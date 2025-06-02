@@ -1,0 +1,2 @@
+class MessageFeedsController < ApplicationController
+end
