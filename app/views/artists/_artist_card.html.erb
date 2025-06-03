@@ -1,4 +1,4 @@
-<div class="artist-card" data-controller='artist_card'>
+<div class="artist-card" data-controller='artist-card'>
   <!-- Premier plan -->
   <div class="artist-card-top d-flex justify-content-center align-items-center">
     <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
@@ -26,7 +26,7 @@
       <!-- Partie Loc -->
       <div class="top-card-loc text-center">
         <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
-                data-action="click->artist_card#toggleBack">
+                data-action="click->artist-card#toggleBack">
           <i class="fa-solid fa-map-location-dot mb-1" style="color: #000000;"></i>
           <p class="artist-location m-0"><%#= artist.address %>5 km</p>
         </button>
@@ -35,16 +35,19 @@
   </div>
 
   <!-- Second plan -->
-  <div class="artist-card-down p-3 w-100 d-flex jutify-content-between align-items-end" data-card-target-value='down'>
+  <div class="artist-card-down p-3 w-100 d-flex jutify-content-between align-items-end" data-artist-card-target='down'>
 
     <!-- Section photos -->
-    <div class="artist-card-down-container w-100 d-flex justify-content-center align-items-end">
-      <div class="photos w-100" data-card-target-value='photos'>
-        <div class="arrow-container">
+    <div class="artist-card-down-container justify-content-center align-items-end">
+      <div class="photos w-100" data-artist-card-target='photos'>
+        <%# <div class="arrow-container">
           <i class="arrow fa-solid fa-chevron-left" style="color: #000000;"></i>
           <i class="arrow fa-solid fa-chevron-right" style="color: #000000;"></i>
-        </div>
-        <div class="artist-card-down-img d-flex justify-content-between align-items-end">
+        </div> %>
+        <div class="artist-card-down-img d-flex gap-4 align-items-end">
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
           <%= image_tag 'publi.png', class: "publication rounded" %>
           <%= image_tag 'publi.png', class: "publication rounded" %>
           <%= image_tag 'publi.png', class: "publication rounded" %>
@@ -55,8 +58,8 @@
       </div>
 
       <!-- Section map -->
-      <div class="map hidden" data-card-target-value='map'>
-        <%= image_tag "map-placeholder.png", class: "img-fluid", style: "width: 100%; height: 110px;" %> <!-- à remplacer par une vraie map -->
+      <div class="map hidden rounded" data-artist-card-target='map'>
+        <%= image_tag "map-placeholder.png", class: "img-fluid object-fit-cover" %> <!-- à remplacer par une vraie map -->
       </div>
     </div>
   </div>

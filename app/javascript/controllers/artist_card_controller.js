@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="artist-card"
 export default class extends Controller {
   static targets = ["down", "photos", "map"]
-  
+
   connect() {
     this.showingMap = false
     console.log('controller conected...')
@@ -22,7 +22,7 @@ export default class extends Controller {
       }
 
       this.downTarget.classList.remove('shrunk')
-      this.showingMap != this.showingMap
+      this.showingMap = !this.showingMap
     }, 500);
   }
 }

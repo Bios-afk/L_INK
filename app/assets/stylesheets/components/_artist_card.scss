@@ -116,10 +116,11 @@
 }
 
 .artist-card-down {
-  width: 100%;
+  width: 100vh;
   height: 13.7rem; // 220px
   position: absolute;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   top: 0;
   left: 0;
   border-radius: $border-radius;
@@ -140,7 +141,6 @@
   }
 
   .photos {
-    position: relative;
     margin: 0 auto;
   }
 
@@ -160,9 +160,8 @@
       object-fit: cover;
       width: 5.5rem; // 88px
       height: 6.9rem; // 110px
-    }
+  }
 }
-
 
 .artist-card-down.shrunk {
   height: 0;
