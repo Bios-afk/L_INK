@@ -1,0 +1,66 @@
+<div class="artist-card" data-controller='artist-card'>
+  <!-- Premier plan -->
+  <div class="artist-card-top d-flex justify-content-center align-items-center">
+    <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
+
+      <!-- Partie info -->
+      <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
+        <div class="picture h-100">
+          <%= image_tag 'profile_pic.png', class: 'rounded-circle', size: "53x53" %>
+          <%# <%= cl_image_tag artist.user.avatar.key if artist.user.avatar.attached? %>
+          <div class="rating-circle">
+            <div class="rating">
+              <i class="fa-solid fa-star"></i>
+              <%# <%= user.rating %>
+              <p>5,5</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
+          <h3 class="artist-name"><%#= user.username %>Chat_le_plumet</h3>
+          <p class="artist-username"><%= artist.user.bio.split[0, 3].join(" ") %>…</p>
+          <p class="artist-bio"><%#= artist.user.categories.limit(3).map(&:name).join(" · ") %>#abstrait</p>
+        </div>
+      </div>
+
+      <!-- Partie Loc -->
+      <div class="top-card-loc text-center">
+        <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
+                data-action="click->artist-card#toggleBack">
+          <i class="fa-solid fa-map-location-dot mb-1" style="color: #000000;"></i>
+          <p class="artist-location m-0"><%#= artist.address %>5 km</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second plan -->
+  <div class="artist-card-down p-3 w-100 d-flex jutify-content-between align-items-end" data-artist-card-target='down'>
+
+    <!-- Section photos -->
+    <div class="artist-card-down-container justify-content-center align-items-end">
+      <div class="photos w-100" data-artist-card-target='photos'>
+        <%# <div class="arrow-container">
+          <i class="arrow fa-solid fa-chevron-left" style="color: #000000;"></i>
+          <i class="arrow fa-solid fa-chevron-right" style="color: #000000;"></i>
+        </div> %>
+        <div class="artist-card-down-img d-flex gap-4 align-items-end">
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%= image_tag 'publi.png', class: "publication rounded" %>
+          <%# <% artist.photos.with_attached_blob.first(3).each do |photo| %>
+            <%# <%= image_tag photo.variant(resize_to_limit: [400, 300]), class: "img-fluid rounded", style: "height: 110px; width: auto;" %>
+          <%# <% end %>
+        </div>
+      </div>
+
+      <!-- Section map -->
+      <div class="map hidden rounded" data-artist-card-target='map'>
+        <%= image_tag "map-placeholder.png", class: "img-fluid object-fit-cover" %> <!-- à remplacer par une vraie map -->
+      </div>
+    </div>
+  </div>
+</div>
