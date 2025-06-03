@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_03_131658) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_154349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_131658) do
     t.string "address"
     t.float "longitude"
     t.float "latitude"
-    t.string "styles"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -127,9 +126,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_131658) do
     t.string "bio"
     t.string "userable_type", null: false
     t.bigint "userable_id", null: false
+<<<<<<< HEAD
+    t.string "pseudo"
+    t.float "longitude"
+    t.float "latitude"
+=======
     t.float "longitude"
     t.float "latitude"
     t.string "pseudo"
+>>>>>>> master
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["userable_type", "userable_id"], name: "index_users_on_userable"
