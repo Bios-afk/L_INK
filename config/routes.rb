@@ -10,17 +10,19 @@ Rails.application.routes.draw do
   # Page d'accueil
   root to: "artists#index"
 
-  # Routes pour artistes
-  resources :artists, only: [:show, :edit, :update] do
-    resources :devis, only: [:new, :create]
+  # Route pour les clients
+  resources :artists, except: [:index], only: [:show, :edit, :update] do
+    resources :quote_requests, only: [:new, :create]
   end
 
-  # Routes pour devis
-  resources :devis, only: [:show] do
+  resources :quote_requests, only: [:show, :index] do
+    member do
+      patch :accept
+      patch :reject
+    end
     resources :bookings, only: [:new, :create]
   end
 
-  # Route pour les clients
   resources :clients, only: [:show]
 
   # Messages

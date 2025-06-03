@@ -1,0 +1,32 @@
+<%= form_with model: @quote_request, url: quote_requests_path do |f| %>
+  <%= f.label :style, "Styles (choix multiples)" %><br>
+  <% ["Blackwork", "Dotwork", "Realism", "Old School"].each do |style_option| %>
+    <%= check_box_tag "quote_request[style][]", style_option, false, id: "style_#{style_option}" %>
+    <%= label_tag "style_#{style_option}", style_option %><br>
+  <% end %>
+
+  <%= f.label :color, "Couleurs (choix multiples)" %><br>
+  <% ["Noir", "Rouge", "Bleu", "Vert"].each do |color_option| %>
+    <%= check_box_tag "quote_request[color][]", color_option, false, id: "color_#{color_option}" %>
+    <%= label_tag "color_#{color_option}", color_option %><br>
+  <% end %>
+
+  <%= f.label :body_zone, "Zones à tatouer (choix multiples)" %><br>
+  <% ["Bras", "Jambe", "Dos", "Poitrine"].each do |zone| %>
+    <%= check_box_tag "quote_request[body_zone][]", zone, false, id: "zone_#{zone}" %>
+    <%= label_tag "zone_#{zone}", zone %><br>
+  <% end %>
+
+  <%= f.label :size, "Taille approximative" %>
+  <%= f.text_field :size %>
+
+  <%= f.label :allergies %>
+  <%= f.text_field :allergies %>
+
+  <%= f.label :comments, "Commentaires" %>
+  <%= f.text_area :comments %>
+
+  <%= f.hidden_field :artist_id, value: @artist.id %>
+
+  <%= f.submit "Envoyer la demande" %>
+<% end %>

@@ -1,9 +1,11 @@
 class Artist < ApplicationRecord
   geocoded_by :address
+  has_many_attached :photos, dependent: :destroy
 
   has_one :user, as: :userable
   has_many :bookings, dependent: :destroy
   has_many :message_feeds, dependent: :destroy
+
 
   validates :address, presence: true
   # validates :longitude, presence: true

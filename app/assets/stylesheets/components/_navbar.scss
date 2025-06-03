@@ -2,11 +2,9 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #a56f50;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  overflow: hidden;
   height: 100px;
+  background-color: #b17457;
+  overflow: visible;
   z-index: 1000;
 }
 
@@ -19,22 +17,54 @@
   background: url('wave.svg') no-repeat center top;
   background-size: cover;
   pointer-events: none;
+  z-index: 1;
 }
 
 .nav-icons {
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; /* icônes réparties sur toute la largeur */
   align-items: center;
+  top: -20px; /* remonte dans la wave */
   height: 100%;
   list-style: none;
   margin: 0;
   padding: 0 16px;
 }
 
-.nav-icons li img {
-  height: 28px;
-  width: 28px;
-  filter: brightness(100%) contrast(100%) invert(1);
+.nav-icons li {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.nav-icons li.search-icon {
+  position: relative;
+  top: -30px; /* remonte la loupe dans la wave */
+  flex: 1;
+}
+
+.nav-icons li a i {
+  font-size: 28px;
+  color: #fbf7f0;
+  cursor: pointer;
+  filter: none; /* pas besoin d’invert si c’est blanc */
+}
+
+/* Responsive iPhone XR */
+@media screen and (max-width: 414px) {
+  .curved-navbar {
+    height: 90px;
+  }
+  .wave {
+    height: 70px;
+    top: -35px;
+  }
+  .nav-icons li a i {
+    font-size: 28px;
+  }
+  .nav-icons li.search-icon {
+    top: -16px;
+  }
 }
