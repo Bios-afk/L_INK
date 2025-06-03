@@ -1,0 +1,8 @@
+<% rounded = rating.round %>
+<% 1.upto(5) do |i| %>
+  <% if i <= rounded %>
+    <i class="bi bi-star-fill text-warning"></i>
+  <% else %>
+    <i class="bi bi-star text-muted"></i>
+  <% end %>
+<% end %>

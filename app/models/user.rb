@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :tattoo_categories, dependent: :destroy
   has_many :categories, through: :tattoo_categories
 
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :pseudo, presence: true, uniqueness: true
 end

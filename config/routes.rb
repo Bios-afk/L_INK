@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # Utilisation d’un contrôleur personnalisé pour l'inscription Devise
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
+
+  # Route pour afficher un profil utilisateur public
+  resources :users, only: [:show, :edit, :update]
+
+  # Page d'accueil
   root to: "artists#index"
 
-  resources :artists, except: [:index], only: [:show] do
+  # Route pour les clients
+  resources :artists, except: [:index], only: [:show, :edit, :update] do
     resources :quote_requests, only: [:new, :create]
   end
 
@@ -13,8 +22,10 @@ Rails.application.routes.draw do
     end
     resources :bookings, only: [:new, :create]
   end
+
   resources :clients, only: [:show]
 
+  # Messages
   resources :message_feeds, only: [:index, :show, :destroy] do
     resources :messages, only: [:create]
   end
