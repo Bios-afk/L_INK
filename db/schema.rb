@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_03_105428) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_123016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_105428) do
     t.index ["message_feed_id"], name: "index_messages_on_message_feed_id"
   end
 
+  create_table "quote_requests", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "artist_id", null: false
+    t.jsonb "style", default: [], null: false
+    t.jsonb "color", default: [], null: false
+    t.string "size"
+    t.jsonb "body_zone", default: [], null: false
+    t.string "allergies"
+    t.text "comments"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_quote_requests_on_artist_id"
+    t.index ["client_id"], name: "index_quote_requests_on_client_id"
+  end
+
   create_table "tattoo_categories", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "category_id", null: false
@@ -94,6 +110,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_105428) do
   add_foreign_key "message_feeds", "artists"
   add_foreign_key "message_feeds", "clients"
   add_foreign_key "messages", "message_feeds"
+  add_foreign_key "quote_requests", "artists"
+  add_foreign_key "quote_requests", "clients"
   add_foreign_key "tattoo_categories", "categories"
   add_foreign_key "tattoo_categories", "users"
 end
