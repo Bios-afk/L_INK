@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.1].define(version: 2025_06_03_083932) do
+=======
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_105428) do
+>>>>>>> master
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,6 +112,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_083932) do
     t.string "first_name"
     t.string "last_name"
     t.string "bio"
+    t.float "longitude"
+    t.float "latitude"
     t.string "userable_type", null: false
     t.bigint "userable_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
