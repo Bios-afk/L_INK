@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_02_133620) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_105428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_02_133620) do
     t.string "first_name"
     t.string "last_name"
     t.string "bio"
-    t.float "longitute"
+    t.float "longitude"
     t.float "latitude"
     t.string "userable_type", null: false
     t.bigint "userable_id", null: false
