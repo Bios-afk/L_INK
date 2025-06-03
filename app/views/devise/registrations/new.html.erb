@@ -17,6 +17,13 @@
                 input_html: { autocomplete: "new-password" } %>
   </div>
 
+  <!-- Ajout Thibault > Choix tatoueur ou client -->
+  <div class="mb-3">
+  <%= f.label :userable_type, "Je suis :" %><br>
+  <%= f.select :userable_type, options_for_select([["Un artiste", "Artist"], ["Un client", "Client"]]), {}, class: "form-select" %>
+  </div>
+  <!-- Ajout Thibault > Choix tatoueur ou client -->
+
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
   </div>
