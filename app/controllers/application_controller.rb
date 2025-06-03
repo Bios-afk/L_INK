@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Autoriser le champ `userable_type` lors de l'inscription
   def configure_permitted_parameters
-    # Autoriser le champ `userable_type` lors de l'inscription
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:userable_type])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:userable_type, :pseudo, :first_name, :last_name])
   end
+
 end

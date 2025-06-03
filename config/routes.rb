@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   }
 
   # Route pour afficher un profil utilisateur public
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
 
   # Page d'accueil
   root to: "artists#index"
 
   # Routes pour artistes
-  resources :artists, except: [:index], only: [:show] do
+  resources :artists, only: [:show, :edit, :update] do
     resources :devis, only: [:new, :create]
   end
 

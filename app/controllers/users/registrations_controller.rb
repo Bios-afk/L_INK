@@ -1,26 +1,34 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
-  # This controller overrides the default Devise registrations controller to handle
-  # the creation of a user with a specific `userable_type` (either `Artist` or `Client`).
-  # It builds the resource based on the sign-up parameters and assigns a new `Artist` or `Client`
-  # instance to the `userable` association. After saving the resource, it checks if the user is
-  # persisted and redirects accordingly.
-
   def create
     build_resource(sign_up_params)
 
+    # Création du bon type de profil selon le champ userable_type
     if params[:user][:userable_type] == "Artist"
-      resource.userable = Artist.create!
+      resource.userable = Artist.create(
+        address: "temp", # Adresse temporaire pour éviter les erreurs de validation
+        styles: ""
+      )
     elsif params[:user][:userable_type] == "Client"
       resource.userable = Client.create!
     end
 
+
     resource.save
     yield resource if block_given?
+
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        redirect_to user_path(resource)
+
+        # ✅ Redirection personnalisée selon le type de userable
+        # "redirect_to edit_artist_path(resource.userable)" redirige vers le formulaire de complétion du profil artiste.
+        # "and return" est important pour stopper le traitement et éviter une double redirection.
+        if resource.userable_type == "Artist"
+          redirect_to edit_artist_path(resource.userable) and return
+        else
+          redirect_to user_path(resource) and return
+        end
       else
         expire_data_after_sign_in!
         redirect_to root_path, notice: "Inscription réussie. En attente d'activation."

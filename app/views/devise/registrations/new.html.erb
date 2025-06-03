@@ -3,26 +3,56 @@
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
+  <% if resource.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Erreurs :</h4>
+    <ul>
+      <% resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
   <div class="form-inputs">
     <%= f.input :email,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
+
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "Prénom" }%>
+
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "Nom" }%>
+
+    <%= f.input :pseudo,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "pseudo" }%>
+
+    <!-- Choix tatoueur ou client -->
+    <%= f.input :userable_type,
+              label: "Je suis",
+              collection: [["Un artiste", "Artist"], ["Un client", "Client"]],
+              prompt: "Choisissez un rôle",
+              required: true %>
+    <!-- Choix tatoueur ou client -->
+
     <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
+
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
   </div>
-
-  <!-- Ajout Thibault > Choix tatoueur ou client -->
-  <div class="mb-3">
-  <%= f.label :userable_type, "Je suis :" %><br>
-  <%= f.select :userable_type, options_for_select([["Un artiste", "Artist"], ["Un client", "Client"]]), {}, class: "form-select" %>
-  </div>
-  <!-- Ajout Thibault > Choix tatoueur ou client -->
 
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
