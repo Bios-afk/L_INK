@@ -1,0 +1,169 @@
+@import "../template.scss";
+
+.artist-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  max-width: 359px;
+  height: auto;
+  position: relative;
+}
+
+.artist-card-top {
+  height: 78px;
+  width: 100%;
+  padding: 12px;
+  border-radius: $border-radius;
+  background-color: $primary-color;
+  z-index: 1;
+  box-shadow: $shadow-lg;
+}
+
+.top-card-info {
+  gap: 12px;
+
+  .picture {
+    height: 100%;
+    width: 3.4rem; // 54px
+    position: relative;
+  }
+
+  .rating-circle {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .text-info {
+    font-family: $font-family-base;
+
+    h3 {
+      color: $text-color;
+      font-size: $font-size-base;
+      margin: 0;
+    }
+
+    p {
+      color: $text-color;
+      font-size: 0.65rem; // 10px
+      margin: 0;
+    }
+  }
+}
+
+.rating-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f8f9fa; // ou autre couleur de fond
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      color: #ffd43b;
+      font-size: 7px;
+      line-height: 1;
+    }
+
+    p {
+      font-size: 7px;
+      margin: 0;
+      line-height: 1;
+    }
+  }
+}
+
+.top-card-loc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+
+  i {
+    font-size: 1.1rem; // 18px
+    margin-bottom: 4px;
+    top: 0;
+  }
+
+  .artist-location {
+    font-size: 0.8rem; // 12px
+    line-height: 1; // très important pour éviter le "km" qui descend
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  button {
+    all: unset; // supprime tous les styles par défaut du bouton
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.artist-card-down {
+  width: 100vh;
+  height: 13.7rem; // 220px
+  position: absolute;
+  overflow-x: auto;
+  overflow-y: hidden;
+  top: 0;
+  left: 0;
+  border-radius: $border-radius;
+  background: #d8d2c2;
+  background: linear-gradient(
+    90deg,
+    rgba(216, 210, 194, 1) 0%,
+    rgba(130, 127, 117, 1) 100%
+  );
+  padding: 12px;
+  gap: 6px;
+  transition: height 0.5s ease;
+
+  .photos,
+  .map {
+    overflow: hidden;
+    max-height: 110px;
+  }
+
+  .photos {
+    margin: 0 auto;
+  }
+
+  .arrow-container {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .publication {
+      object-fit: cover;
+      width: 5.5rem; // 88px
+      height: 6.9rem; // 110px
+  }
+}
+
+.artist-card-down.shrunk {
+  height: 0;
+  transition: height 0.5s ease;
+}
