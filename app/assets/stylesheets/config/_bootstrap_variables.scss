@@ -1,3 +1,5 @@
+@import "../template.scss"
+
 // This is where you override default Bootstrap variables
 // 1. Find all Bootstrap variables that you can override at the end of each component's documentation under the `Sass variables` anchor
 // e.g. here are the ones you can override for the navbar https://getbootstrap.com/docs/5.2/components/navbar/#sass-variables
@@ -22,53 +24,5 @@ $warning:    $orange;
 $border-radius-sm:            $radius-sm;
 $border-radius:               $radius-md;
 $border-radius-lg:            $radius-lg;
-$border-radius-xl:            .5rem;
-$border-radius-xxl:           1rem;
 
 // Override other variables below!
-
-// COLORS
-$primary-color: #b17457;
-$secondary-color: #d8d2c2;
-$accent-color: #4a4947;
-$background-color: #3b3a39;
-$text-color: #fbf7f0;
-// $muted-text-color: #979292;
-
-// FEEDBACK COLORS
-$success-color: #b17457;
-// $error-color: #ef4444;
-// $warning-color: #f59e0b;
-$info-color: #979292;
-
-// FONT à intégrer dans head   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-$font-family-base: "Inter", sans-serif;
-$font-size-base: 16px;
-$font-size-sm: 14px;
-$font-size-lg: 18px;
-$line-height-base: 1.6;
-
-// SPACING
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
-$spacing-xxl: 48px;
-
-// BORDER RADIUS
-$radius-sm: 4px;
-$radius-md: 8px;
-$radius-lg: 12px;
-
-// SHADOWS
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
-$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
-$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
-
-// BREAKPOINTS
-$breakpoint-xs: 480px;
-$breakpoint-sm: 768px;
-$breakpoint-md: 1024px;
-$breakpoint-lg: 1280px;
-$breakpoint-xl: 1536px;
