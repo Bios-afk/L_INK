@@ -15,23 +15,23 @@ $info-color: #979292;
 
 // FONT à intégrer dans head   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 $font-family-base: "Inter", sans-serif;
-$font-size-base: 16px;
-$font-size-sm: 14px;
-$font-size-lg: 18px;
+$font-size-base: 1rem;       //
+$font-size-sm: 0.875rem;     // 14px
+$font-size-lg: 1.125rem;     // 18px
 $line-height-base: 1.6;
 
 // SPACING
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
-$spacing-xxl: 48px;
+$spacing-xs: 0.25rem;  // 4px
+$spacing-sm: 0.5rem;   // 8px
+$spacing-md: 1rem;     // 16px
+$spacing-lg: 1.5rem;   // 24px
+$spacing-xl: 2rem;     // 32px
+$spacing-xxl: 3rem;    // 48px
 
 // BORDER RADIUS
-$radius-sm: 4px;
-$radius-md: 8px;
-$radius-lg: 12px;
+$radius-sm: 0.25rem;  // 4px
+$radius-md: 0.5rem;   // 8px
+$radius-lg: 0.75rem;  // 12px
 
 // SHADOWS
 $shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -39,8 +39,8 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
 $shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 
 // BREAKPOINTS
-$breakpoint-xs: 480px;
-$breakpoint-sm: 768px;
-$breakpoint-md: 1024px;
-$breakpoint-lg: 1280px;
-$breakpoint-xl: 1536px;
+$breakpoint-xs: 30em;   // 480px
+$breakpoint-sm: 48em;   // 768px
+$breakpoint-md: 64em;   // 1024px
+$breakpoint-lg: 80em;   // 1280px
+$breakpoint-xl: 96em;   // 1536px
