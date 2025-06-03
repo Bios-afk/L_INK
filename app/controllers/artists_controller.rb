@@ -1,12 +1,11 @@
 class ArtistsController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :set_artist
-  before_action :ensure_current_user_is_artist!
   skip_before_action :authenticate_user!, only: [:index]
-  
+  before_action :ensure_current_user_is_artist!, only: [:edit, :update]
+  before_action :set_artist, only: [:edit, :update]
+
   def index
-    @artists = Artist.first
+    @artists = Artist.all
   end
 
   def edit
