@@ -4,25 +4,29 @@
     <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
 
       <!-- Partie info -->
-      <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
-        <div class="picture h-100">
-          <%= image_tag 'profile_pic.png', class: 'rounded-circle', size: "53x53" %>
-          <%# <%= cl_image_tag artist.user.avatar.key if artist.user.avatar.attached? %>
-          <div class="rating-circle">
-            <div class="rating">
-              <i class="fa-solid fa-star"></i>
-              <%# <%= user.rating %>
-              <p>5,5</p>
+      <%= link_to artist_path(artist), class: 'w-100' do %>
+        <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
+          <div class="picture h-100">
+            <%= cl_image_tag(
+              artist.user.avatar.attached? ? artist.user.avatar.key : 'png-transparent-default-avatar-thumbnail.png',
+              class: 'rounded-circle',
+              size: "53x53"
+            ) %>
+            <div class="rating-circle">
+              <div class="rating">
+                <i class="fa-solid fa-star"></i>
+                <%# <%= user.rating %>
+                <p>5,5</p>
+              </div>
             </div>
           </div>
+          <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
+            <h3 class="artist-name"><%= artist.user.pseudo %></h3>
+            <p class="artist-username"><%= artist.user.bio.split[0, 4].join(" ") %>…</p>
+            <p class="artist-bio"><%= artist.user.categories.present? ? artist.user.categories.limit(3).map(&:name).join(" ") : "#" %></p>
+          </div>
         </div>
-        <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
-          <h3 class="artist-name"><%#= user.username %>Chat_le_plumet</h3>
-          <p class="artist-username"><%= artist.user.bio.split[0, 3].join(" ") %>…</p>
-          <p class="artist-bio"><%#= artist.user.categories.limit(3).map(&:name).join(" · ") %>#abstrait</p>
-        </div>
-      </div>
-
+      <% end %>
       <!-- Partie Loc -->
       <div class="top-card-loc text-center">
         <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
