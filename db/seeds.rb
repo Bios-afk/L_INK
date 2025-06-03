@@ -20,6 +20,7 @@ puts '🚀creating Users, Artists and Clients...'
   User.create!(
     email: Faker::Internet.email,
     password: "AZERTY",
+    pseudo: Faker::Internet.username(specifier: 5..10, separators: %w(_ -)),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     bio: Faker::Lorem.paragraph,
@@ -30,11 +31,13 @@ puts '🚀creating Users, Artists and Clients...'
   User.create!(
     email: Faker::Internet.email,
     password: "AZERTY",
+    pseudo: Faker::Internet.username(specifier: 5..10, separators: %w(_ -)),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     bio: Faker::Lorem.paragraph,
     userable: artist,
   )
+
 end
 
 puts '✅seeding completed!'
