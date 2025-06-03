@@ -3,8 +3,10 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="artist-card"
 export default class extends Controller {
   static targets = ["down", "photos", "map"]
+  
   connect() {
     this.showingMap = false
+    console.log('controller conected...')
   }
 
   toggleBack(){
