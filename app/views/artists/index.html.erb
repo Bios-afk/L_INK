@@ -1,3 +1,10 @@
-<% @artists.each do |artist| %>
-  <%= render partial: 'artists/artist_card', locals: { artist: artist } %>
-<% end %>
+<%= render partial: 'shared/header_search' %>
+<div class="w-100"><%= render partial: 'artists/bar_search' %></div>
+
+<div class="w-100">
+  <turbo-frame id="artists_list">
+    <% @artists.each do |artist| %>
+      <%= render partial: 'artists/artist_card', locals: { artist: artist } %>
+    <% end %>
+  </turbo-frame>
+</div>

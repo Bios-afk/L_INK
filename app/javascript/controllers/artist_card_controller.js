@@ -13,7 +13,8 @@ export default class extends Controller {
     console.log('controller conected...')
   }
 
-  toggleBack(){
+  toggleBack(event){
+    event.stopPropagation();
     this.downTarget.classList.add('shrunk')
 
     setTimeout(() => {
