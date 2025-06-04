@@ -12,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-
+  <body>
+    <div class="header-hide"></div>
+    <%= render "shared/flashes" %>
+    <%= render "shared/navbar" %>
     <%= yield %>
   </body>
 </html>
