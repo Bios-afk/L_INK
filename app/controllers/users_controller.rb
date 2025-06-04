@@ -5,9 +5,14 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(user_params)
-      redirect_back fallback_location: user_path(@user), notice: "Bio mise à jour"
+
+    success = @user.update(user_params)
+    success &&= @user.userable.update(address: params[:user][:address]) if params[:user][:address].present?
+
+    if success
+      redirect_to user_path(@user), notice: "Profil complété avec succès."
     else
+      flash[:alert] = "Erreur lors de la mise à jour du profil."
       render :edit
     end
   end
