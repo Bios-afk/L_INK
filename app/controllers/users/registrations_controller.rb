@@ -1,28 +1,45 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
+    puts "🎯 CONTROLEUR PERSONNALISÉ UTILISÉ"
+
+    # 🔧 Création du User (sans le sauvegarder encore)
     build_resource(sign_up_params)
 
-    # Création du bon type de profil selon le champ userable_type
-    if params[:user][:userable_type] == "Artist"
-      resource.userable = Artist.create(
-        address: "", # Adresse temporaire pour éviter les erreurs de validation
-      )
-    elsif params[:user][:userable_type] == "Client"
-      resource.userable = Client.create!
+    # 🎭 Création du profil associé (Artist ou Client)
+    case params[:user][:userable_type]
+    when "Artist"
+      artist = Artist.create(address: "")
+      unless artist.persisted?
+        flash[:alert] = "Erreur lors de la création du profil artiste : #{artist.errors.full_messages.join(', ')}"
+        render :new and return
+      end
+      resource.userable = artist
+
+    when "Client"
+      client = Client.create
+      unless client.persisted?
+        flash[:alert] = "Erreur lors de la création du profil client : #{client.errors.full_messages.join(', ')}"
+        render :new and return
+      end
+      resource.userable = client
+
+    else
+      flash[:alert] = "Type d'utilisateur invalide."
+      render :new and return
     end
 
-
+    # 💾 Sauvegarde du User (et du userable lié)
     resource.save
     yield resource if block_given?
+
+    puts "👮‍♂️ ERREURS À L'INSCRIPTION : #{resource.errors.full_messages}"
 
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
 
-        # ✅ Redirection personnalisée selon le type de userable
-        # "redirect_to edit_artist_path(resource.userable)" redirige vers le formulaire de complétion du profil artiste.
-        # "and return" est important pour stopper le traitement et éviter une double redirection.
+        # 🔁 Redirection personnalisée selon le type
         if resource.userable_type == "Artist"
           redirect_to edit_artist_path(resource.userable) and return
         else

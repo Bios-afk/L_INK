@@ -1,11 +1,24 @@
-<h2>Complétez votre profil artiste</h2>
+<div class="devise-container">
+  <h2>Complétez votre profil artiste</h2>
 
-<%= simple_form_for @user, url: user_path(@user), method: :patch do |f| %>
-  <%= f.input :bio, label: "Quelques mots sur vous", as: :text %>
-  <%= f.button :submit, "Mettre à jour ma bio", class: "btn btn-secondary" %>
-<% end %>
+    <%= simple_form_for @user, url: user_path(@user), method: :patch do |f| %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.input :bio, label: "Quelques mots sur vous", as: :text, input_html: { rows: 4 } %>
+        </div>
+      </div>
 
-<%= simple_form_for @artist do |f| %>
-  <%= f.input :address, label: "Votre adresse pro pour la géolocalisation" %>
-  <%= f.button :submit, "Enregistrer", class: "btn btn-primary mt-3" %>
-<% end %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.input :userable_address,
+            label: "Votre adresse pro pour la géolocalisation",
+            input_html: {
+              name: "user[address]",
+              value: @user.userable.address
+            } %>
+        </div>
+      </div>
+
+      <%= f.button :submit, "Enregistrer", class: "btn btn-primary mt-3" %>
+    <% end %>
+</div>

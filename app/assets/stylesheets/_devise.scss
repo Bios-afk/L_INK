@@ -4,15 +4,15 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 2rem;
-  border-radius: $radius-md;
-  color: $text-color;
+  border-radius: 8px;
+  color: #fbf7f0;
 
   a {
     text-decoration: none;
   }
 
   h2 {
-    font-size: $font-size-base;
+    font-size: 1rem;
     margin-bottom: 1rem;
   }
 
@@ -22,9 +22,9 @@
 
   .btn {
     width: 100%;
-    background-color: $primary-color;
+    background-color: #b17457;
     border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: $shadow-md;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease-in-out;
   }
 
@@ -33,7 +33,7 @@
   textarea,
   select {
     color: #fbf7f0;
-    background-color: $accent-color;
+    background-color: #3b3a39;
     border: 1px solid rgba(0, 0, 0, 0.12);
 
     &::placeholder {
@@ -41,7 +41,7 @@
     }
 
     &:focus {
-      color: $text-color !important;
+      color: #fbf7f0;
     }
   }
 }
