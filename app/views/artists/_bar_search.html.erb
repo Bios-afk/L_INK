@@ -1,4 +1,4 @@
-<div class="position-relative w-100">
+<div class="search-bar position-relative d-flex align-items-center w-100 gap-2 mb-4 ">
   <%= form_with url: artists_path, method: :get,
       data: {
         turbo_frame: "artists_list",
@@ -6,10 +6,12 @@
         search_target: "form"
       },
       local: false,
-      html: { class: "search-bar-form" } do |f| %>
+      html: { class: "search-bar-form flex-grow-1 position-relative" } do |f| %>
 
-    <i class="fa fa-search"></i>
+    <!-- Loupe -->
+    <i class="fa fa-search position-absolute top-50 start-0 translate-middle-y ms-3" style="color: #{$text-color};"></i>
 
+    <!-- Champ recherche -->
     <%= f.text_field :query,
         placeholder: "Rechercher…",
         autocomplete: "off",
@@ -19,4 +21,15 @@
           search_target: "input"
         } %>
   <% end %>
+
+  <!-- Bouton filtre -->
+  <button type="button"
+          class="btn d-flex align-items-center justify-content-center search-filter-button"
+          data-bs-toggle="collapse"
+          data-bs-target="#filters-collapse"
+          aria-expanded="false"
+          aria-controls="filters-collapse">
+    <i class="fa fa-sliders"></i>
+  </button>
+
 </div>

@@ -1,9 +1,6 @@
 @import "../template.scss";
 
 .search-bar-form {
-  position: relative;
-  margin-bottom: 12px;
-
   .fa-search {
     position: absolute;
     top: 50%;
@@ -37,4 +34,24 @@
   color: $text-color;
   border-color: rgba(0, 0, 0, 0.12);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.search-filter-button {
+  height: 35px;
+  width: 35px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: $radius-md;
+  background-color: $accent-color;
+  color: $text-color;
+  font-size: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  i {
+    color: $text-color;
+    font-size: 16px;
+  }
 }
