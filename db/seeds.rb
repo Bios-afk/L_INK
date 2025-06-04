@@ -9,35 +9,43 @@
 #   end
 require 'faker'
 
-puts '🧹destroying all records...'
+puts '🧹 Destroying all records...'
+Message.destroy_all
+MessageFeed.destroy_all
+Booking.destroy_all
 User.destroy_all
 Artist.destroy_all
 Client.destroy_all
 
-puts '🚀creating Users, Artists and Clients...'
+puts '🚀 Creating Users, Artists and Clients...'
+
 10.times do
-  client = Client.create!()
+  # Création du client et de son user
+  client = Client.create!
   User.create!(
-    email: Faker::Internet.email,
+    email: Faker::Internet.unique.email,
     password: "AZERTY",
-    pseudo: Faker::Internet.username(specifier: 5..10, separators: %w(_ -)),
+    pseudo: Faker::Internet.unique.username(specifier: 5..10),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     bio: Faker::Lorem.paragraph,
-    userable: client,
+    userable: client
   )
 
-  artist = Artist.create!(address: 'bordeaux, france')
+  # Création de l'artiste et de son user
+  artist = Artist.create!(
+    address: Faker::Address.city + ", " + Faker::Address.country
+  )
   User.create!(
-    email: Faker::Internet.email,
+    email: Faker::Internet.unique.email,
     password: "AZERTY",
-    pseudo: Faker::Internet.username(specifier: 5..10, separators: %w(_ -)),
+    pseudo: Faker::Internet.unique.username(specifier: 5..10),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     bio: Faker::Lorem.paragraph,
-    userable: artist,
+    userable: artist
   )
 
 end
 
-puts '✅seeding completed!'
+puts '✅ Seeding completed!'
