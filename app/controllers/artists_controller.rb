@@ -5,7 +5,11 @@ class ArtistsController < ApplicationController
   before_action :set_artist, only: [:edit, :update]
 
   def index
+    if params[:query].present?
+    @artists = Artist.joins(:user).where("users.pseudo ILIKE :query OR users.bio ILIKE :query", query: "%#{params[:query]}%")
+    else
     @artists = Artist.all
+    end
   end
 
   def edit

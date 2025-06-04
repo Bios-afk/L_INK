@@ -1,0 +1,22 @@
+<div class="position-relative w-100">
+  <%= form_with url: artists_path, method: :get,
+      data: {
+        turbo_frame: "artists_list",
+        controller: "search",
+        search_target: "form"
+      },
+      local: false,
+      html: { class: "search-bar-form" } do |f| %>
+
+    <i class="fa fa-search"></i>
+
+    <%= f.text_field :query,
+        placeholder: "Rechercher…",
+        autocomplete: "off",
+        class: "form-control ps-5 search-bar-input w-100",
+        data: {
+          action: "input->search#search",
+          search_target: "input"
+        } %>
+  <% end %>
+</div>

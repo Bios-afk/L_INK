@@ -12,4 +12,12 @@ class Artist < ApplicationRecord
   # validates :latitude, presence: true
 
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def marker_map
+    {
+      lat: latitude,
+      lng: longitude
+    }
+  end
+
 end

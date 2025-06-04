@@ -120,7 +120,7 @@ $artist-card-down-height: 13.7rem; // 220px
 }
 
 .artist-card-down {
-  width: 100vh;
+  width: 100%;
   height: $artist-card-down-height; // 220px
   position: absolute;
   overflow-x: auto;
@@ -138,10 +138,16 @@ $artist-card-down-height: 13.7rem; // 220px
   gap: 6px;
   transition: height 0.5s ease;
 
-  .photos,
-  .map {
+  .photos {
     overflow: hidden;
     max-height: 110px;
+  }
+
+  .map{
+    overflow: hidden;
+    max-width: 330px;
+    width: 320px;
+    height: 130px;
   }
 
   .photos {

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root to: "artists#index"
 
   # Route pour les clients
-  resources :artists, except: [:index], only: [:show, :edit, :update] do
+  resources :artists, only: [:index, :show, :edit, :update] do
     resources :quote_requests, only: [:new, :create]
   end
 
