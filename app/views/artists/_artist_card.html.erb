@@ -1,4 +1,6 @@
-<div class="artist-card mb-3 w-100" data-controller='artist-card'>
+<div class="artist-card mb-3" data-controller='artist-card'
+      data-artist-card-lat-value="<%= artist.marker_map[:lat] %>"
+      data-artist-card-lng-value="<%= artist.marker_map[:lng] %>">
   <!-- Premier plan -->
   <div class="artist-card-top d-flex justify-content-center align-items-center">
     <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
@@ -62,8 +64,12 @@
       </div>
 
       <!-- Section map -->
-      <div class="map hidden rounded" data-artist-card-target='map'>
-        <%= image_tag "map-placeholder.png", class: "img-fluid object-fit-cover" %> <!-- à remplacer par une vraie map -->
+      <div class="map hidden rounded" data-artist-card-target='map'
+      data-controller="map"
+      data-map-lat-value="<%= artist.marker_map[:lat] %>"
+      data-map-lng-value="<%= artist.marker_map[:lng] %>"
+      data-map-api-key-value="<%= ENV['MAP_BOX_API_KEY'] %>">
+        <%#= render partial: 'artists/map', locals: { marker: artist.marker_map} %>
       </div>
     </div>
   </div>
