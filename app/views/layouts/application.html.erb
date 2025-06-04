@@ -6,11 +6,19 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_include_tag "application", type: "module" %>
+    <!-- suppression de "<%= javascript_include_tag "application", type: "module" %>" apparement en conflit avec"<%= javascript_importmap_tags %>" -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   </head>
+
+
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= javascript_importmap_tags %>
+
+
 
   <body>
     <div class="header-hide"></div>
