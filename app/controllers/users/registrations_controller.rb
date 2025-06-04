@@ -6,8 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Création du bon type de profil selon le champ userable_type
     if params[:user][:userable_type] == "Artist"
       resource.userable = Artist.create(
-        address: "temp", # Adresse temporaire pour éviter les erreurs de validation
-        styles: ""
+        address: "Indiquez votre adresse pro pour la géolocalisation", # Adresse temporaire pour éviter les erreurs de validation
       )
     elsif params[:user][:userable_type] == "Client"
       resource.userable = Client.create!

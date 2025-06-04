@@ -6,7 +6,6 @@
 <% end %>
 
 <%= simple_form_for @artist do |f| %>
-  <%= f.input :styles, label: "Styles que vous proposez" %>
-  <%= f.input :address, label: "Adresse pro pour la géolocalisation" %>
+  <%= f.input :address, label: "Votre adresse pro pour la géolocalisation" %>
   <%= f.button :submit, "Enregistrer", class: "btn btn-primary mt-3" %>
 <% end %>
