@@ -1,0 +1,41 @@
+<div class="card p-3">
+  <div class="row g-2">
+
+    <!-- Style -->
+    <div class="col-md-4">
+      <label for="style-filter" class="form-label">Style</label>
+      <select name="category_id" id="style-filter" class="form-select" onchange="this.form.requestSubmit()">
+        <option value="">Tous les styles</option>
+        <% Category.all.each do |category| %>
+          <option value="<%= category.id %>" <%= 'selected' if params[:category_id].to_s == category.id.to_s %>>
+            <%= category.name %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <!-- Ville -->
+    <div class="col-md-4">
+      <label for="city-filter" class="form-label">Ville</label>
+      <select name="city" id="city-filter" class="form-select" onchange="this.form.requestSubmit()">
+        <option value="">Toutes les villes</option>
+        <% User.where(userable_type: "Artist").distinct.pluck(:address).compact.each do |city| %>
+          <option value="<%= city %>" <%= 'selected' if params[:city] == city %>>
+            <%= city %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <!-- Tri par note -->
+    <div class="col-md-4">
+      <label for="rating-filter" class="form-label">Note</label>
+      <select name="sort_by" id="rating-filter" class="form-select" onchange="this.form.requestSubmit()">
+        <option value="">Pertinence</option>
+        <option value="rating_desc" <%= 'selected' if params[:sort_by] == 'rating_desc' %>>Meilleures notes</option>
+        <option value="rating_asc" <%= 'selected' if params[:sort_by] == 'rating_asc' %>>Moins bien notés</option>
+      </select>
+    </div>
+
+  </div>
+</div>
