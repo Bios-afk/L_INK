@@ -1,62 +1,79 @@
-<h2>Sign up</h2>
+<div class="devise-container">
+  <h2 class="mb-4">Créer un compte</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
 
-  <% if resource.errors.any? %>
-  <div class="alert alert-danger">
-    <h4>Erreurs :</h4>
-    <ul>
-      <% resource.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <% if resource.errors.any? %>
+      <div class="alert alert-danger">
+        <h4 class="alert-heading">Erreurs :</h4>
+        <ul class="mb-0">
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-inputs">
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :first_name,
+                      label: "Prénom",
+                      required: true,
+                      input_html: { autocomplete: "given-name", class: "form-control" } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.input :last_name,
+                      label: "Nom",
+                      required: true,
+                      input_html: { autocomplete: "family-name", class: "form-control" } %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :email,
+                      label: "Adresse e-mail",
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email", class: "form-control" } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.input :pseudo,
+                      label: "Pseudo",
+                      required: true,
+                      input_html: { autocomplete: "username", class: "form-control" } %>
+        </div>
+      </div>
+
+      <%= f.input :userable_type,
+                  label: "Je suis",
+                  collection: [["Un artiste", "Artist"], ["Un client", "Client"]],
+                  prompt: "Choisissez votre rôle",
+                  required: true,
+                  input_html: { class: "form-select" } %>
+
+      <%= f.input :password,
+                  label: "Mot de passe",
+                  required: true,
+                  placeholder: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password", class: "form-control" } %>
+
+      <%= f.input :password_confirmation,
+                  label: "Confirmation du mot de passe",
+                  required: true,
+                  input_html: { autocomplete: "new-password", class: "form-control" } %>
+    </div>
+
+    <div class="form-actions mt-3">
+      <%= f.button :submit, "S'inscrire", class: "btn btn-success btn-sm" %>
+    </div>
+  <% end %>
+
+  <div class="mt-3">
+    <%= render "devise/shared/links" %>
   </div>
-<% end %>
-
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "Prénom" }%>
-
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "Nom" }%>
-
-    <%= f.input :pseudo,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "pseudo" }%>
-
-    <!-- Choix tatoueur ou client -->
-    <%= f.input :userable_type,
-              label: "Je suis",
-              collection: [["Un artiste", "Artist"], ["Un client", "Client"]],
-              prompt: "Choisissez un rôle",
-              required: true %>
-    <!-- Choix tatoueur ou client -->
-
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

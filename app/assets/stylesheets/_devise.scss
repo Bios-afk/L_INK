@@ -1,0 +1,47 @@
+/* app/assets/stylesheets/_devise.scss */
+
+.devise-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: $radius-md;
+  color: $text-color;
+
+  a {
+    text-decoration: none;
+  }
+
+  h2 {
+    font-size: $font-size-base;
+    margin-bottom: 1rem;
+  }
+
+  .form-actions {
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    background-color: $primary-color;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: $shadow-md;
+    transition: all 0.2s ease-in-out;
+  }
+
+  // Champs de formulaire (input, textarea, select)
+  input,
+  textarea,
+  select {
+    color: #fbf7f0;
+    background-color: $accent-color;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+
+    &::placeholder {
+      color: #cccccc;
+    }
+
+    &:focus {
+      color: $text-color !important;
+    }
+  }
+}
