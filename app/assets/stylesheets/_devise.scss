@@ -65,4 +65,13 @@
       color: #fbf7f0;
     }
   }
+  /* Cacher la loupe (icone de recherche) */
+  .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon-search {
+  display: none !important;
+  }
+
+  /* Cacher la croix (clear button) */
+  .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon-close {
+    display: none !important;
+  }
 }
