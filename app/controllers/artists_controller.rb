@@ -1,14 +1,19 @@
 class ArtistsController < ApplicationController
-
   skip_before_action :authenticate_user!, only: [:index]
   before_action :ensure_current_user_is_artist!, only: [:edit, :update]
   before_action :set_artist, only: [:edit, :update]
 
   def index
+    @artists = Artist.joins(:user).distinct
+
+    # Filtre texte (pseudo ou bio)
     if params[:query].present?
-    @artists = Artist.joins(:user).where("users.pseudo ILIKE :query OR users.bio ILIKE :query", query: "%#{params[:query]}%")
-    else
-    @artists = Artist.all
+      @artists = @artists.where("users.pseudo ILIKE :query OR users.bio ILIKE :query", query: "%#{params[:query]}%")
+    end
+
+    # Filtre par catégorie (style de tatouage)
+    if params[:category_id].present?
+      @artists = @artists.joins(user: :categories).where(categories: { id: params[:category_id] }).distinct
     end
   end
 
