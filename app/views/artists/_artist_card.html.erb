@@ -10,7 +10,7 @@
         <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
           <div class="picture h-100">
             <%= cl_image_tag(
-              artist.user.avatar.attached? ? artist.user.avatar.key : 'png-transparent-default-avatar-thumbnail.png',
+              artist.user&.avatar&.attached? ? artist.user.avatar.key : 'png-transparent-default-avatar-thumbnail.png',
               class: 'rounded-circle',
               size: "53x53"
             ) %>
