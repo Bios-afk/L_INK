@@ -74,6 +74,7 @@
                   input_html: { autocomplete: "new-password", class: "form-control" } %>
     </div>
 
+    <%= recaptcha_v3 action: 'signup' %>
     <div class="form-actions mt-3">
       <%= f.button :submit, "S'inscrire", class: "btn btn-success btn-sm" %>
     </div>

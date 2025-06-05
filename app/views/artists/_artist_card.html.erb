@@ -10,7 +10,7 @@
         <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
           <div class="picture h-100">
             <%= cl_image_tag(
-              artist.user.avatar.attached? ? artist.user.avatar.key : 'png-transparent-default-avatar-thumbnail.png',
+              artist.user&.avatar&.attached? ? artist.user.avatar.key : 'png-transparent-default-avatar-thumbnail.png',
               class: 'rounded-circle',
               size: "53x53"
             ) %>
@@ -25,7 +25,7 @@
           <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
             <h3 class="artist-name"><%= artist.user.pseudo %></h3>
             <p class="artist-username"><%= artist.user.bio.split[0, 4].join(" ") %>…</p>
-            <p class="artist-bio"><%= artist.user.categories.present? ? artist.user.categories.limit(3).map(&:name).join(" ") : "#" %></p>
+            <p class="artist-bio"><%= artist.user&.categories&.present? ? artist.user.categories.limit(3).map(&:name).join(" ") : "#" %></p>
           </div>
         </div>
       <% end %>
