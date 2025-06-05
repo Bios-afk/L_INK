@@ -12,7 +12,9 @@
   </head>
 
   <body data-controller="location">
-    <div class="header-hide"></div>
+    <% if Rails.env.development? %>
+      <div class="header-hide"></div>
+    <% end %>
     <%= render "shared/flashes" %>
     <%= render "shared/navbar" %>
     <%= yield %>
