@@ -6,6 +6,7 @@ class Artist < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :message_feeds, dependent: :destroy
 
+  has_many :reviews, through: :bookings, dependent: :destroy
 
   validates :address, presence: true, on: :update
   # validates :longitude, presence: true
@@ -20,4 +21,15 @@ class Artist < ApplicationRecord
     }
   end
 
+  def rating
+    self.reviews.any? ? self.reviews.average(:rating) : 0
+  end
+
+  def distance_to(lat, lon)
+    if lat.nil? && lon.nil?
+      return ""
+    else
+      Geocoder::Calculations.distance_between([self.latitude, self.longitude], [lat, lon]).round
+    end
+  end
 end
