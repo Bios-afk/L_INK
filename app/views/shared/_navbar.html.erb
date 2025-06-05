@@ -5,6 +5,21 @@
     <li><a href="#"><%= image_tag 'Favorite_fill.svg' %></a></li>
     <li class="search-icon"><a href="#"><%= image_tag 'Search_icon.svg' %></i></a></li>
     <li><a href="#"><%= image_tag 'Chat_fill.svg' %></a></li>
-    <li><a href="#"><%= image_tag 'User_circle.svg' %></a></li>
+
+    <!-- Profile utilisateur -->
+    <!-- Si un utilisateur est connecté (user_signed_in?), on le redirige vers sa page de profil -->
+    <!-- Sinon, on l’envoie vers la page de connexion -->
+    <li>
+      <% if user_signed_in? %>
+        <%= link_to user_path(current_user) do %>
+          <%= image_tag 'User_circle.svg' %>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path do %>
+          <%= image_tag 'User_circle.svg' %>
+        <% end %>
+      <% end %>
+    </li>
+
   </ul>
 </nav>
