@@ -1,2 +1,72 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container my-4">
+
+  <div class="card mb-4 shadow-sm">
+    <div class="row g-0 align-items-center">
+
+      <!-- Avatar -->
+      <div class="col-12 col-md-4 text-center p-3">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: "rounded-circle img-fluid", alt: "Avatar" %>
+        <% else %>
+          <%= image_tag "default_avatar.png", class: "rounded-circle img-fluid", alt: "Avatar par défaut" %>
+        <% end %>
+
+        <% if user_signed_in? && current_user == @user %>
+          <%= link_to 'Modifier avatar', edit_user_registration_path, class: "btn btn-sm btn-outline-secondary mt-2" %>
+        <% end %>
+      </div>
+
+
+      <!-- Infos -->
+      <div class="col-12 col-md-8 p-3">
+        <% case @user.userable %>
+        <% when Client %>
+          <p><%= @user.bio %></p>
+          <% if user_signed_in? && current_user == @user %>
+            <%= link_to 'Modifier la bio', edit_user_registration_path, class: "btn btn-sm btn-outline-secondary mt-3" %>
+          <% end %>
+
+
+        <% when Artist %>
+
+
+          <!-- Bio -->
+          <p><%= @user.bio %></p>
+
+          <% if user_signed_in? && current_user == @user %>
+            <%= link_to 'Modifier mon profil', edit_user_registration_path, class: "btn btn-sm btn-outline-secondary mt-3" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton Devis (uniquement visible par un autre utilisateur que l'artiste lui-même) -->
+  <% if @user.userable_type == "Artist" && current_user != @user %>
+    <div class="text-center mb-4">
+      <%= button_to 'Demander un devis', new_quote_path(user_id: @user.id), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+
+  <!-- Top 3 photos -->
+  <div class="mb-4">
+    <h6>Top 3</h6>
+    <div class="d-flex gap-2">
+      <% @user.userable.photos.where(top_three: true).limit(3).each do |photo| %>
+        <%= image_tag photo.url, class: "img-thumbnail", style: "width: 100px;" %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Galerie étendue -->
+  <div>
+    <h6>Galerie</h6>
+    <div class="d-flex flex-wrap gap-2">
+      <% @user.userable.photos.where(top_three: false).each do |photo| %>
+        <%= image_tag photo.url, class: "img-thumbnail", style: "width: 100px;" %>
+      <% end %>
+    </div>
+  </div>
+
+</div>
