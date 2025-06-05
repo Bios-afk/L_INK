@@ -1,2 +1,9 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<!-- Header dashBoard-->
+<%= render partial: 'users/header', locals: { user: @user} %>
+
+<!-- Profile info -->
+<% if @user.userable == 'Client' %>
+  <%= render partial: 'users/client_page', locals: { user: @user}%>
+<% else %>
+  <%= render partial: 'artists/profil', locals: { user: @user} %>
+<% end %>
