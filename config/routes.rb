@@ -4,9 +4,6 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  # Route Post pour la geolocalisation
-  post 'users/set_location', to: 'users#set_location'
-
   # Route pour afficher un profil utilisateur public
   resources :users, only: [:show, :edit, :update]
 

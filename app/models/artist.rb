@@ -24,12 +24,4 @@ class Artist < ApplicationRecord
   def rating
     self.reviews.any? ? self.reviews.average(:rating) : 0
   end
-
-  def distance_to(lat, lon)
-    if lat.nil? && lon.nil?
-      return ""
-    else
-      Geocoder::Calculations.distance_between([self.latitude, self.longitude], [lat, lon]).round
-    end
-  end
 end
