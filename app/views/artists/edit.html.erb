@@ -13,8 +13,17 @@
           <%= f.input :userable_address,
             label: "Votre adresse pro pour la géolocalisation",
             input_html: {
+              data: {address_autocomplete_target: "address"},
+              class: "d-none",
               name: "user[address]",
               value: @user.userable.address
+            },
+            wrapper_html: {
+              class: "mapboxgl-autocomplete_signup",
+              data: {
+                controller: "address-autocomplete",
+                address_autocomplete_api_key_value: ENV["MAP_BOX_API_KEY"]
+              }
             } %>
         </div>
       </div>
