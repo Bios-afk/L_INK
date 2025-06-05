@@ -43,12 +43,7 @@
         <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
                 data-action="click->artist-card#toggleBack">
           <i class="fa-solid fa-map-location-dot mb-1" style="color: #000000;"></i>
-          <p class="artist-location m-0">
-            <!--affichage de la difference de km -->
-            <% if current_user %>
-              <%= artist.distance_to(current_user.latitude, current_user.longitude) %> km
-            <% end %>
-          </p>
+          <p class="artist-location m-0"><%#= artist.address %>5 km</p>
         </button>
       </div>
     </div>
