@@ -25,7 +25,16 @@
           <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
             <h3 class="artist-name"><%= artist.user.pseudo %></h3>
             <p class="artist-username"><%= artist.user.bio.split[0, 4].join(" ") %>…</p>
-            <p class="artist-bio"><%= artist.user&.categories&.present? ? artist.user.categories.limit(3).map(&:name).join(" ") : "#" %></p>
+            <p class="artist-bio">
+              <% if artist.user.categories.present? %>
+                <%= artist.user.categories.limit(3).map do |category|
+                      words = category.name.split(/\s+/).first(3)   # limite à 3 mots
+                      "#" + words.join(" #")
+                    end.join(" ") %>
+              <% else %>
+                #
+              <% end %>
+            </p>
           </div>
         </div>
       <% end %>
