@@ -54,6 +54,7 @@ gem "geocoder"
 gem "faker", "~> 3.2"
 gem "ostruct"
 gem "cloudinary"
+gem "recaptcha", require: "recaptcha/rails"
 
 group :development, :test do
   gem "dotenv-rails"

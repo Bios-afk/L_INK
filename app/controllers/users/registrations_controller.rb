@@ -3,6 +3,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     puts "🎯 CONTROLEUR PERSONNALISÉ UTILISÉ"
 
+     # 👉 Vérification reCAPTCHA AVANT toute création
+    unless verify_recaptcha(action: 'signup', minimum_score: Rails.env.development? ? 0 : 0.5)
+      flash[:alert] = "Captcha invalide, veuillez réessayer."
+      build_resource(sign_up_params)
+      render :new and return
+    end
+
     # 🔧 Création du User (sans le sauvegarder encore)
     build_resource(sign_up_params)
 
