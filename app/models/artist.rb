@@ -6,6 +6,8 @@ class Artist < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :message_feeds, dependent: :destroy
 
+  has_many :reviews
+
 
   validates :address, presence: true, on: :update
   # validates :longitude, presence: true
