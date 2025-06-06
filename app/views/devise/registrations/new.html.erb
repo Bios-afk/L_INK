@@ -21,27 +21,30 @@
       </div>
     <% end %>
 
-    <div class="form-inputs">
+    <div class="form-inputs d-flex flex-column gap-2">
       <div class="row">
         <div class="col-6">
           <%= f.input :first_name,
-                      label: "Prénom",
+                      label: false,
+                      placeholder: "Prénom",
                       required: true,
                       input_html: { autocomplete: "given-name", class: "form-control border border-secondary" } %>
         </div>
 
         <div class="col-6">
           <%= f.input :last_name,
-                      label: "Nom",
+                      label: false,
+                      placeholder: "Nom",
                       required: true,
                       input_html: { autocomplete: "family-name", class: "form-control border border-secondary" } %>
         </div>
       </div>
 
-      <div class="row">
+      <%# <div class="row"> %>
         <div class="col-md-6">
           <%= f.input :email,
-                      label: "Adresse e-mail",
+                      label: false,
+                      placeholder: "Adresse e-mail",
                       required: true,
                       autofocus: true,
                       input_html: { autocomplete: "email", class: "form-control border border-secondary" } %>
@@ -49,29 +52,37 @@
 
         <div class="col-md-6">
           <%= f.input :pseudo,
-                      label: "Pseudo",
+                      label: false,
+                      placeholder: "Pseudo",
                       required: true,
                       input_html: { autocomplete: "username", class: "form-control border border-secondary" } %>
         </div>
-      </div>
 
-      <%= f.input :userable_type,
-                  label: "Je suis",
-                  collection: [["Un artiste", "Artist"], ["Un client", "Client"]],
-                  prompt: "Choisissez votre rôle",
-                  required: true,
-                  input_html: { class: "form-select border border-secondary" } %>
+        <div class="col-md-6">
+          <%= f.input :userable_type,
+                      label: false,
+                      collection: [["Un artiste", "Artist"], ["Un client", "Client"]],
+                      prompt: "Choisissez votre rôle",
+                      required: true,
+                      input_html: { class: "form-select border border-secondary" } %>
+        </div>
+        <div class="row align-items-end">
+          <div class="col-6">
+            <%= f.input :password,
+                        label: "Mot de passe",
+                        required: true,
+                        placeholder: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password", class: "form-control border border-secondary" } %>
+          </div>
 
-      <%= f.input :password,
-                  label: "Mot de passe",
-                  required: true,
-                  placeholder: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password", class: "form-control border border-secondary" } %>
-
-      <%= f.input :password_confirmation,
-                  label: "Confirmation du mot de passe",
-                  required: true,
-                  input_html: { autocomplete: "new-password", class: "form-control border border-secondary" } %>
+          <div class="col-6">
+            <%= f.input :password_confirmation,
+                        label: "Confirmation du mot de passe",
+                        required: true,
+                        input_html: { autocomplete: "new-password", class: "form-control border border-secondary" } %>
+          </div>
+        </div>
+      <%# </div> %>
     </div>
 
     <%= recaptcha_v3 action: 'signup' %>
