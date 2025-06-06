@@ -55,3 +55,72 @@
     font-size: 16px;
   }
 }
+
+.offcanvas-bottom.custom-height {
+  height: 100%;
+  top: 118px;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+
+  .offcanvas-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+  }
+
+  .offcanvas-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 auto;
+    color: $text-color;
+  }
+
+  .btn-close {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    filter: invert(35%) sepia(78%) saturate(408%) hue-rotate(330deg) brightness(85%) contrast(90%);
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: invert(60%) sepia(90%) saturate(600%) hue-rotate(330deg) brightness(110%) contrast(100%);
+    }
+  }
+
+  .mb-3 {
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  .form-control {
+    height: 35px;
+    width: 359px;
+    padding: 12px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: $radius-md;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: $accent-color;
+    color: $text-color;
+  }
+
+  .btn {
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  .form-check {
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  .hr {
+    color: $text-color;
+  }
+}

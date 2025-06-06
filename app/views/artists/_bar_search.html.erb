@@ -25,11 +25,12 @@
   <!-- Bouton filtre -->
   <button type="button"
           class="btn d-flex align-items-center justify-content-center search-filter-button"
-          data-bs-toggle="collapse"
-          data-bs-target="#filters-collapse"
-          aria-expanded="false"
-          aria-controls="filters-collapse">
+          data-bs-toggle="offcanvas"
+          data-bs-target="#filtersOffcanvas"
+          aria-controls="filtersOffcanvas">
     <i class="fa fa-sliders"></i>
   </button>
-
+</div>
+<!-- 📂 Filtres -->
+<%= render "filters" %>
 </div>
