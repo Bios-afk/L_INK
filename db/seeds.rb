@@ -101,6 +101,16 @@ puts '🚀 Création des clients et artistes...'
   user.categories << sample_styles
 end
 
+User.create!(
+  email: 'felix.korbendau@free.fr',
+  password: "Felix_33",
+  pseudo: 'bios',
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  bio: Faker::Lorem.paragraph,
+  userable: Artist.create!(address: '24 Rue Saint-Rémi, 33000 Bordeaux, France')
+)
+
 puts "✅ Création et association terminées !"
 
 puts "📊 Récapitulatif :"
