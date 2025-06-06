@@ -2,8 +2,8 @@
 <%= render partial: 'users/header', locals: { user: current_user} %>
 
 <!-- Profile info -->
-<% if current_user.userable_type == 'Client' %>
+<%# if current_user.userable_type == 'Client' %>
   <%= render partial: 'users/client_page', locals: { user: current_user}%>
-<% else %>
-  <%#= render partial: 'artists/profil', locals: { user: @user} %>
-<% end %>
+<%# else %>
+  <%#= render partial: 'artists/artist_profile/profile', locals: { user: current_user} %>
+<%# end %>

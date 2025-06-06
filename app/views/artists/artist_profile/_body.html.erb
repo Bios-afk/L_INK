@@ -1,0 +1,32 @@
+<div class="body-profile-container d-flex flex-column align-items-center">
+  <div class="body-profile-button mt-3">
+    <% if user_signed_in? %>
+      <% if artist.user != current_user %>
+        <%= link_to 'Demande de devis', new_artist_quote_request_path(artist), class: "btn btn-primary" %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Demande de devis', new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if artist.photos.attached? %>
+
+    <div class="row mt-4">
+      <% artist.photos.each do |photo| %>
+        <div class="col-md-4 mb-3">
+          <%= image_tag photo, class: "img-fluid rounded shadow" %>
+        </div>
+      <% end %>
+    </div>
+
+  <% else %>
+
+    <div class="row mt-4">
+      <% 6.times do %>
+        <div class="col-4 mb-3">
+          <%= image_tag 'publi.png', class: "publication rounded w-100" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
