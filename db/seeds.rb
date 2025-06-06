@@ -1,12 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 require 'faker'
 
 puts '🧹 Suppression des données existantes...'
@@ -49,10 +40,25 @@ end
 
 puts "✅ #{Category.count} styles insérés avec succès !"
 
+big_french_cities = [
+  "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes",
+  "Strasbourg", "Montpellier", "Bordeaux", "Lille"
+]
+
+bordeaux_addresses = [
+  "10 Rue Sainte-Catherine, Bordeaux",
+  "22 Cours Victor Hugo, Bordeaux",
+  "5 Place de la Bourse, Bordeaux",
+  "13 Rue Parlement Saint-Pierre, Bordeaux",
+  "7 Quai des Chartrons, Bordeaux",
+  "18 Rue du Pas-Saint-Georges, Bordeaux",
+  "25 Rue Mably, Bordeaux",
+  "3 Rue Saint-James, Bordeaux"
+]
+
 puts '🚀 Création des clients et artistes...'
 
-10.times do
-  # Création d'un client et de son user
+10.times do |i|
   client = Client.create!
   User.create!(
     email: Faker::Internet.unique.email,
@@ -64,10 +70,23 @@ puts '🚀 Création des clients et artistes...'
     userable: client
   )
 
-  # Création d'un artiste et de son user
-  artist = Artist.create!(
-    address: "#{Faker::Address.city}, #{Faker::Address.country}"
-  )
+  # Adresse de l'artiste
+  if i < 8
+    address = bordeaux_addresses[i]
+  else
+    city = big_french_cities.sample
+    street = Faker::Address.street_address
+    address = "#{street}, #{city}, France"
+  end
+
+  artist = Artist.create!(address: address)
+
+  # Géocodage automatique avec Geocoder (attention à l'API limit)
+  if artist.respond_to?(:geocode) && artist.address.present?
+    artist.geocode
+    artist.save!
+  end
+
   user = User.create!(
     email: Faker::Internet.unique.email,
     password: "AZERTY",
@@ -78,7 +97,6 @@ puts '🚀 Création des clients et artistes...'
     userable: artist
   )
 
-  # Association de 1 à 3 styles aléatoires
   sample_styles = Category.order("RANDOM()").limit(rand(1..3))
   user.categories << sample_styles
 end
