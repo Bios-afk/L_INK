@@ -24,10 +24,14 @@ class QuoteRequestsController < ApplicationController
     @pending_requests = current_user.userable.quote_requests.where(status: :pending)
   end
 
-  def accept
+    def accept
     if @quote_request.update(status: :accepted)
+      Booking.create!(
+        client: @quote_request.client,
+        artist: @quote_request.artist
+      )
       MessageFeed.find_or_create_by(client: @quote_request.client, artist: @quote_request.artist)
-      redirect_to quote_requests_path, notice: "Demande acceptée."
+      redirect_to quote_requests_path, notice: "Demande acceptée et rendez-vous créé."
     else
       redirect_to quote_requests_path, alert: "Impossible d'accepter la demande."
     end
