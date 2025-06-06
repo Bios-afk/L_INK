@@ -1,0 +1,10 @@
+<h1>Carte des artistes proches</h1>
+
+<div
+  data-controller="map-artists"
+  data-map-artists-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-map-artists-lat-value="<%= @user_lat %>"
+  data-map-artists-lng-value="<%= @user_lng %>"
+  data-map-artists-markers-value='<%= raw @artists.select { |a| a.latitude && a.longitude }.map { |a| { lat: a.latitude, lng: a.longitude, pseudo: a.pseudo } }.to_json %>'
+  style="height: 600px;">
+</div>

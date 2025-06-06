@@ -32,4 +32,7 @@ Rails.application.routes.draw do
 
   # Route Post pour la geolocalisation
   post 'users/set_location', to: 'users#set_location'
+
+  # Route pour la page carte
+  get '/map', to: 'maps#show', as: 'map'
 end
