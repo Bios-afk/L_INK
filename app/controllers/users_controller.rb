@@ -12,11 +12,12 @@ class UsersController < ApplicationController
   #   @user = User.includes(:userable).find(params[:id])
   # end
 
+
   def update
     @user = current_user
 
     success = @user.update(user_params)
-    success &&= @user.userable.update(address: params[:user][:address]) if params[:user][:address].present?
+    success &&= @user.userable.update(address: params[:artist][:address]) if params[:artist].present? && params[:artist][:address].present?
 
     if success
       redirect_to user_path(@user), notice: "Profil complété avec succès."

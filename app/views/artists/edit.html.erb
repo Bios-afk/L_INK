@@ -1,6 +1,70 @@
 <div class="devise-container">
   <h2>Complétez votre profil artiste</h2>
 
+  <!-- 🔁 On englobe tout le bloc catégorie dans le contrôleur -->
+  <div data-controller="category-filter-signup">
+
+    <!-- 🎨 Bouton d’ouverture -->
+    <div
+      class="mb-3 d-flex justify-content-between align-items-center"
+      style="cursor: pointer;"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#categoryOffcanvas"
+      aria-controls="categoryOffcanvas"
+    >
+      <label class="form-label mb-0">Catégories</label>
+      <span class="fs-4">&rsaquo;</span>
+    </div>
+
+    <!-- ✅ Zone des badges sélectionnés (maintenant bien à l’intérieur du contrôleur) -->
+    <div
+      id="selected-categories"
+      class="mb-3"
+      data-category-filter-signup-target="container"
+    ></div>
+
+    <!-- 🧩 Offcanvas -->
+    <div
+      class="offcanvas offcanvas-bottom custom-height"
+      tabindex="-1"
+      id="categoryOffcanvas"
+      aria-labelledby="categoryOffcanvasLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="categoryOffcanvasLabel">Quels styles tatouez-vous ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+      </div>
+
+      <div class="offcanvas-body" style="overflow-y: auto; max-height: 80vh;">
+        <% Category.all.each do |category| %>
+          <div class="form-check mb-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="<%= category.id %>"
+              id="category_<%= category.id %>"
+              data-category-filter-signup-target="checkbox"
+            >
+            <label class="form-check-label" for="category_<%= category.id %>">
+              <%= category.name %>
+            </label>
+          </div>
+        <% end %>
+
+        <button
+          type="button"
+          class="btn btn-primary w-100"
+          id="applyCategories"
+          data-action="click->category-filter-signup#applyCategories"
+        >
+          Valider
+        </button>
+      </div>
+    </div>
+
+  </div> <!-- fin du bloc contrôleur -->
+
+
     <%= simple_form_for @user, url: user_path(@user), method: :patch do |f| %>
       <div class="row">
         <div class="col-md-12">
@@ -14,8 +78,8 @@
             label: "Votre adresse pro pour la géolocalisation",
             input_html: {
               data: {address_autocomplete_target: "address"},
-              class: "d-none",
-              name: "user[address]",
+              class: "form-control d-none",
+              name: "artist[address]",
               value: @user.userable.address
             },
             wrapper_html: {
