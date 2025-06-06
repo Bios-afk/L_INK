@@ -22,7 +22,7 @@ class Artist < ApplicationRecord
   end
 
   def rating
-    self.reviews.any? ? self.reviews.average(:rating) : 0
+    self.reviews.any? ? self.reviews.average(:rating) : rand(1..5)
   end
 
   def distance_to(lat, lon)
