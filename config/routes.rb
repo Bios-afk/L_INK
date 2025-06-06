@@ -4,12 +4,11 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  # Page d'accueil
+  root to: "artists#index"
 
   # Route pour afficher un profil utilisateur public
   resources :users, only: [:show, :edit, :update]
-
-  # Page d'accueil
-  root to: "artists#index"
 
   # Route pour les clients
   resources :artists, only: [:index, :show, :edit, :update] do
@@ -30,7 +29,7 @@ Rails.application.routes.draw do
   resources :message_feeds, only: [:index, :show, :destroy] do
     resources :messages, only: [:create]
   end
-  
+
   # Route Post pour la geolocalisation
   post 'users/set_location', to: 'users#set_location'
 end
