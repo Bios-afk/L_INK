@@ -1,11 +1,11 @@
 <div class="devise-container">
-  <h2 class="mb-4">Créer un compte</h2>
+  <h2 class="mb-4 text-center">Créer un compte</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false } }) do |f| %>
     <%= f.error_notification %>
 
         <% if flash[:alert] %>
-          <div class="alert alert-danger mt-3">
+          <div class="alert alert-danger mt-3y">
             <%= flash[:alert] %>
           </div>
         <% end %>
@@ -23,18 +23,18 @@
 
     <div class="form-inputs">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-6">
           <%= f.input :first_name,
                       label: "Prénom",
                       required: true,
-                      input_html: { autocomplete: "given-name", class: "form-control" } %>
+                      input_html: { autocomplete: "given-name", class: "form-control border border-secondary" } %>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-6">
           <%= f.input :last_name,
                       label: "Nom",
                       required: true,
-                      input_html: { autocomplete: "family-name", class: "form-control" } %>
+                      input_html: { autocomplete: "family-name", class: "form-control border border-secondary" } %>
         </div>
       </div>
 
@@ -44,14 +44,14 @@
                       label: "Adresse e-mail",
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "email", class: "form-control" } %>
+                      input_html: { autocomplete: "email", class: "form-control border border-secondary" } %>
         </div>
 
         <div class="col-md-6">
           <%= f.input :pseudo,
                       label: "Pseudo",
                       required: true,
-                      input_html: { autocomplete: "username", class: "form-control" } %>
+                      input_html: { autocomplete: "username", class: "form-control border border-secondary" } %>
         </div>
       </div>
 
@@ -60,18 +60,18 @@
                   collection: [["Un artiste", "Artist"], ["Un client", "Client"]],
                   prompt: "Choisissez votre rôle",
                   required: true,
-                  input_html: { class: "form-select" } %>
+                  input_html: { class: "form-select border border-secondary" } %>
 
       <%= f.input :password,
                   label: "Mot de passe",
                   required: true,
                   placeholder: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password", class: "form-control" } %>
+                  input_html: { autocomplete: "new-password", class: "form-control border border-secondary" } %>
 
       <%= f.input :password_confirmation,
                   label: "Confirmation du mot de passe",
                   required: true,
-                  input_html: { autocomplete: "new-password", class: "form-control" } %>
+                  input_html: { autocomplete: "new-password", class: "form-control border border-secondary" } %>
     </div>
 
     <%= recaptcha_v3 action: 'signup' %>
