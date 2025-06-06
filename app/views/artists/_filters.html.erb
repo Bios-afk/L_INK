@@ -37,19 +37,43 @@
       <hr class="hr">
 
       <!-- 📍 Ville -->
+      <div data-controller="city-autocomplete">
       <div class="mb-3">
         <label for="city-autocomplete" class="form-label">Ville</label>
-        <input type="text" id="city-autocomplete" class="form-control" placeholder="Ex : Paris">
+        <input
+          type="text"
+          id="city-autocomplete"
+          autocomplete="off"
+          class="form-control"
+          placeholder="Ex : Paris"
+          data-city-autocomplete-target="input"
+          data-action="input->city-autocomplete#search"
+        >
+        <!-- Suggestions affichées ici -->
+        <ul class="mb-3" data-city-autocomplete-target="suggestions"></ul>
       </div>
 
       <!-- 🟦 Affichage des villes sélectionnées -->
-      <div id="selected-cities" class="mb-3"></div>
+      <div id="selected-cities" class="mb-3" data-city-autocomplete-target="selected"></div>
+    </div>
+
+      <hr class="hr">
 
       <!-- ⭐ Note -->
-      <div class="mb-3">
-        <%= f.label :rating, "Note minimale" %>
-        <%= f.select :rating, options_for_select((1..5).to_a.reverse.map { |n| ["#{n}★ et plus", n] }), include_blank: "Toutes", class: "form-select" %>
+      <div class="mb-3" data-controller="star-rating">
+        <label class="form-label">Note minimale</label>
+        <div class="star-rating d-flex gap-1">
+          <% 1.upto(5) do |n| %>
+            <i class="fa-regular fa-star fs-4 star"
+              data-action="click->star-rating#select"
+              data-star-rating-value="<%= n %>"></i>
+          <% end %>
+        </div>
+        <!-- Champ caché qui stocke la valeur sélectionnée -->
+        <%= f.hidden_field :rating, value: "", data: { star_rating_target: "input" } %>
       </div>
+
+       <hr class="hr">
 
       <!-- ✅ Bouton appliquer -->
       <%= f.submit "Appliquer les filtres", class: "btn btn-primary w-100" %>
@@ -81,8 +105,9 @@
         </label>
       </div>
     <% end %>
-
+    <div class="offcanvas-footer">
     <button type="button" class="btn btn-primary w-100" id="applyCategories" data-action="click->category-filter#applyCategories">Valider</button>
+    </div>
   </div>
 </div>
 </div>
