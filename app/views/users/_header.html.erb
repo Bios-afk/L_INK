@@ -4,7 +4,7 @@
       <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
     <% end %>
     <div class="titre-prfile gap-1">
-      <h2 class="header-pseudo text-light mb-0"><%= user.pseudo %></h2>
+      <h2 class="header-pseudo text-light mb-0"><%= current_user.pseudo %></h2>
       <p class="header-connected mb-0">En ligne il y à 10mins</p>
     </div>
   </div>

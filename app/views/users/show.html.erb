@@ -1,9 +1,9 @@
 <!-- Header dashBoard-->
-<%= render partial: 'users/header', locals: { user: @user} %>
+<%= render partial: 'users/header', locals: { user: current_user} %>
 
 <!-- Profile info -->
-<% if @user.userable == 'Client' %>
-  <%#= render partial: 'users/client_page', locals: { user: @user}%>
+<% if current_user.userable_type == 'Client' %>
+  <%= render partial: 'users/client_page', locals: { user: current_user}%>
 <% else %>
   <%#= render partial: 'artists/profil', locals: { user: @user} %>
 <% end %>

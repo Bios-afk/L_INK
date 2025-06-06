@@ -1,0 +1,34 @@
+@import "../template.scss";
+
+.header_profile_container{
+  border-bottom: $accent-color solid 1px;
+}
+
+.header_profile_bouton {
+  background-color: $accent-color;
+  color: $primary-color;
+  color: $secondary-color;
+  font-family: $font-family-base;
+  font-size: 0.8rem;
+  padding: 0.1rem 1rem;
+}
+
+.header_profile_bouton:hover {
+  background-color: $info-color;
+}
+
+.header_profile_info_container{
+  background-color: $primary-color;
+  box-shadow: $shadow-md;
+}
+
+.rounded-circle {
+  width: 78px;
+  height: 78px;
+}
+
+.header_profile_info_bio{
+  font-family: $font-family-base;
+  font-size: 0.8rem;
+  color: $secondary-color;
+}
