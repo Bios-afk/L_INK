@@ -8,7 +8,7 @@ export default class extends Controller {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        fetch("users/set_location", {
+        fetch("/users/set_location", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

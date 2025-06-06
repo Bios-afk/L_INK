@@ -1,0 +1,12 @@
+@import "../template.scss";
+
+.header-container{
+  border-bottom: $accent-color solid 1px;
+  padding-bottom: 1.0rem;
+  font-family: $font-family-base;
+}
+
+.header-icon{
+  width: 3.0rem;
+  height: 3.0rem;
+}

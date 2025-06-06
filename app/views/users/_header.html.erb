@@ -1,0 +1,12 @@
+<div class="header-container w-100 d-flex justify-content-between align-items-center">
+  <div class="titre-container d-flex align-items-center gap-4">
+    <%= link_to root_path do %>
+      <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
+    <% end %>
+    <div class="titre-prfile gap-1">
+      <h2 class="header-pseudo text-light mb-0"><%= current_user.pseudo %></h2>
+      <p class="header-connected mb-0">En ligne il y à 10mins</p>
+    </div>
+  </div>
+  <%= image_tag 'parametre.svg', class: 'header-icon' %>
+</div>

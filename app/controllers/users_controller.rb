@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def set_location
     if current_user
       current_user.update(latitude: params[:latitude], longitude: params[:longitude])
@@ -9,9 +8,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.includes(:userable).find(params[:id])
-  end
+  # def show
+  #   @user = User.includes(:userable).find(params[:id])
+  # end
+
 
   def update
     @user = current_user
