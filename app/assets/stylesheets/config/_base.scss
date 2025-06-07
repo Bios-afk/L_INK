@@ -2,10 +2,18 @@
 
 body {
   padding-inline: 19px;
-  margin-top: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 118px; /* Espace pour le footer */
+}
+
+body.dev-env {
+  margin-top: 48px;
+}
+
+body.prod-env {
+  margin-top: 0;
 }
 
 .header-hide {

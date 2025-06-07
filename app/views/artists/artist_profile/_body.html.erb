@@ -1,32 +1,43 @@
-<div class="body-profile-container d-flex flex-column align-items-center">
-  <div class="body-profile-button mt-3">
-    <% if user_signed_in? %>
-      <% if artist.user != current_user %>
-        <%= link_to 'Demande de devis', new_artist_quote_request_path(artist), class: "btn btn-primary" %>
+<div class="body-profile-container d-flex flex-column align-items-center justify-content-center">
+  <% if artist.user != current_user %>
+    <div class="body-profile-button mt-3 w-100 d-flex justify-content-center pb-3">
+      <% if user_signed_in? %>
+        <%= link_to 'Demande de devis', new_artist_quote_request_path(artist), class: "btn btn-primary text-light" %>
+      <% else %>
+        <%= link_to 'Demande de devis', new_user_session_path, class: "btn btn-primary text-light" %>
       <% end %>
-    <% else %>
-      <%= link_to 'Demande de devis', new_user_session_path, class: "btn btn-primary" %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <% if artist.photos.attached? %>
 
-    <div class="row mt-4">
+    <div class="row mt-4 w-100">
       <% artist.photos.each do |photo| %>
-        <div class="col-md-4 mb-3">
-          <%= image_tag photo, class: "img-fluid rounded shadow" %>
+        <div class="col-4 p-1">
+          <%= cl_image_tag photo.key, crop: :fill, aspect_ratio: "4:5", gravity: :auto, class: "publication rounded w-100" %>
         </div>
       <% end %>
     </div>
 
   <% else %>
 
-    <div class="row mt-4">
-      <% 6.times do %>
-        <div class="col-4 mb-3">
+    <div class="row mt-4 w-100">
+      <% 12.times do %>
+        <div class="col-4 p-1">
           <%= image_tag 'publi.png', class: "publication rounded w-100" %>
         </div>
       <% end %>
     </div>
+  <% end %>
+  <% if artist.user == current_user %>
+    <label for="photos-upload" style="cursor: pointer;">
+      <div class="button-add-photos rounded-circle d-flex justify-content-center align-items-center">
+        <i class="fa-solid fa-plus" style="color:rgb(227, 227, 227);"></i>
+      </div>
+    </label>
+
+    <%= form_with(model: current_user.userable, url: upload_photo_path, method: :patch, html: { multipart: true }) do |f| %>
+      <%= f.file_field :photos, id: "photos-upload", multiple: true, class: "d-none", accept: "image/*", onchange: "this.form.submit()" %>
+    <% end %>
   <% end %>
 </div>

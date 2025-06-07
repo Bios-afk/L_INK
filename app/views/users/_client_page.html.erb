@@ -1,2 +1,7 @@
-<%= render partial: 'users/header_profile', locals: { user: current_user } %>
+<% if current_user.userable_type == 'Client' %>
+  <%= render partial: 'users/header_profile_client', locals: { user: current_user } %>
+<% else %>
+  <%= render partial: 'users/header_profile_artist', locals: { user: current_user } %>
+<% end %>
+
 <%= render partial: 'users/body' %>

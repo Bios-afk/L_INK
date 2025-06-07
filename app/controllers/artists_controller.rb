@@ -53,6 +53,16 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end
 
+  def upload_photo
+    @artist = current_user.userable
+    if params[:artist] && params[:artist][:photos]
+      @artist.photos.attach(params[:artist][:photos])
+      redirect_to user_path(@artist), notice: "Photos bien ajoutées."
+    else
+      redirect_to user_path(@artist), alert: "Aucune photo sélectionnée."
+    end
+  end
+
   private
 
   def set_artist
