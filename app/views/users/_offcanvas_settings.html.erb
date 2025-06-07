@@ -1,0 +1,18 @@
+<div class="header-container w-100 d-flex justify-content-between align-items-center mt-5">
+  <div class="titre-container d-flex align-items-center gap-5">
+    <button type="button" class="btn text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+      <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
+    </button>
+    <div class="titre-prfile gap-1 text-center"
+          style="margin-left: 2.5rem;">
+      <h2 class="header-pseudo text-light mb-0">Parametres</h2>
+    </div>
+  </div>
+</div>
+<div class="offcanvas-body d-flex flex-column align-items-center justify-content-start gap-4">
+  <div class="body-profile-container h-100 w-30 d-flex align-items-start">
+    <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false }, class: "logout-form" do %>
+      <%= submit_tag "Déconnexion", class: "btn btn-primary w-100 text-light mt-4 shadow" %>
+    <% end %>
+  </div>
+</div>

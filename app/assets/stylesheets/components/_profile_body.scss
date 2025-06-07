@@ -1,0 +1,21 @@
+@import "../template.scss";
+
+.body-profile-container{
+  position: relative;
+  height: 100%;
+}
+
+.body-profile-button {
+  border-bottom: $accent-color solid 1px;
+}
+
+.button-add-photos{
+  position: fixed;
+  height: 52px;
+  width: 52px;
+  bottom: 118px;
+  right: calc(50% - 26px);
+  background-color: $primary-color;
+  z-index: 1000;
+  box-shadow: $shadow-md;
+}

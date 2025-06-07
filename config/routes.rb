@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   # Route pour afficher un profil utilisateur public
   resources :users, only: [:show, :edit, :update]
+  patch 'photos', to: 'artists#upload_photo', as: 'upload_photo'
 
   # Route pour les clients
   resources :artists, only: [:index, :show, :edit, :update] do

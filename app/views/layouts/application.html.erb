@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   </head>
 
-  <body data-controller="location">
+  <body data-controller="location" class='<%= Rails.env.development? ? 'dev-env' : 'prod-env' %>'>
     <% if Rails.env.development? %>
       <div class="header-hide"></div>
     <% end %>
