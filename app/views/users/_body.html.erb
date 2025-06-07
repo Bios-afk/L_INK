@@ -1,7 +1,1 @@
-<div class="body-profile-container h-100 w-30 d-flex align-items-start">
-  <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false }, class: "logout-form" do %>
-    <%= submit_tag "Déconnexion", class: "btn btn-primary w-100 text-light mt-4" %>
-  <% end %>
-</div>
-
 <%= render partial: 'artists/artist_profile/body', locals: { artist: current_user.userable } %>

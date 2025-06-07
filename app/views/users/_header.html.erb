@@ -8,5 +8,16 @@
       <p class="header-connected mb-0">En ligne il y à 10mins</p>
     </div>
   </div>
-  <%= image_tag 'parametre.svg', class: 'header-icon' %>
+  <button class="btn"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight">
+    <%= image_tag 'parametre.svg', class: 'header-icon' %>
+  </button>
+
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <%= render partial: 'users/offcanvas_settings', locals: { user: current_user } %>
 </div>
