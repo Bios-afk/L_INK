@@ -22,6 +22,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_avatar
+    @user = current_user
+    if params[:user] && params[:user][:avatar]
+      @user.avatar.attach(params[:user][:avatar])
+      redirect_to user_path(@user), notice: "Avatar mis à jour avec succès."
+    else
+      redirect_to user_path(@user), alert: "Aucun avatar sélectionné."
+    end
+  end
+
   private
 
   def user_params
