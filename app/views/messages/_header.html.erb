@@ -1,0 +1,19 @@
+<div class="header-container w-100 d-flex justify-content-between align-items-center">
+  <div class="titre-container d-flex align-items-center gap-4">
+    <%= link_to message_feeds_path do %>
+      <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
+    <% end %>
+    <div class="titre-prfile">
+      <%= link_to artist_path(@user), data: { turbo: false }, class: 'w-100' do %>
+        <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
+          <div class="picture h-100">
+            <%= image_tag @user.user.avatar_or_default, class: 'rounded-circle', size: "38x38" %>
+          </div>
+          <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
+            <h3 class="artist-name"><%= @user.user.pseudo %></h3>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
