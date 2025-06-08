@@ -1,4 +1,4 @@
-<div id="messages" class="messages-container w-100 d-flex flex-column justify-content-start gap-1">
+<div id="messages" class="messages-container">
   <% messages.each do |message| %>
     <% if message.user != current_user %>
       <div id="message-<%= message.id %>" class="message-from-another-container w-100">

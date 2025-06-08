@@ -1,5 +1,22 @@
 @import "../template.scss";
 
+.message-page-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+}
+
+.messages-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: calc(100vh - 162px);
+}
+
 .message-from-another-container{
   display: flex;
   justify-content: flex-start;
@@ -45,17 +62,17 @@
 .form-textarea-message {
   width: 100%;
   min-height: 35px;
-  max-height: 200px; // facultatif pour limiter la hauteur
+  max-height: 108px; // facultatif pour limiter la hauteur
   padding: 8px 102px 8px 18px;
   border: 1px solid $gray;
   color: $light-gray;
   background-color: $accent-color;
   font-size: $font-size-base;
   font-family: $font-family-base;
+  border-radius: 18px;
   margin: 0;
   resize: none;
   overflow: hidden;
-  border-radius: 9999px; // arrondi comme un input
   line-height: 1.4;
 
   &::placeholder {
@@ -71,8 +88,8 @@
 .btn-form-message {
   position: absolute;
   right: 3.2px;
-  bottom: calc(100% - 37px); // ajuster si besoin
-  height: calc(100% - 14px);
+  bottom: 10px; // ajuster si besoin
+  height: 32px;
   padding: 0px 12px;
   font-size: $font-size-base;
   font-family: $font-family-base;
