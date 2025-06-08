@@ -1,0 +1,79 @@
+@import "../template.scss";
+
+.message-from-another-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: fit-content;
+}
+
+.message-from-me-container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: fit-content;
+}
+
+.message-from-another{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $light-gray;
+  padding-inline: 17px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  border-radius: $border-radius-sm $border-radius-sm $border-radius-sm 0;
+  color: $accent-color;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  max-width: 48%;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.input-message-container {
+  position: relative;
+  width: 100%;
+}
+
+.form-textarea-message {
+  width: 100%;
+  min-height: 35px;
+  max-height: 200px; // facultatif pour limiter la hauteur
+  padding: 8px 102px 8px 18px;
+  border: 1px solid $gray;
+  color: $light-gray;
+  background-color: $accent-color;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  margin: 0;
+  resize: none;
+  overflow: hidden;
+  border-radius: 9999px; // arrondi comme un input
+  line-height: 1.4;
+
+  &::placeholder {
+    color: $light-gray;
+  }
+
+  &:focus {
+    outline: none;
+    color: $light-gray;
+  }
+}
+
+.btn-form-message {
+  position: absolute;
+  right: 3.2px;
+  bottom: calc(100% - 37px); // ajuster si besoin
+  height: calc(100% - 14px);
+  padding: 0px 12px;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+}

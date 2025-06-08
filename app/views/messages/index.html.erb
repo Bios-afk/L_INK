@@ -1,1 +1,7 @@
-<%= render partial: 'header', locals: { user: @user } %>
+<div class="message-page-container w-100 d-flex flex-column justify-content-between gap-4">
+  <%= render partial: 'header', locals: { user: @user } %>
+
+  <%= render partial: 'messages', locals: { messages: @messages, artist: @artist, client: @client} %>
+
+  <%= render partial: 'form_message', locals: { message: @message, artist: @artist, client: @client } %>
+</div>

@@ -4,7 +4,7 @@
       <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
     <% end %>
     <div class="titre-prfile">
-      <%= link_to artist_path(@user), data: { turbo: false }, class: 'w-100' do %>
+      <%= link_to user_path(user), data: { turbo: false }, class: 'w-100' do %>
         <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
           <div class="picture h-100">
             <%= image_tag @user.user.avatar_or_default, class: 'rounded-circle', size: "38x38" %>

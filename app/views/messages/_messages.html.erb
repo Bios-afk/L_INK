@@ -1,0 +1,17 @@
+<div id="messages" class="messages-container w-100 d-flex flex-column justify-content-start gap-1">
+  <% messages.each do |message| %>
+    <% if message.user != current_user %>
+      <div id="message-<%= message.id %>" class="message-from-another-container w-100">
+        <div class="message-from-another">
+          <p><%= message.body %></p>
+        </div>
+      </div>
+    <% else %>
+      <div id="message-<%= message.id %>" class="message-from-me-container w-100">
+        <div class="message-from-another">
+          <p><%= message.body %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
