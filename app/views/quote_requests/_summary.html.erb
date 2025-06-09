@@ -10,8 +10,12 @@
     <li><strong>Commentaire</strong> : <%= quote.comments.presence || "Aucun" %></li>
   </ul>
 
-  <div class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
-    <%= button_to 'accepter', accept_quote_request_path(quote), method: :patch, class: 'btn btn-primary btn-sm text-light shadow' %>
-    <%= button_to 'refuser', reject_quote_request_path(quote), method: :patch, class: 'btn btn-secondary btn-sm text-light shadow' %>
+  <div id="quote_buttons_<%= quote.id %>" class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
+    <% if quote.accepted? %>
+      <span class="badge bg-success">Validé</span>
+    <% else %>
+      <%= button_to 'Accepter', accept_quote_request_path(quote), method: :patch, class: 'btn btn-primary btn-sm text-light shadow', data: { turbo_stream: true } %>
+      <%= button_to 'Refuser', reject_quote_request_path(quote), method: :patch, class: 'btn btn-secondary btn-sm text-light shadow', data: { turbo_stream: true } %>
+    <% end %>
   </div>
 </div>

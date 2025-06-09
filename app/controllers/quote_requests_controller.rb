@@ -29,7 +29,19 @@ class QuoteRequestsController < ApplicationController
 
     if @quote_request.update(status: :accepted)
       feed = MessageFeed.find_or_create_by!(artist: @quote_request.artist, client: @quote_request.client)
-      redirect_to message_feed_path(feed), notice: "Demande acceptée et rendez-vous créé."
+      respond_to do |format|
+        format.turbo_stream do
+          html = <<~HTML
+            <div id="quote_buttons_#{@quote_request.id}" class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
+              <span class="badge bg-success">Validé</span>
+            </div>
+          HTML
+
+          render turbo_stream: turbo_stream.replace("quote_buttons_#{@quote_request.id}", html)
+        end
+
+        format.html { redirect_to message_feed_path(@quote.message_feed), notice: "Demande acceptée." }
+      end
     else
       redirect_to message_feed_path(feed), alert: "Impossible d'accepter la demande."
     end
@@ -72,7 +84,7 @@ class QuoteRequestsController < ApplicationController
       message_feed: feed
       )
     @booking.save!
-    
+
     unless feed.messages.exists?(body: quote_summary(quote), user: current_user)
       feed.messages.create!(body: quote_summary(quote), user: current_user)
     end
