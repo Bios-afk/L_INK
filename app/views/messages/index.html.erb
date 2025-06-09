@@ -1,8 +1,9 @@
 <div class="message-page-container">
   <%= render partial: 'header', locals: { user: @user } %>
 
-  <%= render partial: 'messages', locals: { messages: @messages, artist: @artist, client: @client} %>
+  <div class="chat-wrapper d-flex flex-column w-100">
+    <%= render partial: 'messages', locals: { messages: @messages, artist: @artist, client: @client} %>
 
-  <%= render partial: 'form_message', locals: { artist: @artist, client: @client, feed: @feed } %>
+    <%= render partial: 'form_message', locals: { artist: @artist, client: @client, feed: @feed } %>
+  </div>
 </div>
-

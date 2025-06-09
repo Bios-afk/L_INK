@@ -21,12 +21,12 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.message_feed = @feed
     @message.user = current_user
-    
+
     if @message.save
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.append(:messages, partial: "messages/message",
-            locals: { message: @message })
+            locals: { message: @message, now_user: current_user })
         end
         format.html { redirect_to message_feed_path(@feed), notice: "Message envoyé avec succès." }
       end

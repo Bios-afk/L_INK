@@ -1,6 +1,6 @@
-<div id="messages" class="messages-container">
-  <%= turbo_stream_from "message_feed_#{@feed.id}" %>
+<%= turbo_stream_from "message_feed_#{@feed.id}" %>
+<div id="messages" class="messages-container" data-taget>
   <% messages.each do |message| %>
-    <%= render partial: 'messages/message', locals: { message: message} %>
+    <%= render partial: 'messages/message', locals: { message: message, now_user: current_user} %>
   <% end %>
 </div>

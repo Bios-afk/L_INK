@@ -1,15 +1,28 @@
-<%= simple_form_for [@feed, Message.new], html: { class: "d-flex w-100" } do |f| %>
-  <div class="form-container w-100">
-    <div class="input-message-container w-100">
-      <%= f.text_area :body,
-          placeholder: "Votre message...",
-          class: "form-textarea-message mb-0",
-          rows: 1,
-          data: { controller: "autosize" } %>
+<div class="form-message-container", id='message_form'>
+  <%= simple_form_for [@feed, Message.new],
+      html: { class: "d-flex w-100",
+      data: { controller: "reset-form",
+      action: "turbo:submit-end->reset-form#reset" } },
+      data: { turbo: true } do |f| %>
 
-      <div class="form-submit-message">
-        <%= f.submit "Envoyer", class: "btn-form-message btn btn-primary rounded-pill" %>
+    <div class="form-container w-100" id="message-form">
+      <div class="input-message-container w-100">
+        <%= f.text_area :body,
+            placeholder: "Votre message...",
+            class: "form-textarea-message mb-0",
+            rows: 1,
+            data: { controller: "autosize" } %>
+
+        <div class="form-upload-photo">
+          <label for="chat-photo-upload" class="upload-label btn btn-outline-secondary">
+            <i class="fa-solid fa-image"></i>
+          </label>
+          <%= f.file_field :photo, id: "chat-photo-upload", class: "d-none", direct_upload: true, accept: "image/*" %>
+        </div>
+        <div class="form-submit-message">
+          <%= f.submit "Envoyer", class: "btn-form-message btn btn-primary rounded-pill", id: "form-message-input" %>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

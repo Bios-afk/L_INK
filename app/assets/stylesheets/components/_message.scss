@@ -4,17 +4,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: end;
   width: 100%;
+}
+
+.chat-wrapper{
+  height: calc(100vh - 142px);
 }
 
 .messages-container{
   display: flex;
+  position: relative;
+  overflow: auto;
   flex-direction: column;
   align-items: center;
   justify-content: end;
   width: 100%;
-  height: calc(100vh - 162px);
+  height: calc(100vh - 142px);
+  padding-bottom: 24px;
+  transition: height 0.2s ease;
+}
+
+.form-message-container{
+  width: 100%;
+  padding-inline: 19px;
+  position: absolute;
+  bottom: 12px;
+  left: 0;
 }
 
 .message-from-another-container{
@@ -124,4 +140,28 @@
   padding: 0px 12px;
   font-size: $font-size-base;
   font-family: $font-family-base;
+}
+
+.form-upload-photo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 98px;
+  bottom: 10px;
+  height: 32px;
+  width: 32px;
+
+  .upload-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+
+    i{
+      font-size: $font-size-base;
+    };
+  }
 }
