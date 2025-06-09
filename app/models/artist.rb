@@ -4,9 +4,11 @@ class Artist < ApplicationRecord
 
   has_one :user, as: :userable, dependent: :destroy
   has_many :bookings, dependent: :destroy
-  has_many :message_feeds, dependent: :destroy
 
+  has_many :message_feeds, dependent: :destroy
   has_many :reviews, through: :bookings, dependent: :destroy
+  has_many :follows, dependent: :destroy
+  has_many :followers, through: :follows, source: :user
 
   validates :address, presence: true, on: :update
   # validates :longitude, presence: true

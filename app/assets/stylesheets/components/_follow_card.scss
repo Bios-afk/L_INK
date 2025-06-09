@@ -1,0 +1,20 @@
+@import "../template.scss";
+
+.follow-card {
+  background-color: $primary-color;
+  width: 100%;
+  border: 1px solid #444;
+  transition: background-color 0.2s ease;
+  color: $text-color;
+  box-shadow: $shadow-md;
+
+  &:hover {
+    background-color: $primary-color-hover;
+  }
+}
+
+.full-follow-page {
+  color: $text-color;
+  width: 100%;
+  padding-inline: 0px;
+}
