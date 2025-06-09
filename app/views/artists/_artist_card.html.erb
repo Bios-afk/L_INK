@@ -61,21 +61,11 @@
     <!-- Section photos -->
     <div class="artist-card-down-container justify-content-center align-items-end">
       <div class="photos w-100" data-artist-card-target='photos'>
-        <%# <div class="arrow-container">
-          <i class="arrow fa-solid fa-chevron-left" style="color: #000000;"></i>
-          <i class="arrow fa-solid fa-chevron-right" style="color: #000000;"></i>
-        </div> %>
-        <div class="artist-card-down-img d-flex gap-4 align-items-end">
-          <%= image_tag 'publi.png', class: "publication rounded" %>
-          <%= image_tag 'publi.png', class: "publication rounded" %>
-          <%= image_tag 'publi.png', class: "publication rounded" %>
-          <%= image_tag 'publi.png', class: "publication rounded" %>
-          <%= image_tag 'publi.png', class: "publication rounded" %>
-          <%= image_tag 'publi.png', class: "publication rounded" %>
-          <%# <% artist.photos.with_attached_blob.first(3).each do |photo| %>
-            <%# <%= image_tag photo.variant(resize_to_limit: [400, 300]), class: "img-fluid rounded", style: "height: 110px; width: auto;" %>
-          <%# <% end %>
-        </div>
+          <div class="artist-card-down-img d-flex gap-4 align-items-end">
+            <% artist.photos.last(6).each do |photo| %>
+              <%= cl_image_tag photo.key, class: "publication rounded", width: 110, height: 137 %>
+            <% end %>
+          </div>
       </div>
 
       <!-- Section map -->
