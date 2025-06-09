@@ -29,13 +29,12 @@ class Artist < ApplicationRecord
   end
 
   def distance_to(lat, lon)
-  Rails.logger.debug "[DISTANCE DEBUG] lat: #{lat}, lon: #{lon}, self: #{self.latitude}, #{self.longitude}"
-  if lat.nil? || lon.nil? || self.latitude.nil? || self.longitude.nil?
-    nil
-  else
-    Geocoder::Calculations.distance_between([self.latitude, self.longitude], [lat, lon]).round
+    if lat.nil? && lon.nil?
+      ""
+    else
+      Geocoder::Calculations.distance_between([self.latitude, self.longitude], [lat, lon]).round
+    end
   end
-end
 
   # private
 
