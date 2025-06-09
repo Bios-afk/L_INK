@@ -2,28 +2,37 @@
   <% if artist.user != current_user %>
     <div class="body-profile-button mt-3 w-100 d-flex justify-content-center gap-2 pb-3">
 
-    <!-- Bouton Follow / Unfollow -->
+    <!-- FOLLOW / UNFOLLOW -->
     <% if user_signed_in? %>
-      <% followed = current_user.followed_artists.include?(artist) %>
+      <% follow = current_user.follows.find_by(artist_id: artist.id) %>
+      <% followed = follow.present? %>
 
-      <%= form_with url: (followed ? follow_path(artist_id: artist.id)
-                                   : follows_path),
+      <%= form_with url: (followed ? follow_path(follow) : follows_path),
                     method: (followed ? :delete : :post),
+                    id: "follow_btn_#{artist.id}",
                     data: { turbo_stream: true },
                     class: "d-inline" do %>
-          <button type="submit" class="btn btn-primary text-light">
-            <% if followed %>
-              <i class="fa-solid fa-heart"></i>
-            <% else %>
-              <i class="fa-regular fa-heart"></i>
-            <% end %>
-          </button>
+
+        <%# -- Champ caché seulement quand on crée le follow -- %>
+        <% unless followed %>
+          <%= hidden_field_tag :artist_id, artist.id %>
         <% end %>
-      <% else %>
-        <%= link_to new_user_session_path, class: "btn btn-primary text-light" do %>
-          <i class="fa-regular fa-heart me-1"></i>Follow
-        <% end %>
+
+        <button type="submit" class="btn btn-primary text-light" title="<%= followed ? 'Ne plus suivre' : 'Suivre' %>">
+          <% if followed %>
+            <i class="fa-solid fa-heart"></i>
+          <% else %>
+            <i class="fa-regular fa-heart"></i>
+          <% end %>
+        </button>
       <% end %>
+
+    <% else %>
+      <%= link_to new_user_session_path, class: "btn btn-primary text-light" do %>
+        <i class="fa-regular fa-heart"></i>
+      <% end %>
+    <% end %>
+
 
       <!-- Bouton Devis -->
       <% if user_signed_in? %>

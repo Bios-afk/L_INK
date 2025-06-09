@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   # Follow / Unfollow artistes
+  get '/follows', to: 'follows#index', as: :follows
   resources :follows, only: [:create, :destroy]
 
   # Route Post pour la geolocalisation
