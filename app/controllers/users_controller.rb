@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def show
+    @user = User.includes(:userable).find(params[:id])
+  end
+
   def update
     @user = current_user
 
