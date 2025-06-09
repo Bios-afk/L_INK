@@ -10,7 +10,7 @@ class MapsController < ApplicationController
       @user_lng = -0.57918
     end
 
-    radius = 10 # km
+    radius = 20 # km
 
     # On construit la requête avec select explicite
     @artists = Artist
