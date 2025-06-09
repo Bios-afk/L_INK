@@ -12,23 +12,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: end;
   width: 100%;
   height: calc(100vh - 162px);
 }
 
 .message-from-another-container{
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   height: fit-content;
+  margin-bottom: $spacing-md;
+  .message-timestramp{
+    color: $info-color;
+    font-size: $font-size-sm;
+    font-family: $font-family-base;
+  }
 }
 
 .message-from-me-container{
+  flex-direction: column;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
+  align-items: end;
   height: fit-content;
+  margin-bottom: $spacing-md;
+
+  .message-timestramp{
+    color: $info-color;
+    font-size: $font-size-sm;
+    font-family: $font-family-base;
+  }
 }
 
 .message-from-another{
@@ -37,11 +52,27 @@
   justify-content: center;
   background-color: $light-gray;
   padding-inline: 17px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 
   border-radius: $border-radius-sm $border-radius-sm $border-radius-sm 0;
   color: $accent-color;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  max-width: 48%;
+}
+
+.message-from-me{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-color;
+  padding-inline: 17px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  border-radius: $border-radius $border-radius 0.12rem $border-radius;
+  color: $gray;
   font-size: $font-size-base;
   font-family: $font-family-base;
   max-width: 48%;

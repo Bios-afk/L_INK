@@ -1,17 +1,6 @@
 <div id="messages" class="messages-container">
+  <%= turbo_stream_from "message_feed_#{@feed.id}" %>
   <% messages.each do |message| %>
-    <% if message.user != current_user %>
-      <div id="message-<%= message.id %>" class="message-from-another-container w-100">
-        <div class="message-from-another">
-          <p><%= message.body %></p>
-        </div>
-      </div>
-    <% else %>
-      <div id="message-<%= message.id %>" class="message-from-me-container w-100">
-        <div class="message-from-another">
-          <p><%= message.body %></p>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: 'messages/message', locals: { message: message} %>
   <% end %>
 </div>

@@ -3,5 +3,6 @@
 
   <%= render partial: 'messages', locals: { messages: @messages, artist: @artist, client: @client} %>
 
-  <%= render partial: 'form_message', locals: { message: @message, artist: @artist, client: @client } %>
+  <%= render partial: 'form_message', locals: { artist: @artist, client: @client, feed: @feed } %>
 </div>
+

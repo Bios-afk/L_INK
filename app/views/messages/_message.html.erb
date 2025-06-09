@@ -1,0 +1,15 @@
+<% if message.user != current_user %>
+  <div id="message-<%= message.id %>" class="message-from-another-container w-100">
+    <small class="message-timestramp"><%= message.created_at.strftime("%H:%M") %></small>
+    <div class="message-from-another">
+      <p><%= message.body %></p>
+    </div>
+  </div>
+<% else %>
+  <div id="message-<%= message.id %>" class="message-from-me-container w-100">
+    <small class="message-timestramp"><%= message.created_at.strftime("%H:%M") %></small>
+    <div class="message-from-me">
+      <p class="mb-0"><%= message.body %></p>
+    </div>
+  </div>
+<% end %>
