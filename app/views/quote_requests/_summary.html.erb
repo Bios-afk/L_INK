@@ -1,14 +1,17 @@
-<p class="titre-message-rapport">✏️ <strong>Nouvelle demande de devis</strong></p>
-<ul style="padding-left: 18px; margin: 0;">
-  <li><strong>Style</strong> : <%= quote.style.join(', ') %></li>
-  <li><strong>Taille</strong> : <%= quote.size %></li>
-  <li><strong>Couleur</strong> : <%= quote.color.join(', ') %></li>
-  <li><strong>Zone</strong> : <%= quote.body_zone.join(', ') %></li>
-  <li><strong>Allergies</strong> : <%= quote.allergies.presence || "Aucune" %></li>
-  <li><strong>Commentaire</strong> : <%= quote.comments.presence || "Aucun" %></li>
-</ul>
+<div class="sumarry-contenaire d-flex flex-column align-items-start justify-content-between">
+  <p class="titre-message-rapport">✏️ <strong>Nouvelle demande de devis</strong></p>
+  <ul style="padding-left: 18px; margin: 0;"
+      class="list-unstyled mb-0 d-flex flex-column gap-1 align-items-start p-0">
+    <li><strong>Style</strong> : <%= quote.style.join(', ') %></li>
+    <li><strong>Taille</strong> : <%= quote.size %></li>
+    <li><strong>Couleur</strong> : <%= quote.color.join(', ') %></li>
+    <li><strong>Zone</strong> : <%= quote.body_zone.join(', ') %></li>
+    <li><strong>Allergies</strong> : <%= quote.allergies.presence || "Aucune" %></li>
+    <li><strong>Commentaire</strong> : <%= quote.comments.presence || "Aucun" %></li>
+  </ul>
 
-<div style="margin-top: 16px;">
-  <%= button_to 'accepter', accept_quote_request_path(quote), method: :patch %>
-  <%= button_to 'refuser', reject_quote_request_path(quote), method: :patch %>
+  <div class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
+    <%= button_to 'accepter', accept_quote_request_path(quote), method: :patch, class: 'btn btn-primary btn-sm text-light shadow' %>
+    <%= button_to 'refuser', reject_quote_request_path(quote), method: :patch, class: 'btn btn-secondary btn-sm text-light shadow' %>
+  </div>
 </div>
