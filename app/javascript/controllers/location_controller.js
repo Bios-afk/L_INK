@@ -9,16 +9,12 @@ export default class extends Controller {
         const longitude = position.coords.longitude;
 
         fetch("/users/set_location", {
-          method: "PATCH",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
           },
           body: JSON.stringify({ latitude, longitude })
-        }).then((response) => {
-          if (response.ok) {
-            location.reload(); // Recharger pour actualiser la carte
-          }
         });
       });
     }

@@ -52,7 +52,7 @@ addMarkers() {
       })
       .then(response => response.text())
       .then(html => {
-        const content = document.querySelector('#offcanvas-content');
+        const content = document.querySelector('#artistOffcanvasBody'); 
         content.innerHTML = html;
 
         // 🔁 Redéclenche Stimulus (et d'autres events Turbo/Stimulus)

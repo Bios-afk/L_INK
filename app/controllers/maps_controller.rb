@@ -6,7 +6,7 @@ class MapsController < ApplicationController
       @user_lat = current_user.latitude
       @user_lng = current_user.longitude
     else
-      @user_lat = 44.837789  # Bordeaux par défaut
+      @user_lat = 44.837789 # Bordeaux par défaut
       @user_lng = -0.57918
     end
 
@@ -23,5 +23,4 @@ class MapsController < ApplicationController
     @users = User.where(userable_type: "Artist", userable_id: artist_ids)
                  .where.not(id: current_user.id)
   end
-
 end

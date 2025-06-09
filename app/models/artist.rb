@@ -15,7 +15,7 @@ class Artist < ApplicationRecord
   # validates :latitude, presence: true
 
   after_validation :geocode, if: :will_save_change_to_address?
-  after_validation :sync_user_coordinates, if: -> { saved_change_to_latitude? || saved_change_to_longitude? }
+  # after_validation :sync_user_coordinates, if: -> { saved_change_to_latitude? || saved_change_to_longitude? }
 
   def marker_map
     {
@@ -29,18 +29,18 @@ class Artist < ApplicationRecord
   end
 
   def distance_to(lat, lon)
-    if lat.nil? && lon.nil?
-      ""
-    else
-      Geocoder::Calculations.distance_between([self.latitude, self.longitude], [lat, lon]).round
-    end
-  end
-
-  private
-
-  def sync_user_coordinates
-    return unless user.present?
-    user.update(latitude: latitude, longitude: longitude)
+  Rails.logger.debug "[DISTANCE DEBUG] lat: #{lat}, lon: #{lon}, self: #{self.latitude}, #{self.longitude}"
+  if lat.nil? || lon.nil? || self.latitude.nil? || self.longitude.nil?
+    nil
+  else
+    Geocoder::Calculations.distance_between([self.latitude, self.longitude], [lat, lon]).round
   end
 end
 
+  # private
+
+  # def sync_user_coordinates
+  #   return unless user.present?
+  #   user.update(latitude: latitude, longitude: longitude)
+  # end
+end
