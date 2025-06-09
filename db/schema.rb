@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.1].define(version: 2025_06_06_125304) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,12 +91,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_06_125304) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.boolean "read"
+    t.boolean "read", default: false
     t.string "body"
     t.bigint "message_feed_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["message_feed_id"], name: "index_messages_on_message_feed_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "quote_requests", force: :cascade do |t|
@@ -120,6 +124,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_06_125304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
+  end
+
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.text "channel"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
   end
 
   create_table "tattoo_categories", force: :cascade do |t|
@@ -161,6 +174,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_06_125304) do
   add_foreign_key "message_feeds", "artists"
   add_foreign_key "message_feeds", "clients"
   add_foreign_key "messages", "message_feeds"
+  add_foreign_key "messages", "users"
   add_foreign_key "quote_requests", "artists"
   add_foreign_key "quote_requests", "clients"
   add_foreign_key "reviews", "bookings"

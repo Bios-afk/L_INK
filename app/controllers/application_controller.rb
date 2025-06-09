@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     user_path(resource)
+    cookies.signed[:user_id] = {
+    value: resource.id,
+    httponly: true, # sécurise le cookie, non accessible par JS
+    expires: 1.week.from_now
+  }
+
   end
 
   protected
