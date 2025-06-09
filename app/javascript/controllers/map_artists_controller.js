@@ -32,36 +32,36 @@ export default class extends Controller {
     this.fitMapToMarkers();
   }
 
-addMarkers() {
-  this.markersValue.forEach(marker => {
-    const mapMarker = new mapboxgl.Marker()
-      .setLngLat([marker.lng, marker.lat])
-      .addTo(this.map);
+  addMarkers() {
+    this.markersValue.forEach(marker => {
+      const mapMarker = new mapboxgl.Marker()
+        .setLngLat([marker.lng, marker.lat])
+        .addTo(this.map);
 
-    mapMarker.getElement().addEventListener("click", () => {
-      const artistId = marker.id; // <-- récupère l'id ici
-      console.log("Fetch artist with id:", artistId);
+      mapMarker.getElement().addEventListener("click", () => {
+        const artistId = marker.id; // <-- récupère l'id ici
+        console.log("Fetch artist with id:", artistId);
 
-      // Ouvre l'offcanvas Bootstrap
-      const offcanvasEl = document.getElementById("artistOffcanvas");
-      const bsOffcanvas = new bootstrap.Offcanvas(offcanvasEl);
-      bsOffcanvas.show();
+        // Ouvre l'offcanvas Bootstrap
+        const offcanvasEl = document.getElementById("artistOffcanvas");
+        const bsOffcanvas = new bootstrap.Offcanvas(offcanvasEl);
+        bsOffcanvas.show();
 
-      // Charge le contenu dynamique via fetch
-      fetch(`/artists/${artistId}/card_details`, {
-        headers: { Accept: "text/html" }
-      })
-      .then(response => response.text())
-      .then(html => {
-        const content = document.querySelector('#artistOffcanvasBody');
-        content.innerHTML = html;
+        // Charge le contenu dynamique via fetch
+        fetch(`/artists/${artistId}/card_details`, {
+          headers: { Accept: "text/html" }
+        })
+        .then(response => response.text())
+        .then(html => {
+          const content = document.querySelector('#artistOffcanvasBody');
+          content.innerHTML = html;
 
-        // 🔁 Redéclenche Stimulus (et d'autres events Turbo/Stimulus)
-        document.dispatchEvent(new Event("turbo:load"));
+          // 🔁 Redéclenche Stimulus (et d'autres events Turbo/Stimulus)
+          document.dispatchEvent(new Event("turbo:load"));
+        });
       });
     });
-  });
-}
+  }
 
   fitMapToMarkers() {
     if (!this.markersValue.length) return;
