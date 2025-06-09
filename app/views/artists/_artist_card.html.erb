@@ -6,7 +6,7 @@
     <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
 
       <!-- Partie info -->
-      <%= link_to artist_path(artist), class: 'w-100' do %>
+      <%= link_to artist_path(artist), data: { turbo: false }, class: 'w-100' do %>
         <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
           <div class="picture h-100">
             <%= image_tag 'profile_pic.png', class: 'rounded-circle', size: "53x53" %>

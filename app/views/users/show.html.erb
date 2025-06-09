@@ -3,7 +3,9 @@
 
 <!-- Profile info -->
 <% if current_user.userable_type == 'Client' %>
-  <%= render partial: 'users/client_page', locals: { user: current_user}%>
+  <%= render partial: 'users/header_profile_client', locals: { user: current_user } %>
+  <%= render partial: 'user/body_client', locals: { user: current_user } %>
 <% else %>
-  <%#= render partial: 'artists/profil', locals: { user: @user} %>
+  <%= render partial: 'users/header_profile_artist', locals: { user: current_user } %>
+  <%= render partial: 'artists/artist_profile/body', locals: { artist: current_user.userable } %>
 <% end %>

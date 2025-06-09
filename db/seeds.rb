@@ -1,12 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 require 'faker'
 
 puts '🧹 Suppression des données existantes...'
@@ -109,6 +100,16 @@ puts '🚀 Création des clients et artistes...'
   sample_styles = Category.order("RANDOM()").limit(rand(1..3))
   user.categories << sample_styles
 end
+
+User.create!(
+  email: 'felix.korbendau@free.fr',
+  password: "Felix_33",
+  pseudo: 'bios',
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  bio: Faker::Lorem.paragraph,
+  userable: Artist.create!(address: '24 Rue Saint-Rémi, 33000 Bordeaux, France')
+)
 
 puts "✅ Création et association terminées !"
 
