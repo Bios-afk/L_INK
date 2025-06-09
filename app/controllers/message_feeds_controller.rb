@@ -18,4 +18,10 @@ class MessageFeedsController < ApplicationController
     @messages = @feed.messages.order(created_at: :asc)
     @message = Message.new
   end
+
+  def destroy
+    @feed = MessageFeed.find(params[:id])
+    @feed.destroy
+    redirect_to message_feeds_path, notice: "Conversation supprimée."
+  end
 end

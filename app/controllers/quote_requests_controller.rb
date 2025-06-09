@@ -72,6 +72,7 @@ class QuoteRequestsController < ApplicationController
       message_feed: feed
       )
     @booking.save!
+    
     unless feed.messages.exists?(body: quote_summary(quote), user: current_user)
       feed.messages.create!(body: quote_summary(quote), user: current_user)
     end

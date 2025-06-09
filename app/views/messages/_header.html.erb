@@ -16,4 +16,15 @@
       <% end %>
     </div>
   </div>
+  <button class="btn p-0"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight">
+    <%= image_tag 'parametre.svg', class: 'header-icon-message' %>
+  </button>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <%= render partial: 'messages/settings' %>
 </div>
