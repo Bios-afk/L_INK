@@ -11,7 +11,7 @@ export default class extends Controller {
   };
 
   connect() {
-    console.log("Lat:", this.latValue, "Lng:", this.lngValue);
+    console.log("Markers:", this.markersValue);;
     if (this.element.offsetParent === null) return;
     this.loadMap();
   }
@@ -40,6 +40,7 @@ addMarkers() {
 
     mapMarker.getElement().addEventListener("click", () => {
       const artistId = marker.id; // <-- récupère l'id ici
+      console.log("Fetch artist with id:", artistId);
 
       // Ouvre l'offcanvas Bootstrap
       const offcanvasEl = document.getElementById("artistOffcanvas");
@@ -47,12 +48,12 @@ addMarkers() {
       bsOffcanvas.show();
 
       // Charge le contenu dynamique via fetch
-      fetch(`/artists/card_partial?id=${artistId}`, {
+      fetch(`/artists/${artistId}/card_details`, {
         headers: { Accept: "text/html" }
       })
       .then(response => response.text())
       .then(html => {
-        const content = document.querySelector('#artistOffcanvasBody'); 
+        const content = document.querySelector('#artistOffcanvasBody');
         content.innerHTML = html;
 
         // 🔁 Redéclenche Stimulus (et d'autres events Turbo/Stimulus)

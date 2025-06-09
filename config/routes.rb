@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
   resources :artists do
     member do
-      get :card_partial
+      get :card_details
     end
   end
 end
