@@ -1,7 +1,16 @@
 class MessageFeedsController < ApplicationController
 
   def index
-    @feeds = current_user.userable.message_feeds
+    if current_user.userable_type == 'Artist'
+      @feeds = current_user.userable.message_feeds
+    elsif current_user.userable_type == 'Client'
+      @feeds = MessageFeed
+              .joins(booking: :quote_request)
+              .where(quote_requests: { status: :accepted })
+              .distinct
+    else
+      @feeds = MessageFeed.none
+    end
   end
 
   def show

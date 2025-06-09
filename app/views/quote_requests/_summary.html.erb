@@ -1,0 +1,14 @@
+<p class="titre-message-rapport">✏️ <strong>Nouvelle demande de devis</strong></p>
+<ul style="padding-left: 18px; margin: 0;">
+  <li><strong>Style</strong> : <%= quote.style.join(', ') %></li>
+  <li><strong>Taille</strong> : <%= quote.size %></li>
+  <li><strong>Couleur</strong> : <%= quote.color.join(', ') %></li>
+  <li><strong>Zone</strong> : <%= quote.body_zone.join(', ') %></li>
+  <li><strong>Allergies</strong> : <%= quote.allergies.presence || "Aucune" %></li>
+  <li><strong>Commentaire</strong> : <%= quote.comments.presence || "Aucun" %></li>
+</ul>
+
+<div style="margin-top: 16px;">
+  <%= button_to 'accepter', accept_quote_request_path(quote), method: :patch %>
+  <%= button_to 'refuser', reject_quote_request_path(quote), method: :patch %>
+</div>
