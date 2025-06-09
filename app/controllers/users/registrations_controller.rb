@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
      # 👉 Vérification reCAPTCHA AVANT toute création
     unless verify_recaptcha(action: 'signup', minimum_score: Rails.env.development? ? 0 : 0.5)
-      flash[:alert] = "Captcha invalide, veuillez réessayer."
+      # flash[:alert] = "Captcha invalide, veuillez réessayer."
       build_resource(sign_up_params)
       render :new and return
     end
@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     when "Artist"
       artist = Artist.create(address: "")
       unless artist.persisted?
-        flash[:alert] = "Erreur lors de la création du profil artiste : #{artist.errors.full_messages.join(', ')}"
+        # flash[:alert] = "Erreur lors de la création du profil artiste : #{artist.errors.full_messages.join(', ')}"
         render :new and return
       end
       resource.userable = artist
@@ -26,13 +26,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     when "Client"
       client = Client.create
       unless client.persisted?
-        flash[:alert] = "Erreur lors de la création du profil client : #{client.errors.full_messages.join(', ')}"
+        # flash[:alert] = "Erreur lors de la création du profil client : #{client.errors.full_messages.join(', ')}"
         render :new and return
       end
       resource.userable = client
 
     else
-      flash[:alert] = "Type d'utilisateur invalide."
+      # flash[:alert] = "Type d'utilisateur invalide."
       render :new and return
     end
 
