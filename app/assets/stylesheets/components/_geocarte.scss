@@ -1,0 +1,19 @@
+@import "../template.scss";
+
+.logo-map {
+  object-fit: cover;
+  width: 38%;
+  margin: 0 auto;
+}
+
+.geocarte {
+  height: 700px;
+  width: 120%;
+  align-content: flex;
+  box-shadow: inset 0 5px 8px -5px rgba(0, 0, 0, 0.3);
+}
+
+.geocarte-container{
+  // padding-bottom: 1.0rem;
+  font-family: $font-family-base;
+}

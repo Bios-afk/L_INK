@@ -1,0 +1,12 @@
+<div class="geocarte-container w-100 mb-4 d-flex justify-content-center align-items-center">
+  <%= image_tag 'logo.svg', class: 'logo-map' %>
+</div>
+
+<div data-controller="location"></div>
+<div class="geocarte"
+  data-controller="map-artists"
+  data-map-artists-api-key-value="<%= ENV['MAP_BOX_API_KEY'] %>"
+  data-map-artists-lat-value="<%= @user_lat %>"
+  data-map-artists-lng-value="<%= @user_lng %>"
+  data-map-artists-markers-value='<%= raw @users.map { |u| { lat: u.userable.latitude, lng: u.userable.longitude, pseudo: u.pseudo } }.to_json %>' >
+</div>

@@ -1,7 +1,7 @@
 <nav class="curved-navbar">
   <div class="wave"></div>
   <ul class="nav-icons">
-    <li><a href="#"><%= image_tag 'loc_icon.svg', class: 'icon' %></a></li>
+    <li><%= link_to image_tag('loc_icon.svg', class: 'icon'), map_path %></li>
     <li>
       <%= link_to follows_path do %>
         <%= image_tag 'Favorite_fill.svg', class: 'icon', alt: 'Favoris' %>

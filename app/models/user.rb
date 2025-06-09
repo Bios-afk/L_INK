@@ -19,6 +19,9 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :pseudo, presence: true, uniqueness: true
+  
+  // geocoded_by :address
+  // after_validation :geocode, if: :will_save_change_to_address?
 
   # application avatar par defaut
   def avatar_or_default
