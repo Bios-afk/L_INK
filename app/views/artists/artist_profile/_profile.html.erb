@@ -1,3 +1,5 @@
-<%= render partial: 'artists/artist_profile/header_pseudo', locals: { user: @artist } %>
-<%= render partial: 'artists/artist_profile/header', locals: { artist: @artist} %>
-<%= render partial: 'artists/artist_profile/body', locals: { user: current_user, artist: @artist } %>
+<div class="d-flex flex-column justify-content-start align-items-center">
+  <%= render partial: 'artists/artist_profile/header_pseudo', locals: { artist: artist } %>
+  <%= render partial: 'artists/artist_profile/header', locals: { artist: artist} %>
+  <%= render partial: 'artists/artist_profile/body', locals: { artist: artist } %>
+</div>

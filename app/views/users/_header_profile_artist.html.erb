@@ -1,18 +1,18 @@
 <div class="header_profile_container w-100 d-flex justify-content-start align-items-start pb-4">
   <div class="header_profile_info_container rounded w-100 d-flex justify-content-start align-items-center gap-3 px-3 py-2">
     <div class="header_profile_pic h-100 d-flex justify-content-center align-items-center">
-      <%= image_tag artist.user.avatar.attached? ? url_for(artist.user.avatar) : 'pic-profile-default.png', class: 'header-rounded-circle', alt: "#{artist.user.pseudo} profile picture" %>
+      <%= image_tag user.avatar.attached? ? url_for(user.avatar) : 'pic-profile-default.png', class: 'header-rounded-circle', alt: "#{user.pseudo} profile picture" %>
     </div>
     <div class="header_profile_info_text h-100 d-flex flex-column justify-content-center align-items-start gap-1">
       <div class="header_profile_info_rating d-flex align-items-end gap-1">
-        <% artist.rating.to_i.times do %>
+        <% user.userable.rating.to_i.times do %>
           <i class="fa-solid fa-star header-profile-rating-star" style="color:rgb(255, 211, 52);"></i>
         <% end %>
       </div>
-      <p class="header_profile_info_bio mb-0"><%= artist.user.bio %></p>
+      <p class="header_profile_info_bio mb-0"><%= user.bio %></p>
       <div class="header-profile-info-loc-container d-flex align-items-center gap-2">
         <%= image_tag 'loc_icon.svg', class: 'header-profile-info-icon-loc' %>
-        <p class="header_profile_info_address mb-0"><%= artist.address %></p>
+        <p class="header_profile_info_address mb-0"><%= user.userable.address %></p>
       </div>
     </div>
   </div>
