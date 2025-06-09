@@ -11,6 +11,7 @@ export default class extends Controller {
   };
 
   connect() {
+    console.log("Lat:", this.latValue, "Lng:", this.lngValue);
     if (this.element.offsetParent === null) return;
     this.loadMap();
   }

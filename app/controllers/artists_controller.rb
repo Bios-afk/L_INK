@@ -4,6 +4,16 @@ class ArtistsController < ApplicationController
   before_action :set_artist, only: [:edit, :update]
 
   def index
+
+    # Bordeaux par défaut
+    @user_lat = 44.837789
+    @user_lng = -0.57918
+
+    if current_user&.userable_type == "Client"
+      @user_lat = current_user.latitude if current_user.latitude.present?
+      @user_lng = current_user.longitude if current_user.longitude.present?
+    end
+
     @artists = Artist.joins(:user).distinct
 
     # 🔍 Filtre texte (pseudo ou bio)
