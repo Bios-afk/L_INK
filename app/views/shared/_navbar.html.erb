@@ -2,7 +2,12 @@
   <div class="wave"></div>
   <ul class="nav-icons">
     <li><a href="#"><%= image_tag 'loc_icon.svg', class: 'icon' %></a></li>
-    <li><a href="#"><%= image_tag 'Favorite_fill.svg', class: 'icon' %></a></li>
+    <li>
+      <%= link_to follows_path do %>
+        <%= image_tag 'Favorite_fill.svg', class: 'icon', alt: 'Favoris' %>
+      <% end %>
+    </li>
+
     <li class="search-icon">
       <%= link_to root_path do %>
         <%= image_tag 'Search_icon.svg', class: 'icon' %>
