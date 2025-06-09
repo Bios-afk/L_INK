@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if success
       redirect_to user_path(@user), notice: "Profil complété avec succès."
     else
-      # flash[:alert] = "Erreur lors de la mise à jour du profil."
+      flash[:alert] = "Erreur lors de la mise à jour du profil."
       render :edit
     end
   end
