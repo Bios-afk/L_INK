@@ -15,7 +15,7 @@ class Artist < ApplicationRecord
   # validates :latitude, presence: true
 
   after_validation :geocode, if: :will_save_change_to_address?
-  after_validation :sync_user_coordinates, if: -> { saved_change_to_latitude? || saved_change_to_longitude? }
+  # after_validation :sync_user_coordinates, if: -> { saved_change_to_latitude? || saved_change_to_longitude? }
 
   def marker_map
     {
@@ -36,11 +36,10 @@ class Artist < ApplicationRecord
     end
   end
 
-  private
+  # private
 
-  def sync_user_coordinates
-    return unless user.present?
-    user.update(latitude: latitude, longitude: longitude)
-  end
+  # def sync_user_coordinates
+  #   return unless user.present?
+  #   user.update(latitude: latitude, longitude: longitude)
+  # end
 end
-

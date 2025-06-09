@@ -36,14 +36,15 @@ Rails.application.routes.draw do
   resources :follows, only: [:create, :destroy]
 
   # Route Post pour la geolocalisation
-  resources :users do
-    collection do
-      post :set_location
-    end
-  end
 
   post "/users/set_location", to: "users#set_location"
 
   # Route pour la page carte
   get '/map', to: 'maps#show', as: 'map'
+
+  resources :artists do
+    member do
+      get :card_details
+    end
+  end
 end

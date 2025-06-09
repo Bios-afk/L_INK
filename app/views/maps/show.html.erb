@@ -2,11 +2,21 @@
   <%= image_tag 'logo.svg', class: 'logo-map' %>
 </div>
 
-<div data-controller="location"></div>
 <div class="geocarte"
   data-controller="map-artists"
   data-map-artists-api-key-value="<%= ENV['MAP_BOX_API_KEY'] %>"
   data-map-artists-lat-value="<%= @user_lat %>"
   data-map-artists-lng-value="<%= @user_lng %>"
-  data-map-artists-markers-value='<%= raw @users.map { |u| { lat: u.userable.latitude, lng: u.userable.longitude, pseudo: u.pseudo } }.to_json %>' >
+  data-map-artists-markers-value='<%= raw @users.map { |u| { id: u.userable.id, lat: u.userable.latitude, lng: u.userable.longitude, pseudo: u.pseudo } }.to_json %>'
+ >
+</div>
+
+<div class="offcanvas offcanvas-bottom custom-maps-show" tabindex="-1" id="artistOffcanvas" aria-labelledby="artistOffcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="artistOffcanvasLabel">Détails de l'artiste</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="artistOffcanvasBody">
+    <!-- Contenu injecté dynamiquement -->
+  </div>
 </div>

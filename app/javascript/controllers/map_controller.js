@@ -9,13 +9,13 @@ export default class extends Controller {
     apiKey: String,
   };
 
-    connect() {
+  connect() {
     console.log("conected controller map");
     // Ne pas lancer si l'élément est caché
     if (this.element.offsetParent === null) return;
-    }
+  }
 
-      loadMap() {
+  loadMap() {
     console.log("load map");
     this.element.innerHTML = "";
     mapboxgl.accessToken = this.apiKeyValue;
@@ -23,7 +23,7 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
-            center: [this.lngValue, this.latValue],
+      center: [this.lngValue, this.latValue],
       zoom: 12,
     });
     console.log(this.element)

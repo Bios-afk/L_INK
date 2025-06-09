@@ -73,6 +73,11 @@ class ArtistsController < ApplicationController
     end
   end
 
+  def card_details
+    @artist = Artist.find(params[:id])
+    render partial: 'artists/artist_card', locals: { artist: @artist }
+  end
+
   private
 
   def set_artist
