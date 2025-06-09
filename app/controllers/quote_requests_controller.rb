@@ -13,7 +13,7 @@ class QuoteRequestsController < ApplicationController
     @quote_request.client = current_user.userable
 
     if @quote_request.save
-      redirect_to root_path, notice: "Votre demande de devis a bien été envoyée."
+      redirect_to_conversation(@quote_request)
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class QuoteRequestsController < ApplicationController
     @pending_requests = current_user.userable.quote_requests.where(status: :pending)
   end
 
-    def accept
+  def accept
     if @quote_request.update(status: :accepted)
       Booking.create!(
         client: @quote_request.client,
@@ -55,7 +55,6 @@ class QuoteRequestsController < ApplicationController
     # Sécurité : ne montrer que les demandes qui appartiennent à l'artiste connecté
     unless current_user.userable_type == "Artist"
       redirect_to root_path, alert: "Accès non autorisé."
-      return
     end
   end
 
@@ -69,5 +68,33 @@ class QuoteRequestsController < ApplicationController
       color: [],
       body_zone: []
     )
+  end
+
+  def redirect_to_conversation(quote)
+    artist = quote.artist
+    client = quote.client
+
+    feed = MessageFeed.find_or_create_by!(artist: artist, client: client)
+
+    unless feed.messages.exists?(body: quote_summary(quote), user: current_user)
+      feed.messages.create!(
+        body: quote_summary(quote),
+        user: current_user
+      )
+    end
+
+    redirect_to message_feed_path(feed)
+  end
+
+  def quote_summary(quote)
+    <<~MSG
+      ✏️ Nouvelle demande de devis :
+      • Style : #{quote.style}
+      • Taille : #{quote.size}
+      • Couleur : #{quote.color}
+      • Zone : #{quote.body_zone}
+      • Allergies : #{quote.allergies}
+      • Commentaire : #{quote.comments}
+    MSG
   end
 end

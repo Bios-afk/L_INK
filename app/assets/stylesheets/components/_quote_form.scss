@@ -1,0 +1,73 @@
+@import "../template.scss";
+
+.quote-form {
+  .form-label {
+    color: $text-color;
+    font-weight: bolder;
+  }
+  .h0 {
+    align-content: center;
+  }
+  .form-select,
+  .form-control,
+  .form-check-input {
+    background-color: $accent-color;
+    color: $text-color;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: $radius-md;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      outline: none;
+    }
+  }
+
+  .form-control::placeholder {
+    color: $text-color;
+    font-style: italic;
+  }
+
+  .form-check-label {
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  .form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background-color: #b17457;
+    color: $text-color;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .mb-4,
+  .mb-3 {
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  .titre-container {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-color;
+    margin-bottom: 20px;
+
+    .header-arrow {
+      height: 24px;
+    }
+  }
+}
