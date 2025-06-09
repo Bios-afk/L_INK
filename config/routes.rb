@@ -31,6 +31,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  # Follow / Unfollow artistes
+  resources :follows, only: [:create, :destroy]
+
   # Route Post pour la geolocalisation
   post 'users/set_location', to: 'users#set_location'
 end

@@ -1,11 +1,37 @@
 <div class="body-profile-container d-flex flex-column align-items-center justify-content-center">
   <% if artist.user != current_user %>
-    <div class="body-profile-button mt-3 w-100 d-flex justify-content-center pb-3">
+    <div class="body-profile-button mt-3 w-100 d-flex justify-content-center gap-2 pb-3">
+
+    <!-- Bouton Follow / Unfollow -->
+    <% if user_signed_in? %>
+      <% followed = current_user.followed_artists.include?(artist) %>
+
+      <%= form_with url: (followed ? follow_path(artist_id: artist.id)
+                                   : follows_path),
+                    method: (followed ? :delete : :post),
+                    data: { turbo_stream: true },
+                    class: "d-inline" do %>
+          <button type="submit" class="btn btn-primary text-light">
+            <% if followed %>
+              <i class="fa-solid fa-heart"></i>
+            <% else %>
+              <i class="fa-regular fa-heart"></i>
+            <% end %>
+          </button>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path, class: "btn btn-primary text-light" do %>
+          <i class="fa-regular fa-heart me-1"></i>Follow
+        <% end %>
+      <% end %>
+
+      <!-- Bouton Devis -->
       <% if user_signed_in? %>
         <%= link_to 'Demande de devis', new_artist_quote_request_path(artist), class: "btn btn-primary text-light" %>
       <% else %>
         <%= link_to 'Demande de devis', new_user_session_path, class: "btn btn-primary text-light" %>
       <% end %>
+
     </div>
   <% end %>
 

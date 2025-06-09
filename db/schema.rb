@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_05_100539) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_06_125304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_05_100539) do
   create_table "clients", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_follows_on_artist_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "message_feeds", force: :cascade do |t|
@@ -135,9 +144,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_05_100539) do
     t.string "bio"
     t.string "userable_type", null: false
     t.bigint "userable_id", null: false
+    t.string "pseudo"
     t.float "longitude"
     t.float "latitude"
-    t.string "pseudo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["userable_type", "userable_id"], name: "index_users_on_userable"
@@ -147,6 +156,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_05_100539) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "artists"
   add_foreign_key "bookings", "clients"
+  add_foreign_key "follows", "artists"
+  add_foreign_key "follows", "users"
   add_foreign_key "message_feeds", "artists"
   add_foreign_key "message_feeds", "clients"
   add_foreign_key "messages", "message_feeds"
