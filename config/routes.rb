@@ -43,8 +43,8 @@ Rails.application.routes.draw do
   get '/map', to: 'maps#show', as: 'map'
 
   resources :artists do
-  member do
-    get :card_partial
+    member do
+      get :card_partial
+    end
   end
-end
 end
