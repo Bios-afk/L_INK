@@ -6,7 +6,7 @@
     <h1 class="m-0 text-center">Votre projet ?</h1>
   </div>
 
-  <%= form_with model: @quote_request, url: quote_requests_path, local: true, class: "needs-validation" do |f| %>
+  <%= form_with model: @quote_request, url: artist_quote_requests_path(@artist), local: true, class: "needs-validation" do |f| %>
     <div class="mb-4">
       <%= f.label :style, "Style", class: "form-label" %>
       <%= f.select :style, Category.pluck(:name), { prompt: "Choisissez un style" }, class: "form-select" %>
