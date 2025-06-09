@@ -1,32 +1,55 @@
-<%= form_with model: @quote_request, url: quote_requests_path do |f| %>
-  <%= f.label :style, "Styles (choix multiples)" %><br>
-  <% ["Blackwork", "Dotwork", "Realism", "Old School"].each do |style_option| %>
-    <%= check_box_tag "quote_request[style][]", style_option, false, id: "style_#{style_option}" %>
-    <%= label_tag "style_#{style_option}", style_option %><br>
+<div class="quote-form">
+  <div class="titre-container d-flex align-items-center justify-content-center position-relative mb-4">
+    <%= link_to artist_path(@artist), class: "position-absolute start-0" do %>
+      <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
+    <% end %>
+    <h1 class="m-0 text-center">Votre projet ?</h1>
+  </div>
+
+  <%= form_with model: @quote_request, url: quote_requests_path, local: true, class: "needs-validation" do |f| %>
+    <div class="mb-4">
+      <%= f.label :style, "Style", class: "form-label" %>
+      <%= f.select :style, Category.pluck(:name), { prompt: "Choisissez un style" }, class: "form-select" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :color, "Couleurs", class: "form-label" %>
+      <div class="d-flex flex-wrap gap-3">
+        <% ["Noir", "Couleur"].each do |color_option| %>
+          <div class="form-check">
+            <%= check_box_tag "quote_request[color][]", color_option, false, class: "form-check-input", id: "color_#{color_option.parameterize}" %>
+            <%= label_tag "color_#{color_option.parameterize}", color_option, class: "form-check-label" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :body_zone, "Zones à tatouer", class: "form-label" %>
+      <div class="d-flex flex-wrap gap-3">
+        <% ["Bras", "Jambe", "Dos", "Poitrine"].each do |zone| %>
+          <div class="form-check">
+            <%= check_box_tag "quote_request[body_zone][]", zone, false, class: "form-check-input", id: "zone_#{zone.parameterize}" %>
+            <%= label_tag "zone_#{zone.parameterize}", zone, class: "form-check-label" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :size, "Taille approximative", class: "form-label" %>
+      <%= f.text_field :size, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :comments, "Commentaires (allergies, précisions…)", class: "form-label" %>
+      <%= f.text_area :comments, class: "form-control", rows: 4, placeholder: "Mentionnez ici vos allergies, préférences ou demandes spécifiques" %>
+    </div>
+
+    <%= f.hidden_field :artist_id, value: @artist.id %>
+
+    <div class="mb-3">
+      <%= f.submit "Envoyer la demande", class: "btn btn-primary w-100" %>
+    </div>
   <% end %>
-
-  <%= f.label :color, "Couleurs (choix multiples)" %><br>
-  <% ["Noir", "Rouge", "Bleu", "Vert"].each do |color_option| %>
-    <%= check_box_tag "quote_request[color][]", color_option, false, id: "color_#{color_option}" %>
-    <%= label_tag "color_#{color_option}", color_option %><br>
-  <% end %>
-
-  <%= f.label :body_zone, "Zones à tatouer (choix multiples)" %><br>
-  <% ["Bras", "Jambe", "Dos", "Poitrine"].each do |zone| %>
-    <%= check_box_tag "quote_request[body_zone][]", zone, false, id: "zone_#{zone}" %>
-    <%= label_tag "zone_#{zone}", zone %><br>
-  <% end %>
-
-  <%= f.label :size, "Taille approximative" %>
-  <%= f.text_field :size %>
-
-  <%= f.label :allergies %>
-  <%= f.text_field :allergies %>
-
-  <%= f.label :comments, "Commentaires" %>
-  <%= f.text_area :comments %>
-
-  <%= f.hidden_field :artist_id, value: @artist.id %>
-
-  <%= f.submit "Envoyer la demande" %>
-<% end %>
+</div>
