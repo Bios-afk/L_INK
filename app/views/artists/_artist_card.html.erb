@@ -57,9 +57,16 @@
       <div class="top-card-loc text-center">
         <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
                 data-action="click->artist-card#toggleBack">
-          <i class="fa-solid fa-map-location-dot mb-1" style="color: #fbf7f0;"></i>
+
+          <!-- 👇 Icône contrôlée par Stimulus -->
+          <i data-artist-card-target="cardIcon"
+            class="fa-solid fa-map-location-dot mb-1 card-icon-transition card-icon-show"
+            style="color: #fbf7f0;"></i>
+
+          <i class="fa-solid fa-chevron-down fa-sm mt-2" style="color: #fbf7f0;"></i>
         </button>
       </div>
+
     </div>
   </div>
 

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="artist-card"
 export default class extends Controller {
-  static targets = ["down", "photos", "map"]
+  static targets = ["down", "photos", "map", "cardIcon"]
   static values = {
     lat: Number,
     lng: Number,
@@ -47,6 +47,27 @@ export default class extends Controller {
 
       this.downTarget.classList.remove('shrunk')
       this.showingMap = !this.showingMap
+      if (this.hasCardIconTarget) {
+        // Animation de sortie
+        this.cardIconTarget.classList.remove("card-icon-show")
+        this.cardIconTarget.classList.add("card-icon-hide")
+
+        // Changement d'icône après transition (200ms)
+        setTimeout(() => {
+          if (this.showingMap) {
+            this.cardIconTarget.classList.remove("fa-map-location-dot")
+            this.cardIconTarget.classList.add("fa-image")
+          } else {
+            this.cardIconTarget.classList.remove("fa-image")
+            this.cardIconTarget.classList.add("fa-map-location-dot")
+          }
+
+          // Animation d'entrée
+          this.cardIconTarget.classList.remove("card-icon-hide")
+          this.cardIconTarget.classList.add("card-icon-show")
+        }, 200)
+      }
+
     }, 500);
   }
 }
