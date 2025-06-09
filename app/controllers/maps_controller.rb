@@ -23,4 +23,5 @@ class MapsController < ApplicationController
     @users = User.where(userable_type: "Artist", userable_id: artist_ids)
                  .where.not(id: current_user.id)
   end
+
 end

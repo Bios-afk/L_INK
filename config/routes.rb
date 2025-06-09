@@ -42,4 +42,10 @@ Rails.application.routes.draw do
 
   # Route pour la page carte
   get '/map', to: 'maps#show', as: 'map'
+
+  resources :artists do
+  member do
+    get :card_partial
+  end
+end
 end
