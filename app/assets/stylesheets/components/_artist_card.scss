@@ -31,6 +31,21 @@ a.mapboxgl-ctrl-logo{
   background-color: $primary-color;
   box-shadow: $shadow-lg;
   z-index: 2;
+
+  &.all-read {
+  background-color: rgba($primary-color, 0.5);
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+
+}
+
+.no-image-found{
+  width: 54px;
+  height: 54px;
 }
 
 .top-card-info {
@@ -38,7 +53,7 @@ a.mapboxgl-ctrl-logo{
 
   .picture {
     height: 100%;
-    width: 3.4rem; // 54px
+    width: fit-content; // 54px
     position: relative;
   }
 
@@ -149,6 +164,7 @@ a.mapboxgl-ctrl-logo{
   .photos {
     overflow: hidden;
     max-height: 110px;
+    margin: 0 auto;
   }
 
   .map{
@@ -156,10 +172,6 @@ a.mapboxgl-ctrl-logo{
     max-width: 330px;
     width: 320px;
     height: 130px;
-  }
-
-  .photos {
-    margin: 0 auto;
   }
 
   .arrow-container {
@@ -179,6 +191,11 @@ a.mapboxgl-ctrl-logo{
       width: 5.5rem; // 88px
       height: 6.9rem; // 110px
   }
+}
+
+.artist-card-down-no-img{
+  width: 220px;
+  height: 110px; // 220px
 }
 
 .artist-card-down.shrunk {

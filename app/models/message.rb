@@ -1,6 +1,25 @@
 class Message < ApplicationRecord
-  belongs_to :message_feed
+  has_many_attached :message_pictures, dependent: :destroy
 
-  validates :reader, presence: true
-  validates :body, presence: true
+  belongs_to :message_feed
+  belongs_to :user
+
+  validate :body_or_photo_present
+
+  after_create_commit :broadcast_message
+
+  private
+
+  def body_or_photo_present
+    if body.blank? && message_pictures.blank?
+      errors.add(:base, "Le message doit contenir un texte ou une image.")
+    end
+  end
+
+  def broadcast_message
+    broadcast_append_to "message_feed_#{message_feed.id}",
+                        partial: "messages/message",
+                        target: "messages",
+                        locals: { message: self, now_user: user }
+  end
 end

@@ -28,8 +28,12 @@ Rails.application.routes.draw do
 
   # Messages
   resources :message_feeds, only: [:index, :show, :destroy] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:index, :create]
   end
+
+  # Follow / Unfollow artistes
+  get '/follows', to: 'follows#index', as: :follows
+  resources :follows, only: [:create, :destroy]
 
   # Route Post pour la geolocalisation
   resources :users do

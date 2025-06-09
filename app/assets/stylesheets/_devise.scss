@@ -89,3 +89,10 @@
     display: none !important;
   }
 }
+
+.input.error input,
+.input.error select,
+.input.error textarea {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.1rem rgba(220, 53, 69, 0.25); // Optionnel pour une lueur rouge
+}

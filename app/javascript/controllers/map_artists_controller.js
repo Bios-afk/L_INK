@@ -71,6 +71,6 @@ addMarkers() {
       bounds.extend([marker.lng, marker.lat]);
     });
 
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
+    this.map.fitBounds(bounds, { padding: 70, maxZoom: 12, duration: 0 });
   }
 }
