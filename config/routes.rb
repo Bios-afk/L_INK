@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post "/users/set_location", to: "users#set_location"
+
   # Route pour la page carte
   get '/map', to: 'maps#show', as: 'map'
 end
