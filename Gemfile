@@ -55,6 +55,7 @@ gem "faker", "~> 3.2"
 gem "ostruct"
 gem "cloudinary"
 gem "recaptcha", require: "recaptcha/rails"
+gem "solid_cable"
 
 group :development, :test do
   gem "dotenv-rails"

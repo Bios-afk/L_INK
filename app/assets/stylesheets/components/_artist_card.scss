@@ -30,6 +30,15 @@ a.mapboxgl-ctrl-logo{
   border-radius: $border-radius;
   background-color: $primary-color;
   box-shadow: $shadow-lg;
+
+  &.all-read {
+  background-color: rgba($primary-color, 0.5);
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
   z-index: 2;
 }
 
@@ -38,7 +47,7 @@ a.mapboxgl-ctrl-logo{
 
   .picture {
     height: 100%;
-    width: 3.4rem; // 54px
+    width: fit-content; // 54px
     position: relative;
   }
 

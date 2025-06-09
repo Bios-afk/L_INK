@@ -1,0 +1,10 @@
+<div class="body-messages-feed-container mt-4 gap-2">
+  <% if feeds.present? %>
+    <% feeds.each do |feed| %>
+      <%= render partial: 'message_feeds/card', locals: { feed: feed } %>
+    <% end %>
+  <% else %>
+    <%= image_tag 'undraw_no-data_ig65.svg', class: 'empty-icon' %>
+    <h3 class="body-messages-feed-text">Pas de messages ici...</h2>
+  <% end %>
+</div>

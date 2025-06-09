@@ -28,9 +28,9 @@ Rails.application.routes.draw do
 
   # Messages
   resources :message_feeds, only: [:index, :show, :destroy] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:index, :create]
   end
-
+  
   # Route Post pour la geolocalisation
   post 'users/set_location', to: 'users#set_location'
 end

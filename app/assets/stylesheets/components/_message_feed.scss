@@ -1,0 +1,26 @@
+@import '../template.scss';
+
+.body-messages-feed-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: calc(100vh - 210px);
+  gap: 1rem;
+}
+
+
+.empty-icon {
+  width: 8rem;
+  height: 8rem;
+  display: inline-block;
+  background-color: transparent;
+}
+
+.body-messages-feed-text{
+  font-family: $font-family-base;
+  font-size: 1.2rem;
+  color: $light-gray;
+
+}

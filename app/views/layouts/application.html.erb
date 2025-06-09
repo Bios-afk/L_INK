@@ -16,7 +16,7 @@
       <div class="header-hide"></div>
     <% end %>
     <%= render "shared/flashes" %>
-    <%= render "shared/navbar" %>
+    <%= render "shared/navbar" unless @hide_navbar %>
     <%= yield %>
   </body>
 </html>
