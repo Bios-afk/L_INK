@@ -9,6 +9,12 @@ class MessagesController < ApplicationController
 
     @hide_navbar = true
 
+    # Marquer les messages non lus de l'autre utilisateur comme lus
+    @feed.messages
+      .where.not(user_id: current_user.id)
+      .where(read: false)
+      .update_all(read: true)
+
     if current_user.userable_type == "Client"
       @user = @feed.artist
     elsif current_user.userable_type == "Artist"
@@ -21,6 +27,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.message_feed = @feed
     @message.user = current_user
+    @message.message_pictures.attach(params[:message][:message_pictures]) if params[:message][:message_pictures].present?
 
     if @message.save
       respond_to do |format|

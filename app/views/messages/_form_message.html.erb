@@ -17,7 +17,10 @@
           <label for="chat-photo-upload" class="upload-label btn btn-outline-secondary">
             <i class="fa-solid fa-image"></i>
           </label>
-          <%= f.file_field :photo, id: "chat-photo-upload", class: "d-none", direct_upload: true, accept: "image/*" %>
+          <%= f.file_field :message_pictures, id: "chat-photo-upload",
+          class: "d-none",
+          direct_upload: true, accept: "image/*",
+          onchange: "this.form.requestSubmit()" %>
         </div>
         <div class="form-submit-message">
           <%= f.submit "Envoyer", class: "btn-form-message btn btn-primary rounded-pill", id: "form-message-input" %>
