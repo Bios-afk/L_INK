@@ -3,6 +3,7 @@ class FollowsController < ApplicationController
 
   def index
     @followed_artists = current_user.followed_artists.includes(:user) # pour charger aussi leur user (pseudo, bio…)
+    @follows_count = @followed_artists.size
   end
 
   def create
