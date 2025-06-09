@@ -25,17 +25,31 @@
           </div>
           <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
             <h3 class="artist-name"><%= artist.user.pseudo %></h3>
-            <p class="artist-username"><%= artist.user.bio.split[0, 4].join(" ") %>…</p>
+
             <p class="artist-bio">
               <% if artist.user.categories.present? %>
-                <%= artist.user.categories.limit(3).map do |category|
-                      words = category.name.split(/\s+/).first(3)   # limite à 3 mots
-                      "#" + words.join(" #")
-                    end.join(" ") %>
+                <% categories = artist.user.categories.is_a?(Array) ? artist.user.categories.first(3) : artist.user.categories.limit(3) %>
+                <% full_text = categories.map { |category| "##{category.name}" }.join(" ") %>
+
+                <% display_text = if full_text.length <= 35
+                                    full_text
+                                  else
+                                    full_text[0...32] + "..."
+                                  end %>
+
+                <%= display_text %>
               <% else %>
                 #
               <% end %>
             </p>
+
+            <!--affichage de la difference de km -->
+            <% if current_user %>
+              <p class="artist-distance text-muted m-0" style="color: #fbf7f0 !important;">
+                <%= image_tag 'loc_icon.svg', class: 'header-profile-info-icon-loc' %> <%= artist.distance_to(current_user.latitude, current_user.longitude) %> km
+              </p>
+            <% end %>
+
           </div>
         </div>
       <% end %>
@@ -43,13 +57,7 @@
       <div class="top-card-loc text-center">
         <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
                 data-action="click->artist-card#toggleBack">
-          <i class="fa-solid fa-map-location-dot mb-1" style="color: #000000;"></i>
-          <p class="artist-location m-0">
-            <!--affichage de la difference de km -->
-            <% if current_user %>
-              <%= artist.distance_to(current_user.latitude, current_user.longitude) %> km
-            <% end %>
-          </p>
+          <i class="fa-solid fa-map-location-dot mb-1" style="color: #fbf7f0;"></i>
         </button>
       </div>
     </div>
