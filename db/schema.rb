@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_09_110722) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_09_175905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,8 +55,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_110722) do
     t.bigint "artist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "quote_request_id", null: false
+    t.bigint "message_feed_id"
     t.index ["artist_id"], name: "index_bookings_on_artist_id"
     t.index ["client_id"], name: "index_bookings_on_client_id"
+    t.index ["message_feed_id"], name: "index_bookings_on_message_feed_id"
+    t.index ["quote_request_id"], name: "index_bookings_on_quote_request_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -167,6 +171,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_110722) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "artists"
   add_foreign_key "bookings", "clients"
+  add_foreign_key "bookings", "message_feeds", on_delete: :cascade
+  add_foreign_key "bookings", "quote_requests"
   add_foreign_key "follows", "artists"
   add_foreign_key "follows", "users"
   add_foreign_key "message_feeds", "artists"

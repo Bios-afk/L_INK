@@ -67,18 +67,48 @@
 .message-from-another{
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: start;
   justify-content: center;
   background-color: $light-gray;
   padding-inline: 17px;
   padding-top: 4px;
   padding-bottom: 4px;
 
-  border-radius: $border-radius-sm $border-radius-sm $border-radius-sm 0.12rem;
+  border-radius: $border-radius $border-radius $border-radius 0.12rem;
   color: $accent-color;
   font-size: $font-size-base;
   font-family: $font-family-base;
-  max-width: 48%;
+
+  max-width: 80%; // ✅ limite la largeur dans le conteneur
+  width: auto; // pas "fit-content"
+  word-break: break-word; // ✅ coupe les mots très longs
+  overflow-wrap: anywhere; // ✅ s’assure que même les chaînes sans espaces se coupent
+
+  p {
+    font-size: $font-size-base;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  ul, li {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}
+
+.button-container-rapport{
+  width: 100%;
+}
+
+.sumarry-contenaire {
+  font-size: $font-size-sm; // ou 0.85rem pour rendre plus petit
+  width: fit-content;
+
+  .d-flex{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .message-from-me{
@@ -95,7 +125,21 @@
   color: $gray;
   font-size: $font-size-base;
   font-family: $font-family-base;
-  max-width: 48%;
+
+  max-width: 80%; // ✅ limite la largeur du message
+  width: auto;
+  word-break: break-word; // ✅ coupe les mots très longs
+  overflow-wrap: anywhere; // ✅ même pour les chaînes sans espace
+
+  p {
+    font-size: $font-size-base;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .d-flex{
+    width: 100%;
+  }
 }
 
 .form-container {
