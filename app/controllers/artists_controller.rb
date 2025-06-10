@@ -40,13 +40,11 @@ class ArtistsController < ApplicationController
     # ⭐️ Filtre par note moyenne (rating >= ...)
     if params[:rating].present?
       rating_threshold = params[:rating].to_i
-      @artists = @artists.joins(:reviews)
-                         .group("artists.id")
-                         .having("AVG(reviews.rating) >= ?", rating_threshold)
+      @artists = @artists.where("artists.rating >= ?", rating_threshold)
     end
 
     @category_ids = params[:category_ids]
-    
+
     @cities = params[:cities]
   end
 

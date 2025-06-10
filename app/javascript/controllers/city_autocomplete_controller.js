@@ -81,4 +81,10 @@ export default class extends Controller {
   removeCity(e) {
     e.target.closest("span.badge").remove()
   }
+
+    reset() {
+    this.selectedTarget.innerHTML = "";
+    this.inputTarget.value = "";
+    this.selectedCitiesValue = [];
+  }
 }

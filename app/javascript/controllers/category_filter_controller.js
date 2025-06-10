@@ -88,4 +88,12 @@ export default class extends Controller {
       }
     });
   }
+    reset() {
+    this.checkboxTargets.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    this.containerTarget.innerHTML = "";
+    this.mainForm.querySelectorAll("input[name='category_ids[]']").forEach(input => input.remove());
+    this.selectedCategoriesValue = [];
+  }
 }

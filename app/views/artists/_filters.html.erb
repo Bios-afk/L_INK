@@ -62,7 +62,8 @@
         <hr class="hr">
 
         <!-- ⭐ Note -->
-        <div class="mb-3" data-controller="star-rating">
+        <div class="mb-3" data-controller="star-rating"
+            data-star-rating-rating-value="<%= params[:rating].presence || 0 %>">
           <label class="form-label">Note minimale</label>
           <div class="star-rating d-flex gap-1">
             <% 1.upto(5) do |n| %>
@@ -71,15 +72,19 @@
                 data-star-rating-value="<%= n %>"></i>
             <% end %>
           </div>
-          <!-- Champ caché qui stocke la valeur sélectionnée -->
-          <%= f.hidden_field :rating, value: "", data: { star_rating_target: "input" } %>
+          <%= f.hidden_field :rating, value: (params[:rating] || ""), data: { star_rating_target: "input" } %>
         </div>
 
         <hr class="hr">
 
         <!-- ✅ Bouton appliquer -->
+        <div class="d-flex mb-3 gap-3">
+        <%= link_to "Effacer", root_path, class: "btn btn-outline-secondary" %>
         <%= f.submit "Appliquer les filtres", class: "btn btn-primary w-100" %>
       <% end %>
+      </div>
+
+
     </div>
   </div>
 
@@ -108,7 +113,9 @@
         </div>
       <% end %>
       <div class="offcanvas-footer">
+
       <button type="button" class="btn btn-primary w-100" id="applyCategories" data-action="click->category-filter#applyCategories">Valider</button>
+
       </div>
     </div>
   </div>
