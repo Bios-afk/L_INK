@@ -31,6 +31,7 @@ export default class extends Controller {
           hasControls: true,
           hasBorders: true,
         })
+        
         // Redimensionne si trop grand
         const maxWidth = this.fabricCanvas.width * 0.5
         const scale = maxWidth / tattooImg.width

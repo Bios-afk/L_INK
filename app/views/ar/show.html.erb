@@ -1,5 +1,5 @@
 <div data-controller="tattoo-fabric"
-     data-tattoo-fabric-photo-url-value="<%= url_for(@user.photo) if @user.photo.attached? %>"
-     data-tattoo-fabric-tattoo-url-value="<%= @tattoo_url %>">
+     data-tattoo-fabric-photo-url-value="<%= url_for(@user.ar_photo) if @user.ar_photo.attached? %>"
+     data-tattoo-fabric-tattoo-url-value="<%= cl_image_path(@tattoo_url.key) %>">
   <canvas data-tattoo-fabric-target="canvas"></canvas>
 </div>

@@ -3,12 +3,11 @@ class ArController < ApplicationController
 
   def new
     @tattoo_photo = params[:tattoo_url]
-    raise
   end
 
   def create
     data_url = params[:photo][:data]
-    tattoo_url = params[:photo][:tattoo_url]
+    tattoo_url = ActiveStorage::Attachment.find(params[:photo][:tattoo_url])
     if data_url.present?
       image_data = split_base64(data_url)
       io = StringIO.new(Base64.decode64(image_data[:data]))
@@ -23,7 +22,7 @@ class ArController < ApplicationController
   end
   def show
     @user = current_user
-    @tattoo_url = params[:tattoo_url]
+    @tattoo_url = ActiveStorage::Attachment.find(params[:tattoo_url])
   end
 
   private
