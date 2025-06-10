@@ -1,10 +1,20 @@
 <!-- Premier plan -->
 <% other_messages = feed.messages.reject { |message| message.user_id == current_user.id } %>
+<% quote_request = feed.booking&.quote_request %>
+<% quote_status = quote_request&.status || "pending" %>
+<% disabled = current_user.userable_type == 'Client' && quote_status == "pending" %>
+
 <div class="artist-card-top <%= 'all-read' if other_messages.all?(&:read) %> d-flex justify-content-center align-items-center">
   <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
 
     <!-- Partie info -->
-    <%= link_to message_feed_messages_path(feed), data: { turbo: false }, class: 'w-100' do %>
+    <%= link_to(
+          (disabled ? "#" : message_feed_messages_path(feed)),
+          data: { turbo: false },
+          class: 'w-100',
+          style: (disabled ? "pointer-events: none; opacity: 0.8;" : "")
+        ) do %>
+
       <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
         <div class="picture h-100">
           <% if current_user.userable_type == 'Client' %>
@@ -19,6 +29,14 @@
           <% else %>
             <h3 class="artist-name"><%= feed.client.user.pseudo %></h3>
           <% end %>
+
+          <% if disabled %>
+            <!-- Mention en attente avec cadenas -->
+            <span class="chat-status-tag">
+              🔒 En attente de réponse
+            </span>
+          <% end %>
+
         </div>
       </div>
     <% end %>
