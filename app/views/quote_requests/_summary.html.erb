@@ -12,6 +12,8 @@
   <div id="quote_buttons_<%= quote.id %>" class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
     <% if quote.accepted? %>
       <span class="badge bg-success">Validé</span>
+    <% elsif quote.rejected? %>
+      <span class="badge bg-danger">Refusé</span>
     <% else %>
       <%= button_to 'Accepter', accept_quote_request_path(quote), method: :patch, class: 'btn btn-primary btn-sm text-light shadow', data: { turbo_stream: true } %>
       <%= button_to 'Refuser', reject_quote_request_path(quote), method: :patch, class: 'btn btn-secondary btn-sm text-light shadow', data: { turbo_stream: true } %>

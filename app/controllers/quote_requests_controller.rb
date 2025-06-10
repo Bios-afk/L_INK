@@ -51,6 +51,9 @@ class QuoteRequestsController < ApplicationController
 
   def reject
     if @quote_request.update(status: :rejected)
+      feed = MessageFeed.find_or_create_by!(artist: @quote_request.artist, client: @quote_request.client)
+      message = feed.messages.first
+      message.update(body: quote_summary(@quote_request), user: current_user)
       redirect_to message_feeds_path, notice: "Demande rejetée."
     else
       redirect_to message_feeds_path, alert: "Impossible de rejeter la demande."
