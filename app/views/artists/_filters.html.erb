@@ -1,113 +1,122 @@
 <!-- 🔽 Filtres principaux -->
-<div data-controller="category-filter">
-<div class="offcanvas offcanvas-bottom custom-height"
-     tabindex="-1"
-     id="filtersOffcanvas"
-     aria-labelledby="filtersOffcanvasLabel"
-     data-category-filter-selected-categories-value='<%= (params[:category_ids] || []).to_json %>'>
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="filtersOffcanvasLabel">Rechercher</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
-  </div>
+<div data-controller="category-filter"
+    data-category-filter-selected-categories-value='<%= (@category_ids || []).to_json %>'>
 
-  <div class="offcanvas-body">
-    <hr class="hr">
-
-    <%= form_with url: artists_path, method: :get, local: true do |f| %>
-
-      <!-- 🎨 Bouton d’ouverture du offcanvas Catégorie -->
-      <div
-        class="mb-3 d-flex justify-content-between align-items-center"
-        style="cursor: pointer;"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#categoryOffcanvas"
-        aria-controls="categoryOffcanvas"
-      >
-        <label class="form-label mb-0">Catégories</label>
-        <span class="fs-4">&rsaquo;</span> <!-- flèche à droite -->
-      </div>
-
-      <!-- 🟦 Affichage des catégories sélectionnées -->
-      <div
-        id="selected-categories"
-        class="mb-3"
-        data-category-filter-target="container"
-      ></div>
-
-      <hr class="hr">
-
-      <!-- 📍 Ville -->
-      <div data-controller="city-autocomplete">
-      <div class="mb-3">
-        <label for="city-autocomplete" class="form-label">Ville</label>
-        <input
-          type="text"
-          id="city-autocomplete"
-          autocomplete="off"
-          class="form-control"
-          placeholder="Ex : Paris"
-          data-city-autocomplete-target="input"
-          data-action="input->city-autocomplete#search"
-        >
-        <!-- Suggestions affichées ici -->
-        <ul class="mb-3" data-city-autocomplete-target="suggestions"></ul>
-      </div>
-
-      <!-- 🟦 Affichage des villes sélectionnées -->
-      <div id="selected-cities" class="mb-3" data-city-autocomplete-target="selected"></div>
+  <div class="offcanvas offcanvas-bottom custom-height"
+      tabindex="-1"
+      id="filtersOffcanvas"
+      aria-labelledby="filtersOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="filtersOffcanvasLabel">Rechercher</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
     </div>
 
+    <div class="offcanvas-body">
       <hr class="hr">
 
-      <!-- ⭐ Note -->
-      <div class="mb-3" data-controller="star-rating">
-        <label class="form-label">Note minimale</label>
-        <div class="star-rating d-flex gap-1">
-          <% 1.upto(5) do |n| %>
-            <i class="fa-regular fa-star fs-4 star"
-              data-action="click->star-rating#select"
-              data-star-rating-value="<%= n %>"></i>
-          <% end %>
+      <%= form_with url: artists_path, method: :get, local: true do |f| %>
+
+        <!-- 🎨 Bouton d’ouverture du offcanvas Catégorie -->
+        <div
+          class="mb-3 d-flex justify-content-between align-items-center"
+          style="cursor: pointer;"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#categoryOffcanvas"
+          aria-controls="categoryOffcanvas"
+        >
+          <label class="form-label mb-0">Catégories</label>
+          <span class="fs-4">&rsaquo;</span> <!-- flèche à droite -->
         </div>
-        <!-- Champ caché qui stocke la valeur sélectionnée -->
-        <%= f.hidden_field :rating, value: "", data: { star_rating_target: "input" } %>
+
+        <!-- 🟦 Affichage des catégories sélectionnées -->
+        <div
+          id="selected-categories"
+          class="mb-3"
+          data-category-filter-target="container"
+        ></div>
+
+        <hr class="hr">
+
+        <!-- 📍 Ville -->
+        <div data-controller="city-autocomplete"
+      data-city-autocomplete-selected-cities-value="<%= (params[:cities] || []).to_json %>">
+        <div class="mb-3">
+          <label for="city-autocomplete" class="form-label">Ville</label>
+          <input
+            type="text"
+            id="city-autocomplete"
+            autocomplete="off"
+            class="form-control"
+            placeholder="Ex : Paris"
+            data-city-autocomplete-target="input"
+            data-action="input->city-autocomplete#search"
+          >
+          <!-- Suggestions affichées ici -->
+          <ul class="mb-3" data-city-autocomplete-target="suggestions"></ul>
+        </div>
+
+        <!-- 🟦 Affichage des villes sélectionnées -->
+        <div id="selected-cities" class="mb-3" data-city-autocomplete-target="selected"></div>
       </div>
 
-       <hr class="hr">
+        <hr class="hr">
 
-      <!-- ✅ Bouton appliquer -->
-      <%= f.submit "Appliquer les filtres", class: "btn btn-primary w-100" %>
-    <% end %>
-  </div>
-</div>
+        <!-- ⭐ Note -->
+        <div class="mb-3" data-controller="star-rating"
+            data-star-rating-rating-value="<%= params[:rating].presence || 0 %>">
+          <label class="form-label">Note minimale</label>
+          <div class="star-rating d-flex gap-1">
+            <% 1.upto(5) do |n| %>
+              <i class="fa-regular fa-star fs-4 star"
+                data-action="click->star-rating#select"
+                data-star-rating-value="<%= n %>"></i>
+            <% end %>
+          </div>
+          <%= f.hidden_field :rating, value: (params[:rating] || ""), data: { star_rating_target: "input" } %>
+        </div>
 
-<!-- 🔽 Offcanvas secondaire pour sélection des catégories -->
-<div class="offcanvas offcanvas-bottom custom-height"
-     tabindex="-1"
-     id="categoryOffcanvas"
-     aria-labelledby="categoryOffcanvasLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="categoryOffcanvasLabel">Choisissez vos catégories</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
-  </div>
-  <div class="offcanvas-body" style="overflow-y: auto; max-height: 80vh;">
-    <% Category.all.each do |category| %>
-      <div class="form-check mb-2">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value="<%= category.id %>"
-          id="category_<%= category.id %>"
-          data-category-filter-target="checkbox"
-        >
-        <label class="form-check-label" for="category_<%= category.id %>">
-          <%= category.name %>
-        </label>
+        <hr class="hr">
+
+        <!-- ✅ Bouton appliquer -->
+        <div class="d-flex mb-3 gap-3">
+        <%= link_to "Effacer", root_path, class: "btn btn-outline-secondary" %>
+        <%= f.submit "Appliquer les filtres", class: "btn btn-primary w-100" %>
+      <% end %>
       </div>
-    <% end %>
-    <div class="offcanvas-footer">
-    <button type="button" class="btn btn-primary w-100" id="applyCategories" data-action="click->category-filter#applyCategories">Valider</button>
+
+
     </div>
   </div>
-</div>
+
+  <!-- 🔽 Offcanvas secondaire pour sélection des catégories -->
+  <div class="offcanvas offcanvas-bottom custom-height"
+      tabindex="-1"
+      id="categoryOffcanvas"
+      aria-labelledby="categoryOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="categoryOffcanvasLabel">Choisissez vos catégories</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+    </div>
+    <div class="offcanvas-body" style="overflow-y: auto; max-height: 80vh;">
+      <% Category.all.each do |category| %>
+        <div class="form-check mb-2">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="<%= category.id %>"
+            id="category_<%= category.id %>"
+            data-category-filter-target="checkbox"
+          >
+          <label class="form-check-label" for="category_<%= category.id %>">
+            <%= category.name %>
+          </label>
+        </div>
+      <% end %>
+      <div class="offcanvas-footer">
+
+      <button type="button" class="btn btn-primary w-100" id="applyCategories" data-action="click->category-filter#applyCategories">Valider</button>
+
+      </div>
+    </div>
+  </div>
 </div>

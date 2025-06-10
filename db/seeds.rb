@@ -79,7 +79,11 @@ puts '🚀 Création des clients et artistes...'
     address = "#{street}, #{city}, France"
   end
 
-  artist = Artist.create!(address: address)
+  artist = Artist.create!(
+  address: address,
+  rating: rand(1..5),
+  ratings_count: rand(1..20) # ou 0 si tu veux parfois aucun avis
+)
 
   # Géocodage automatique avec Geocoder (attention à l'API limit)
   if artist.respond_to?(:geocode) && artist.address.present?
@@ -108,7 +112,11 @@ User.create!(
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   bio: Faker::Lorem.paragraph,
-  userable: Artist.create!(address: '24 Rue Saint-Rémi, 33000 Bordeaux, France')
+  userable: Artist.create!(
+  address: '24 Rue Saint-Rémi, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
 )
 
 puts "✅ Création et association terminées !"
