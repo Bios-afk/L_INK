@@ -3,6 +3,8 @@ class ArController < ApplicationController
 
   def new
     @tattoo_photo = params[:tattoo_url]
+
+    @hide_navbar = true
   end
 
   def create
@@ -21,6 +23,7 @@ class ArController < ApplicationController
     end
   end
   def show
+    @hide_navbar = true
     @user = current_user
     @tattoo_url = ActiveStorage::Attachment.find(params[:tattoo_url])
   end

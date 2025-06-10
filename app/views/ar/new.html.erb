@@ -1,10 +1,16 @@
-<div data-controller="camera">
+<div data-controller="camera" class="d-flex flex-column align-items-center">
+
+  <%# bouton retour %>
+  <%= link_to "retour", request.referer || root_path, class: "button-retour-circle btn btn-primary rounded-pill" %>
 
   <%# webcam %>
-  <video data-camera-target="video" autoplay playsinline style="width:100%; transform: scaleX(-1);"></video>
+  <video data-camera-target="video" autoplay playsinline
+  class="webcam-container w-100"></video>
 
   <%# button pour prendre la photo %>
-  <button data-action="click->camera#capture">📸 Prendre la photo</button>
+  <button data-action="click->camera#capture" class="round-photo-btn">
+    <i class="fa-solid fa-camera" style="color: #232323;"></i>
+  </button>
 
   <form id="photo-form" action="<%= create_ar_path %>" method="post" enctype="multipart/form-data" style="display:none;">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>

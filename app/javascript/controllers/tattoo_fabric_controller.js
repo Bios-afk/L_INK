@@ -31,7 +31,7 @@ export default class extends Controller {
           hasControls: true,
           hasBorders: true,
         })
-        
+
         // Redimensionne si trop grand
         const maxWidth = this.fabricCanvas.width * 0.5
         const scale = maxWidth / tattooImg.width
@@ -42,5 +42,21 @@ export default class extends Controller {
         this.fabricCanvas.renderAll()
       }, { crossOrigin: 'anonymous' })
     }, { crossOrigin: 'anonymous' })
+  }
+
+  download() {
+
+    if (!this.fabricCanvas) return;
+    console.log("Téléchargement de l'image...");
+    const dataURL = this.fabricCanvas.toDataURL({
+      format: "png",
+      quality: 1.0
+    });
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'tattoo-photo.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }
