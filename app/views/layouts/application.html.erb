@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   </head>
 
-  <body data-controller="location" class='<%= Rails.env.development? ? 'dev-env' : 'prod-env' %> <%= @hide_navbar ? 'pb-0' : '' %>'>
+  <body data-controller="location" class='<%= Rails.env.development? ? 'dev-env' : 'prod-env' %> <%= @hide_navbar ? 'pb-0' : '' %>' data-current-user-id="<%= current_user ? current_user.id : "" %>">
     <% if Rails.env.development? %>
       <div class="header-hide"></div>
     <% end %>

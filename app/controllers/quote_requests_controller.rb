@@ -29,6 +29,8 @@ class QuoteRequestsController < ApplicationController
 
     if @quote_request.update(status: :accepted)
       feed = MessageFeed.find_or_create_by!(artist: @quote_request.artist, client: @quote_request.client)
+      message = feed.messages.first
+      message.update(body: quote_summary(@quote_request), user: current_user)
       respond_to do |format|
         format.turbo_stream do
           html = <<~HTML
@@ -64,7 +66,6 @@ class QuoteRequestsController < ApplicationController
   def quote_request_params
     params.require(:quote_request).permit(
       :size,
-      :allergies,
       :comments,
       :artist_id,
       style: [],

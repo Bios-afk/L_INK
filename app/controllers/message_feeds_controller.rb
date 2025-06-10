@@ -6,7 +6,7 @@ class MessageFeedsController < ApplicationController
     elsif current_user.userable_type == 'Client'
       @feeds = MessageFeed
               .joins(booking: :quote_request)
-              .where(quote_requests: { status: :accepted })
+              .where(quote_requests: { client_id: current_user.userable_id })
               .distinct
     else
       @feeds = MessageFeed.none
@@ -15,6 +15,17 @@ class MessageFeedsController < ApplicationController
 
   def show
     @feed = MessageFeed.find(params[:id])
+
+    # Vérifie si le client essaie d'accéder à un chat encore "pending"
+    if current_user.userable_type == "Client"
+      quote_request = @feed.booking.quote_request
+
+      if quote_request.pending?
+        redirect_to message_feeds_path, alert: "Ce chat est en attente d'une réponse de l'artiste."
+        return
+      end
+    end
+
     @messages = @feed.messages.order(created_at: :asc)
     @message = Message.new
   end
