@@ -58,6 +58,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem "solid_cable"
 
 group :development, :test do
+  gem 'pry-byebug'
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]

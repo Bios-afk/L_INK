@@ -44,6 +44,10 @@ class ArtistsController < ApplicationController
                          .group("artists.id")
                          .having("AVG(reviews.rating) >= ?", rating_threshold)
     end
+
+    @category_ids = params[:category_ids]
+    
+    @cities = params[:cities]
   end
 
   def edit

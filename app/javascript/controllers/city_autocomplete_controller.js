@@ -2,11 +2,19 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["input", "suggestions", "selected"]
+  static values = {
+    selectedCities: { type: Array, default: [] }
+  }
 
   connect() {
     this.apiUrl = "https://countriesnow.space/api/v0.1/countries/population/cities"
     this.citiesList = []
     this.fetchCities()
+
+    // ✅ Réaffichage des villes sélectionnées
+    if (this.hasSelectedCitiesValue && Array.isArray(this.selectedCitiesValue)) {
+      this.selectedCitiesValue.forEach(city => this.addCityBadge(city))
+    }
   }
 
   fetchCities() {
@@ -35,8 +43,13 @@ export default class extends Controller {
 
   selectCity(e) {
     const city = e.target.textContent
+    this.addCityBadge(city)
+    this.inputTarget.value = ""
+    this.suggestionsTarget.innerHTML = ""
+  }
 
-    // empêche les doublons
+  addCityBadge(city) {
+    // Empêche les doublons
     const alreadyAdded = [...this.selectedTarget.querySelectorAll("input")]
       .some(input => input.value === city)
     if (alreadyAdded) return
@@ -44,11 +57,9 @@ export default class extends Controller {
     const badge = document.createElement("span")
     badge.className = "badge bg-primary me-2 mb-2 d-inline-flex align-items-center"
 
-    // texte
     const label = document.createElement("span")
     label.textContent = city
 
-    // bouton de suppression
     const close = document.createElement("span")
     close.innerHTML = " &times;"
     close.classList.add("remove-city")
@@ -56,7 +67,6 @@ export default class extends Controller {
     close.style.marginLeft = "0.3em"
     close.setAttribute("data-action", "click->city-autocomplete#removeCity")
 
-    // champ caché
     const hiddenInput = document.createElement("input")
     hiddenInput.type = "hidden"
     hiddenInput.name = "cities[]"
@@ -66,9 +76,6 @@ export default class extends Controller {
     badge.appendChild(close)
     badge.appendChild(hiddenInput)
     this.selectedTarget.appendChild(badge)
-
-    this.inputTarget.value = ""
-    this.suggestionsTarget.innerHTML = ""
   }
 
   removeCity(e) {
