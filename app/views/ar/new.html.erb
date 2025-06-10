@@ -1,0 +1,13 @@
+<div data-controller="camera">
+
+  <%# webcam %>
+  <video data-camera-target="video" autoplay playsinline style="width:100%; transform: scaleX(-1);"></video>
+
+  <%# button pour prendre la photo %>
+  <button data-action="click->camera#capture">📸 Prendre la photo</button>
+
+  <form id="photo-form" action="<%= create_ar_path(@tattoo_url) %>" method="post" enctype="multipart/form-data" style="display:none;">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input type="hidden" name="photo[data]" data-camera-target="input">
+  </form>
+</div>
