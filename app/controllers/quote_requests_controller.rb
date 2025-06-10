@@ -66,7 +66,6 @@ class QuoteRequestsController < ApplicationController
   def quote_request_params
     params.require(:quote_request).permit(
       :size,
-      :allergies,
       :comments,
       :artist_id,
       style: [],
