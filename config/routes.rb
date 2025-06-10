@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  get 'ar/:photo'
+
   # Page d'accueil
   root to: "artists#index"
 
