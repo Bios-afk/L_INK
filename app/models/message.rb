@@ -30,18 +30,5 @@ class Message < ApplicationRecord
                         partial: "shared/pastille_notif",
                         target: "pastille-notif"
 
-    other_messages = message_feed.messages.where.not(user_id: user_id)
-    all_read = other_messages.all?(&:read)
-
-    html = ApplicationController.render(
-      partial: "message_feeds/read_status_class",
-      locals: { feed: message_feed, all_read: all_read }
-    )
-
-    broadcast_replace_to(
-      "feed_#{message_feed.id}",
-      target: "card-status-#{message_feed.id}",
-      html: html
-    )
   end
 end

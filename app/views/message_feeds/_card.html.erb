@@ -1,5 +1,4 @@
 <!-- Premier plan -->
-<%= turbo_stream_from "feed_#{feed.id}" %>
 <% other_messages = feed.messages.reject { |message| message.user_id == current_user.id } %>
 <% quote_request = feed.booking&.quote_request %>
 <% quote_status = quote_request&.status || "pending" %>
