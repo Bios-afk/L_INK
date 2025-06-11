@@ -1,0 +1,26 @@
+<div class="summary-container d-flex flex-column align-items-start justify-content-between">
+  <p class="titre-message-rapport">📅 <strong>Proposition de rendez-vous</strong></p>
+
+  <ul style="padding-left: 18px; margin: 0;"
+      class="list-unstyled mb-0 d-flex flex-column gap-1 align-items-start p-0">
+    <li><strong>Date proposée</strong> : <%= l(booking.booking_date, format: :long) %></li>
+    <li><strong>Prix</strong> : <%= number_to_currency(booking.price, unit: "€") %></li>
+
+    <% if booking.photo.attached? %>
+      <li><strong>Référence visuelle</strong> :<br>
+        <%= image_tag booking.photo.variant(resize_to_limit: [300, 300]), class: "img-thumbnail mt-1" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div id="booking_buttons_<%= booking.id %>" class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
+    <% if booking.approved? %>
+      <span class="badge bg-success">Validé</span>
+    <% elsif booking.rejected_by_client? %>
+      <span class="badge bg-danger">Refusé</span>
+    <% elsif current_user.userable_type == "Client" && booking.pending_client_approval? %>
+      <%= button_to 'Approuver', approve_booking_path(booking), method: :patch, class: 'btn btn-primary btn-sm text-light shadow', data: { turbo_stream: true } %>
+      <%= button_to 'Refuser', reject_booking_path(booking), method: :patch, class: 'btn btn-secondary btn-sm text-light shadow', data: { turbo_stream: true } %>
+    <% end %>
+  </div>
+</div>

@@ -82,7 +82,8 @@ class QuoteRequestsController < ApplicationController
       client: @quote_request.client,
       artist: @quote_request.artist,
       quote_request: @quote_request,
-      message_feed: feed
+      message_feed: feed,
+      status: 0
       )
     @booking.save!
 

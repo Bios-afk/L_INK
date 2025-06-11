@@ -54,8 +54,7 @@ Rails.application.routes.draw do
   end
 
   # Route pour les bookings
-  resources :bookings, only: [:show, :edit, :update] do
-    # Add custom member routes for approval/rejection
+  resources :bookings, only: [:edit, :update] do
     member do
       patch :approve
       patch :reject

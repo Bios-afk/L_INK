@@ -1,89 +1,99 @@
 class BookingsController < ApplicationController
-# Ensure the user is logged in for all booking actions
   before_action :authenticate_user!
-  # Find the booking before actions that need it
-  before_action :set_booking, only: [:update, :approve, :reject]
-  # Custom authorization filters
-  before_action :authorize_artist_for_update, only: [:update]
+  before_action :set_booking, only: [:edit, :update, :approve, :reject]
+  before_action :authorize_artist_for_update, only: [:edit, :update]
   before_action :authorize_client_for_approval, only: [:approve, :reject]
 
-  # Action for artists to propose date, price, and add a photo
+  def edit
+    # @booking déjà chargé via set_booking
+  end
+
   def update
-    # Ensure the booking is in a state where an artist can propose
     if @booking.pending_artist_proposal?
-      # Attempt to update the booking with parameters provided by the artist
       if @booking.update(booking_params)
-        # If successful, change the status to pending client approval
+        @booking.message_feed ||= @booking.create_message_feed!(client: @booking.client, artist: @booking.artist)
         @booking.pending_client_approval!
-        # Redirect with a success notice
-        redirect_to @booking, notice: 'Proposal sent to client successfully.'
+
+        @message = @booking.message_feed.messages.create!(
+          user: current_user,
+          body: render_to_string(partial: "bookings/summary", locals: { booking: @booking, current_user: current_user })
+        )
+
+        respond_to do |format|
+          format.html { redirect_to message_feed_messages_path(@booking.message_feed), notice: 'Proposition envoyée au client.' }
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.append("messages", partial: "messages/message", locals: { message: @message, now_user: current_user })
+          end
+        end
       else
-        # If update fails, re-render the form with errors
-        render :edit, status: :unprocessable_entity, alert: 'Could not send proposal. Please check the details.'
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = 'Erreur dans le formulaire.'
+            render :edit, status: :unprocessable_entity
+          end
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(
+              "booking_form_#{@booking.id}",
+              partial: "bookings/form",
+              locals: { booking: @booking }
+            ), status: :unprocessable_entity
+          end
+        end
       end
     else
-      # If the booking is not in the correct state for a proposal
-      redirect_to @booking, alert: 'Booking cannot be updated at this stage.'
+      redirect_to message_feed_path(@booking.message_feed), alert: 'Ce projet ne peut plus être modifié.'
     end
   end
 
-  # Action for clients to approve a booking proposal
   def approve
-    # Ensure the booking is awaiting client approval
     if @booking.pending_client_approval?
-      # Change the status to approved
       @booking.approved!
-      # Redirect with a success notice
-      redirect_to @booking, notice: 'Booking approved successfully!'
+      @booking.message_feed ||= @booking.create_message_feed!(client: @booking.client, artist: @booking.artist)
+
+      summary_html = render_to_string(partial: 'bookings/summary', locals: { booking: @booking, current_user: current_user })
+
+      message = @booking.message_feed.messages.create!(
+        user: current_user,
+        body: summary_html
+      )
+
+      respond_to do |format|
+        format.html { redirect_to message_feed_path(@booking.message_feed), notice: 'Booking validé avec succès !' }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append("messages", partial: "messages/message", locals: { message: message })
+        end
+      end
     else
-      # If the booking is not in the correct state for approval
-      redirect_to @booking, alert: 'Booking cannot be approved at this stage.'
+      redirect_to message_feed_path(@booking.message_feed), alert: 'Booking ne peut pas être validé à ce stade.'
     end
   end
 
-  # Action for clients to reject a booking proposal
   def reject
-    # Ensure the booking is awaiting client approval
     if @booking.pending_client_approval?
-      # Change the status to rejected by client
       @booking.rejected_by_client!
-      # Redirect with a success notice
-      redirect_to @booking, notice: 'Booking proposal rejected.'
+      redirect_to message_feed_path(@booking.message_feed), notice: 'Proposition de booking refusée.'
     else
-      # If the booking is not in the correct state for rejection
-      redirect_to @booking, alert: 'Booking cannot be rejected at this stage.'
+      redirect_to message_feed_path(@booking.message_feed), alert: 'Booking ne peut pas être refusé à ce stade.'
     end
   end
 
   private
 
-  # Set the booking instance based on the ID from parameters
   def set_booking
     @booking = Booking.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    # Handle case where booking is not found
-    redirect_to root_path, alert: 'Booking not found.'
+    redirect_to root_path, alert: 'Booking non trouvé.'
   end
 
-  # Strong parameters for booking updates (date, price, photo)
   def booking_params
-    params.require(:booking).permit(:booking_date, :price, :photo)
+    params.require(:booking).permit(:booking_date, :price, :photo, :status)
   end
 
-  # Authorization method to ensure only artists can update a booking
   def authorize_artist_for_update
-    # Check if the current user is an artist
-    unless current_user.userable_type == "Artist"
-      redirect_to root_path, alert: 'You are not authorized to perform this action.'
-    end
+    redirect_to root_path, alert: 'Action non autorisée.' unless current_user.userable_type == "Artist"
   end
 
-  # Authorization method to ensure only clients can approve or reject a booking
   def authorize_client_for_approval
-    # Check if the current user is a client
-    unless current_user.userable_type == "Client"
-      redirect_to root_path, alert: 'You are not authorized to perform this action.'
-    end
+    redirect_to root_path, alert: 'Action non autorisée.' unless current_user.userable_type == "Client"
   end
-
 end
