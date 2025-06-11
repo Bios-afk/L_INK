@@ -1,0 +1,34 @@
+<h1>Validez votre projet</h1>
+
+<%= form_with(model: @booking, local: true) do |form| %>
+  <% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booking.errors.count, "erreur") %> empêchent l'enregistrement :</h2>
+      <ul>
+        <% @booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :booking_date, "Date du rendez-vous" %><br>
+    <%= form.datetime_select :booking_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, "Prix proposé (€)" %><br>
+    <%= form.number_field :price, step: 1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :photo, "Ajouter une image de référence (facultatif)" %><br>
+    <%= form.file_field :photo %>
+  </div>
+
+  <div class="actions mt-4">
+    <%= form.submit "Envoyer la proposition", class: "btn btn-primary" %>
+    <%= link_to 'Annuler', booking_path(@booking), class: "btn btn-secondary" %>
+  </div>
+<% end %>

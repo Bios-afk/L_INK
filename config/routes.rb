@@ -47,4 +47,13 @@ Rails.application.routes.draw do
       get :card_details
     end
   end
+
+  # Route pour les bookings
+  resources :bookings, only: [:show, :edit, :update] do
+    # Add custom member routes for approval/rejection
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
 end
