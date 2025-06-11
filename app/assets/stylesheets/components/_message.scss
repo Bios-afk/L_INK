@@ -228,3 +228,13 @@
   max-width: 80%; // ✅ limite la largeur du message
   width: auto;
 }
+
+.pastille-notif{
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 45, 45);
+  border-radius: 50%;
+}
