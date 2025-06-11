@@ -4,7 +4,8 @@
 <% quote_status = quote_request&.status || "pending" %>
 <% disabled = current_user.userable_type == 'Client' && quote_status == "pending" %>
 
-<div class="artist-card-top <%= 'all-read' if other_messages.all?(&:read) %> d-flex justify-content-center align-items-center">
+<div id="card-status-<%= feed.id %>"
+     class="artist-card-top <%= 'all-read' if other_messages.all?(&:read) %> d-flex justify-content-center align-items-center">
   <div class="top-card-container w-100 h-100 d-flex justify-content-between align-items-center">
 
     <!-- Partie info -->

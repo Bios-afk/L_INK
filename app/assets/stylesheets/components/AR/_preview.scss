@@ -8,19 +8,66 @@
   position: relative;
 }
 
-.button-retour-circle{
-  position: absolute;
-  top: 25px;
-  left: 10px;
-  width: fit-content;
-  height: fit-content;
-  z-index: 10;
-  font-size: $font-size-lg;
-  text-align: center;
-  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-}
-
 .inner-shadow,
 .button-download-preview {
   box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
+.button-retour-circle-camera{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  z-index: 10;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
+.button-download-preview{
+  width: 48%;
+  height: 62px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+
+  .logo-dowload-ar{
+    width: 48%;
+    height: 48%;
+    object-fit: contain;
+  }
+}
+
+.retour-preview-container{
+  width: 42%;
+}
+
+.text-top-preview{
+  position: absolute;
+  width: 338px;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $gray;
+  text-align: center;
+  z-index: 10;
+
+  background: rgba(177, 116, 87, 0.53);
+  backdrop-filter: blur(9.8px);
+  -webkit-backdrop-filter: blur(9.8px);
+  border: 1px solid rgba(177, 116, 87, 0.32);
+
+  p{
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    font-family: $font-family-base;
+  }
 }

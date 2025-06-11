@@ -10,6 +10,13 @@
         <% end %>
       </div>
       <p class="header_profile_info_bio mb-0"><%= user.bio %></p>
+      <% if user.categories.any? %>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+          <% user.categories.each do |category| %>
+            <span class="styles-badge"><%= category.name %></span>
+          <% end %>
+        </div>
+      <% end %>
       <div class="header-profile-info-loc-container d-flex align-items-center gap-2">
         <%= image_tag 'loc_icon.svg', class: 'header-profile-info-icon-loc' %>
         <p class="header_profile_info_address mb-0"><%= user.userable.address %></p>

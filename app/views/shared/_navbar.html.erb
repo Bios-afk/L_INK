@@ -1,3 +1,6 @@
+<% if current_user.present? %>
+  <%= turbo_stream_from "navbar_stream_#{current_user.id}" %>
+<% end %>
 <nav class="curved-navbar">
   <div class="wave"></div>
   <ul class="nav-icons">
@@ -16,7 +19,15 @@
     <li>
       <% if current_user.present? %>
         <%= link_to message_feeds_path do %>
-          <%= image_tag 'Chat_fill.svg', class: 'icon' %>
+          <%= image_tag 'Chat_fill.svg', class: 'icon position-relative' %>
+          <div id="pastille-notif">
+            <% if current_user.userable.message_feeds.joins(:messages)
+                  .where.not(messages: { user_id: current_user.id })
+                  .where(messages: { read: false })
+                  .exists? %>
+              <%= render 'shared/pastille_notif' %>
+            <% end %>
+          </div>
         <% end %>
       <% else %>
         <%= link_to new_user_session_path do %>

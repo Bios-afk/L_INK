@@ -3,6 +3,7 @@ class ArController < ApplicationController
 
   def new
     @tattoo_photo = params[:tattoo_url]
+    @message_feed = MessageFeed.find(params[:message_feed_id])
 
     @hide_navbar = true
   end
