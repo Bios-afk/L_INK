@@ -10,10 +10,22 @@
         <% end %>
       </div>
       <p class="header_profile_info_bio mb-0"><%= artist.user.bio %></p>
+
+      <!-- 📍 Adresse -->
       <div class="header-profile-info-loc-container d-flex align-items-center gap-2">
         <%= image_tag 'loc_icon.svg', class: 'header-profile-info-icon-loc' %>
         <p class="header_profile_info_address mb-0"><%= artist.address %></p>
       </div>
+
+      <!-- 🎨 Styles EN DESSOUS de l'adresse -->
+      <% if artist.user.categories.any? %>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+          <% artist.user.categories.each do |category| %>
+            <span class="styles-badge"><%= category.name %></span>
+          <% end %>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>
