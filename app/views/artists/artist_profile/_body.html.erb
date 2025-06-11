@@ -54,9 +54,7 @@
     <div class="row mt-4 w-100">
       <% artist.photos.each do |photo| %>
         <div class="col-4 p-1">
-        <%= link_to new_ar_path(photo) do %>
           <%= cl_image_tag photo.key, crop: :fill, aspect_ratio: "4:5", gravity: :auto, class: "publication rounded w-100" %>
-        <% end %>
         </div>
       <% end %>
     </div>

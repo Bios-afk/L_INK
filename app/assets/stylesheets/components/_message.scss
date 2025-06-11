@@ -79,8 +79,7 @@
   font-size: $font-size-base;
   font-family: $font-family-base;
 
-  max-width: 80%; // ✅ limite la largeur dans le conteneur
-  width: auto; // pas "fit-content"
+
   word-break: break-word; // ✅ coupe les mots très longs
   overflow-wrap: anywhere; // ✅ s’assure que même les chaînes sans espaces se coupent
 
@@ -126,8 +125,7 @@
   font-size: $font-size-base;
   font-family: $font-family-base;
 
-  max-width: 80%; // ✅ limite la largeur du message
-  width: auto;
+
   word-break: break-word; // ✅ coupe les mots très longs
   overflow-wrap: anywhere; // ✅ même pour les chaînes sans espace
 
@@ -212,4 +210,21 @@
       font-size: $font-size-base;
     };
   }
+}
+
+.button-ar-rond{
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: $primary-color;
+  cursor: pointer;
+}
+
+.message-photo-ar-container{
+  max-width: 80%; // ✅ limite la largeur du message
+  width: auto;
 }
