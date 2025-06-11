@@ -9,12 +9,7 @@
       <%= link_to artist_path(artist), data: { turbo: false }, class: 'w-100' do %>
         <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
           <div class="picture h-100">
-            <%= image_tag 'profile_pic.png', class: 'rounded-circle', size: "53x53" %>
-            <%#= cl_image_tag(
-              artist.user&.avatar&.attached? ? artist.user.avatar.key : 'png-transparent-default-avatar-thumbnail.png',
-              class: 'rounded-circle',
-              size: "53x53"
-            ) %>
+            <%= image_tag artist.user.avatar.attached? ? url_for(artist.user.avatar) : 'pic-profile-default.png', class: 'rounded-circle object-fit-cover', alt: "#{artist.user.pseudo} profile picture", size: "53x53" %>
             <div class="rating-circle">
               <div class="rating">
                 <i class="fa-solid fa-star"></i>
