@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  # Routes pour l'AR
+  get 'ar/new/:tattoo_url', to: 'ar#new', as: 'new_ar'
+  post 'ar/create', to: 'ar#create', as: 'create_ar'
+  get 'ar/show/:tattoo_url', to: 'ar#show', as: 'show_ar'
+
   # Page d'accueil
   root to: "artists#index"
 

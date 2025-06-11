@@ -1,0 +1,26 @@
+@import "../../template.scss";
+
+
+.canvas-container{
+  margin-top: 15px;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.button-retour-circle{
+  position: absolute;
+  top: 25px;
+  left: 10px;
+  width: fit-content;
+  height: fit-content;
+  z-index: 10;
+  font-size: $font-size-lg;
+  text-align: center;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.inner-shadow,
+.button-download-preview {
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
