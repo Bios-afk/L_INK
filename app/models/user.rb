@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :pseudo, presence: true, uniqueness: true
+  validates :bio, length: { maximum: 100 }
 
   # geocoded_by :address
   # after_validation :geocode, if: :will_save_change_to_address?
