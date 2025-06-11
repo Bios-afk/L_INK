@@ -7,7 +7,10 @@
       </div>
       <% if message.message_pictures.attached? %>
         <div class="ar-round-container h-100 d-flex align-items-center justify-content-center">
-          <%= link_to new_ar_path(message.message_pictures.first), class:'button-ar-rond' do%>
+          <%= link_to new_ar_path(
+            message.message_pictures.first,
+            message_feed_id: message.message_feed_id),
+            class:'button-ar-rond' do%>
             <%= image_tag 'Ar_button.svg' %>
           <% end %>
         </div>
