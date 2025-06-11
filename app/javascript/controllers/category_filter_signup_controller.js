@@ -2,7 +2,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["container", "checkbox"]
+  static targets = ["container", "checkbox", "form"]
 
   connect() {
     this.categoryOffcanvasEl = document.getElementById("categoryOffcanvas")
@@ -19,17 +19,21 @@ export default class extends Controller {
   }
 
   applyCategories() {
+    console.log("✅ applyCategories appelée");
     this.updateSelectedCategories()
     this.categoryOffcanvas.hide()
   }
 
   updateSelectedCategories() {
+    console.log("🛠 updateSelectedCategories appelée");
+
     this.containerTarget.innerHTML = ""
 
     // Supprimer les anciens champs hidden
-    document.querySelectorAll("input[name='category_ids[]']").forEach(input => input.remove())
+    document.querySelectorAll("input[name='user[category_ids][]']").forEach(input => input.remove())
 
     this.checkboxTargets.forEach(checkbox => {
+      console.log(`🔎 Checkbox ${checkbox.id} checked ?`, checkbox.checked);
       if (checkbox.checked) {
         // Affichage visuel des catégories sélectionnées
         const badge = document.createElement("span")
@@ -52,9 +56,13 @@ export default class extends Controller {
         // Ajout d’un champ hidden pour envoyer la donnée au backend
         const hiddenInput = document.createElement("input")
         hiddenInput.type = "hidden"
-        hiddenInput.name = "category_ids[]"
+        hiddenInput.name = "user[category_ids][]"
         hiddenInput.value = checkbox.value
-        this.element.appendChild(hiddenInput)
+        this.formTarget.appendChild(hiddenInput)
+
+        console.log("✅ Champ hidden ajouté :", hiddenInput);
+
+
       }
     })
   }

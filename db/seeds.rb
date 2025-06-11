@@ -12,26 +12,21 @@ Category.destroy_all
 puts '📦 Insertion des styles de tatouage...'
 
 styles = [
-  "Old School",
+  "Traditionnel / Old School",
   "Néotraditionnel",
-  "Traditionnel japonais Irezumi",
+  "Japonais / Irezumi",
+  "Réalisme / Réaliste",
+  "Black & Grey",
   "Blackwork",
-  "Tribal",
-  "Réalisme",
-  "Surréalisme",
-  "Illustratif",
-  "Watercolor",
-  "Sketch Esquisse",
-  "Dotwork",
+  "Dotwork / Pointillisme",
   "Géométrique",
-  "Minimaliste Fine line",
-  "Ignorant style",
-  "Trash Polka",
-  "Lettrage Calligraphie",
-  "Chicano",
-  "Ornemental Mandala",
-  "Biomécanique Cyber",
-  "Gothique Occulte"
+  "Sketch / Trash Polka",
+  "Illustratif",
+  "Lettrage / Calligraphie",
+  "Watercolor / Aquarelle",
+  "Minimaliste / Fineline",
+  "Ornemental / Mandala",
+  "Tribal",
 ]
 
 styles.each do |style|

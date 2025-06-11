@@ -62,4 +62,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+
+  private
+
+  def sign_up_params
+    params.require(:user).permit(
+      :email,
+      :password,
+      :password_confirmation,
+      :first_name,
+      :last_name,
+      :pseudo,
+      :userable_type,
+      category_ids:[],
+    )
+  end
+
+
+
 end
