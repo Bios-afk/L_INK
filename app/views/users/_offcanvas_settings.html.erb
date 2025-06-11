@@ -9,10 +9,12 @@
     </div>
   </div>
 </div>
-<div class="offcanvas-body d-flex flex-column align-items-center justify-content-start gap-4">
-  <div class="body-profile-container h-100 w-30 d-flex align-items-start">
-    <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false }, class: "logout-form" do %>
-      <%= submit_tag "Déconnexion", class: "btn btn-primary w-100 text-light mt-4 shadow" %>
-    <% end %>
-  </div>
+<div class="offcanvas-body d-flex flex-column align-items-center justify-content-start gap-3 mt-5" style="width: 100%;">
+  <% if current_user.userable_type == "Artist" %>
+    <%= link_to "Modifier mon profil", edit_artist_path(current_user.userable), class: "btn btn-primary w-75 text-light shadow" %>
+  <% end %>
+
+  <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false }, class: "w-75" do %>
+    <%= submit_tag "Déconnexion", class: "btn btn-primary w-100 text-light shadow" %>
+  <% end %>
 </div>

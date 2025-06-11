@@ -24,6 +24,10 @@ class Artist < ApplicationRecord
     }
   end
 
+  def categories
+    user.categories
+  end
+
   def rating
     read_attribute(:rating) || 0
   end

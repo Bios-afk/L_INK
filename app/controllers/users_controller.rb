@@ -9,12 +9,14 @@ class UsersController < ApplicationController
   end
 
   def update
+    puts "📞 UsersController#update appelé"
     @user = current_user
 
+    puts "📦 REÇU DANS PARAMS : #{params[:user][:category_ids]}"
     success = @user.update(user_params)
     success &&= @user.userable.update(address: params[:artist][:address]) if params[:artist].present? && params[:artist][:address].present?
-
     if success
+      puts "✅ CATEGORIES SAUVEGARDÉES : #{@user.category_ids}"
       redirect_to user_path(@user), notice: "Profil complété avec succès."
     else
       flash[:alert] = "Erreur lors de la mise à jour du profil."
@@ -35,7 +37,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:bio)
+    params.require(:user).permit(
+      :bio,
+      :userable_address,
+      category_ids: []
+    )
   end
 
 end

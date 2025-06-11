@@ -1,8 +1,8 @@
-<div class="devise-container">
-  <h2>Complétez votre profil artiste</h2>
+<div class="devise-container" data-controller="category-filter-signup">
+  <h2>Mettre à jour votre profil artiste</h2>
 
   <!-- 🔁 On englobe tout le bloc catégorie dans le contrôleur -->
-  <div data-controller="category-filter-signup">
+  <div>
 
     <!-- 🎨 Bouton d’ouverture -->
     <div
@@ -16,7 +16,7 @@
       <span class="fs-4">&rsaquo;</span>
     </div>
 
-    <!-- ✅ Zone des badges sélectionnés (maintenant bien à l’intérieur du contrôleur) -->
+    <!-- ✅ Zone des badges sélectionnés -->
     <div
       id="selected-categories"
       class="mb-3"
@@ -59,23 +59,27 @@
         >
           Valider
         </button>
+
       </div>
     </div>
 
   </div> <!-- fin du bloc contrôleur -->
 
 
-    <%= simple_form_for @user, url: user_path(@user), method: :patch do |f| %>
+    <%= simple_form_for @user, url: user_path(@user), method: :patch, html: { data: {category_filter_signup_target: "form"}} do |f| %>
+
+      <%= hidden_field_tag "user[category_ids][]", "", id: "selected_category_ids" %>
+
       <div class="row">
         <div class="col-md-12">
-          <%= f.input :bio, label: "Quelques mots sur vous", as: :text, input_html: { rows: 4 } %>
+          <%= f.input :bio, label: "Quelques mots sur vous...", as: :text, input_html: { rows: 4, maxlength: 100 } %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12">
           <%= f.input :userable_address,
-            label: "Votre adresse pro pour la géolocalisation",
+            label: "Géolocalisation",
             input_html: {
               data: {address_autocomplete_target: "address"},
               class: "form-control d-none",
