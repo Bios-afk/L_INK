@@ -13,12 +13,18 @@
     <% end %>
   </ul>
 
+  <p>Utilisateur connecté : <%= current_user.userable_type %></p>
+  <p>Booking status : <%= booking.status %></p>
+  <p>pending_client_approval? : <%= booking.pending_client_approval? %></p>
+
+
   <div id="booking_buttons_<%= booking.id %>" class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
+    <%# debugger %>
     <% if booking.approved? %>
       <span class="badge bg-success">Validé</span>
     <% elsif booking.rejected_by_client? %>
       <span class="badge bg-danger">Refusé</span>
-    <% elsif current_user.userable_type == "Client" && booking.pending_client_approval? %>
+    <% elsif current_user.userable_type == "Artist" && booking.pending_client_approval? %>
       <%= button_to 'Approuver', approve_booking_path(booking), method: :patch, class: 'btn btn-primary btn-sm text-light shadow', data: { turbo_stream: true } %>
       <%= button_to 'Refuser', reject_booking_path(booking), method: :patch, class: 'btn btn-secondary btn-sm text-light shadow', data: { turbo_stream: true } %>
     <% end %>

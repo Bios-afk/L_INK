@@ -18,9 +18,11 @@
   </div>
   <div class="d-flex align-items-center gap-3">
     <!-- Lien vers le formulaire de booking -->
-    <%= link_to edit_booking_path(@feed.booking), class: "btn p-0", title: "Proposer un devis" do %>
-      <%= image_tag 'Basket_alt_3_fill.svg', class: 'header-icon-message' %>
-    <% end %>
+    <% if @feed.booking.present? && current_user.userable_type == "Artist" && @feed.booking.artist == current_user.userable %>
+  <%= link_to edit_booking_path(@feed.booking), class: "btn p-0", title: "Proposer un devis" do %>
+    <%= image_tag 'Basket_alt_3_fill.svg', class: 'header-icon-message' %>
+  <% end %>
+<% end %>
 
     <!-- Bouton pour ouvrir le panneau de paramètres -->
     <button class="btn p-0"

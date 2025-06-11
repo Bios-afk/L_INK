@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :client
   belongs_to :artist
-  belongs_to :quote_request
+  belongs_to :quote_request, dependent: :destroy
   belongs_to :message_feed, optional: true  # temporairement optionnel
 
   has_one_attached :photo

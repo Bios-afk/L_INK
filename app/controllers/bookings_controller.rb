@@ -11,44 +11,27 @@ class BookingsController < ApplicationController
   def update
     if @booking.pending_artist_proposal?
       if @booking.update(booking_params)
-        @booking.message_feed ||= @booking.create_message_feed!(client: @booking.client, artist: @booking.artist)
+        # @booking.message_feed ||= @booking.create_message_feed!(client: @booking.client, artist: @booking.artist)
         @booking.pending_client_approval!
 
         @message = @booking.message_feed.messages.create!(
           user: current_user,
-          body: render_to_string(partial: "bookings/summary", locals: { booking: @booking, current_user: current_user })
+          body: booking_summary(@booking)
         )
 
-        respond_to do |format|
-          format.html { redirect_to message_feed_messages_path(@booking.message_feed), notice: 'Proposition envoyée au client.' }
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.append("messages", partial: "messages/message", locals: { message: @message, now_user: current_user })
-          end
-        end
+        redirect_to message_feed_messages_path(@booking.message_feed), notice: 'Proposition envoyée au client.'
       else
-        respond_to do |format|
-          format.html do
-            flash.now[:alert] = 'Erreur dans le formulaire.'
-            render :edit, status: :unprocessable_entity
-          end
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.replace(
-              "booking_form_#{@booking.id}",
-              partial: "bookings/form",
-              locals: { booking: @booking }
-            ), status: :unprocessable_entity
-          end
-        end
+        render :edit, status: :unprocessable_entity
       end
     else
-      redirect_to message_feed_path(@booking.message_feed), alert: 'Ce projet ne peut plus être modifié.'
+      # redirect_to  message_feed_messages_path(@booking.message_feed.id), alert: 'Ce projet ne peut plus être modifié.'
     end
   end
 
   def approve
     if @booking.pending_client_approval?
       @booking.approved!
-      @booking.message_feed ||= @booking.create_message_feed!(client: @booking.client, artist: @booking.artist)
+      # @booking.message_feed ||= @booking.create_message_feed!(client: @booking.client, artist: @booking.artist)
 
       summary_html = render_to_string(partial: 'bookings/summary', locals: { booking: @booking, current_user: current_user })
 
@@ -78,6 +61,10 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def booking_summary(booking)
+    ApplicationController.renderer.render(partial: 'bookings/summary', locals: { booking: booking, current_user: current_user })
+  end
 
   def set_booking
     @booking = Booking.find(params[:id])
