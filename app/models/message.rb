@@ -21,5 +21,14 @@ class Message < ApplicationRecord
                         partial: "messages/message",
                         target: "messages",
                         locals: { message: self, now_user: user }
+
+    broadcast_append_to "navbar_stream_#{message_feed.client.user.id}",
+                        partial: "shared/pastille_notif",
+                        target: "pastille-notif"
+
+    broadcast_append_to "navbar_stream_#{message_feed.artist.user.id}",
+                        partial: "shared/pastille_notif",
+                        target: "pastille-notif"
+
   end
 end

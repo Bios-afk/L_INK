@@ -1,8 +1,20 @@
   <div id="message-<%= message.id %>" class="<%= message.user == now_user ? "message-from-me-container" : "message-from-another-container" %> w-100" data-controller="message" data-message-user-id-value="<%= message.user.id %>">
     <small class="message-timestramp"><%= message.created_at.strftime("%H:%M") %></small>
-    <div data-message-target="message" class="<%= message.user == now_user ? "message-from-me" : "message-from-another" %> <%= 'px-2 py-2' if message.message_pictures.attached? %>">
-      <%= cl_image_tag message.message_pictures.first.key, class: "img-fluid rounded", style: "max-height: 200px;" if message.message_pictures.attached? %>
-      <p class="mb-0"><%= message.body.html_safe %></p>
+    <div class="message-photo-ar-container d-flex gap-2 align-items-center justify-content-<%= message.user == now_user ? 'end' : 'start' %>">
+      <div data-message-target="message" class="<%= message.user == now_user ? "message-from-me" : "message-from-another" %> <%= 'px-2 py-2' if message.message_pictures.attached? %>">
+        <%= cl_image_tag message.message_pictures.first.key, class: "img-fluid rounded", style: "max-height: 200px;" if message.message_pictures.attached? %>
+        <p class="mb-0"><%= message.body.html_safe %></p>
+      </div>
+      <% if message.message_pictures.attached? %>
+        <div class="ar-round-container h-100 d-flex align-items-center justify-content-center">
+          <%= link_to new_ar_path(
+            message.message_pictures.first,
+            message_feed_id: message.message_feed_id),
+            class:'button-ar-rond' do%>
+            <%= image_tag 'Ar_button.svg' %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <% if message.user == now_user %>
       <small class="message-timestramp"><%= message.read ? "vue" : "envoyé" %></small>
