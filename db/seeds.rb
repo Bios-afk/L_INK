@@ -53,7 +53,7 @@ bordeaux_addresses = [
 
 puts '🚀 Création des clients et artistes...'
 
-10.times do |i|
+5.times do |i|
   client = Client.create!
   User.create!(
     email: Faker::Internet.unique.email,
@@ -113,6 +113,80 @@ User.create!(
   ratings_count: rand(1..20)
 )
 )
+
+User.create!(
+  email: 'jojo@fantaisie.fr',
+  password: 'jojo33',
+  pseudo: 'Jojo_fantaisie',
+  first_name: 'Jojo',
+  last_name: 'Fantaisie',
+  bio: 'Je me drogue à la vie',
+  userable: Artist.create!(
+  address: '54 Rue Sainte Catherine, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
+)
+
+User.create!(
+  email: 'johnny@gmail.fr',
+  password: 'jojo33',
+  pseudo: 'Johnny',
+  first_name: 'Johnny',
+  last_name: 'Holidays',
+  bio: 'Il suffira d une étincelle 🔥',
+  userable: Artist.create!(
+  address: '2 place Paul Doumer, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
+)
+
+User.create!(
+  email: 'mime@gmail.fr',
+  password: 'mime33',
+  pseudo: 'Mime',
+  first_name: 'Mime',
+  last_name: 'Mime',
+  bio: '... 🫢',
+  userable: Artist.create!(
+  address: '2 place du palais, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
+)
+
+User.create!(
+  email: 'techto@gmail.fr',
+  password: 'tech33',
+  pseudo: 'TechtoMike',
+  first_name: 'Mike',
+  last_name: 'Techtonik',
+  bio: 'Le style à son importance 🕺',
+  userable: Artist.create!(
+  address: '10 place Gambetta, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
+)
+
+User.create!(
+  email: 'firegirl@gmail.fr',
+  password: 'fire33',
+  pseudo: 'CreepyGirl',
+  first_name: 'Creepy',
+  last_name: 'Girl',
+  bio: 'Ce soir, on vous met le feu ! 🔥',
+  userable: Artist.create!(
+  address: '15 rue porte Dijeau, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
+)
+
+
+
+
 
 puts "✅ Création et association terminées !"
 
