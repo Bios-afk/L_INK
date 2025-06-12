@@ -1,4 +1,23 @@
 require 'faker'
+require "open-uri"
+
+def attach_gallery_photos(artist, urls)
+  urls.each_with_index do |url, i|
+    artist.photos.attach(
+      io: URI.open(url),
+      filename: "gallery_photo_#{i + 1}.jpg",
+      content_type: "image/jpeg"
+    )
+  end
+end
+
+def attach_avatar(user, url)
+  user.avatar.attach(
+    io: URI.open(url),
+    filename: File.basename(URI.parse(url).path),
+    content_type: "image/jpeg"
+  )
+end
 
 puts '🧹 Suppression des données existantes...'
 Message.destroy_all
@@ -15,13 +34,13 @@ styles = [
   "Traditionnel / Old School",
   "Néotraditionnel",
   "Japonais / Irezumi",
-  "Réalisme / Réaliste",
+  "Réaliste",
   "Black & Grey",
   "Blackwork",
   "Dotwork / Pointillisme",
   "Géométrique",
   "Sketch / Trash Polka",
-  "Illustratif",
+  "Fantasy",
   "Lettrage / Calligraphie",
   "Watercolor / Aquarelle",
   "Minimaliste / Fineline",
@@ -53,7 +72,7 @@ bordeaux_addresses = [
 
 puts '🚀 Création des clients et artistes...'
 
-5.times do |i|
+10.times do |i|
   client = Client.create!
   User.create!(
     email: Faker::Internet.unique.email,
@@ -78,7 +97,7 @@ puts '🚀 Création des clients et artistes...'
   address: address,
   rating: rand(1..5),
   ratings_count: rand(1..20) # ou 0 si tu veux parfois aucun avis
-)
+  )
 
   # Géocodage automatique avec Geocoder (attention à l'API limit)
   if artist.respond_to?(:geocode) && artist.address.present?
@@ -100,21 +119,54 @@ puts '🚀 Création des clients et artistes...'
   user.categories << sample_styles
 end
 
-User.create!(
+felix = User.create!(
   email: 'felix.korbendau@free.fr',
   password: "Felix_33",
   pseudo: 'bios',
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  bio: Faker::Lorem.paragraph,
+  first_name: 'Felix',
+  last_name: 'Ix',
+  bio: 'Modestemment le meilleur tatoueur de Bordeaux',
   userable: Artist.create!(
   address: '24 Rue Saint-Rémi, 33000 Bordeaux, France',
   rating: rand(1..5),
   ratings_count: rand(1..20)
 )
 )
+felix.categories = Category.where(name: "Japonais / Irezumi")
 
-User.create!(
+tribal_jam = User.create!(
+  email: 'tribal@free.fr',
+  password: "tribal33",
+  pseudo: 'Tribal_Jam',
+  first_name: 'Tribal',
+  last_name: 'Jam',
+  bio: 'Une illusion s éfface, Remind me baby of you',
+  userable: Artist.create!(
+  address: '24 Rue neuve, 33000 Bordeaux, France',
+  rating: rand(1..5),
+  ratings_count: rand(1..20)
+)
+)
+tribal_jam.categories = Category.where(name: "Tribal")
+
+# URLs des images pour la galerie de Tribal Jam
+tribal_jam_gallery_urls = [
+  "https://res.cloudinary.com/dntveegeg/image/upload/v1749717263/tribal1_drwyfi.jpg",
+  "https://res.cloudinary.com/dntveegeg/image/upload/v1749717263/tribal2_i0i8d8.jpg",
+  "https://res.cloudinary.com/dntveegeg/image/upload/v1749717263/tribal3_h1bdsk.jpg",
+  "https://res.cloudinary.com/dntveegeg/image/upload/v1749717264/tribal4_yc94js.jpg",
+  "https://res.cloudinary.com/dntveegeg/image/upload/v1749717265/tribal5_ajtmxv.jpg",
+  "https://res.cloudinary.com/dntveegeg/image/upload/v1749717265/tribal6_ookshp.jpg"
+]
+
+# Ajout des photos à la galerie
+attach_gallery_photos(tribal_jam.userable, tribal_jam_gallery_urls)
+
+# Avatar
+attach_avatar(tribal_jam, "https://res.cloudinary.com/dntveegeg/image/upload/v1749717259/tribal_avatar_mlgcds.jpg")
+
+
+jojo_fantaisie = User.create!(
   email: 'jojo@fantaisie.fr',
   password: 'jojo33',
   pseudo: 'Jojo_fantaisie',
@@ -127,8 +179,9 @@ User.create!(
   ratings_count: rand(1..20)
 )
 )
+jojo_fantaisie.categories = Category.where(name: "Fantasy")
 
-User.create!(
+johnny = User.create!(
   email: 'johnny@gmail.fr',
   password: 'jojo33',
   pseudo: 'Johnny',
@@ -141,8 +194,9 @@ User.create!(
   ratings_count: rand(1..20)
 )
 )
+johnny.categories = Category.where(name: "Réaliste")
 
-User.create!(
+mime = User.create!(
   email: 'mime@gmail.fr',
   password: 'mime33',
   pseudo: 'Mime',
@@ -155,22 +209,24 @@ User.create!(
   ratings_count: rand(1..20)
 )
 )
+mime.categories = Category.where(name: "Dotwork / Pointillisme")
 
-User.create!(
-  email: 'techto@gmail.fr',
-  password: 'tech33',
-  pseudo: 'TechtoMike',
-  first_name: 'Mike',
-  last_name: 'Techtonik',
-  bio: 'Le style à son importance 🕺',
+yokai_hermit = User.create!(
+  email: 'yokai@gmail.fr',
+  password: 'yokai33',
+  pseudo: 'Yokai_Hermit',
+  first_name: 'Yokai',
+  last_name: 'Hermit',
+  bio: 'Kage Bushin no Justu 🦊',
   userable: Artist.create!(
   address: '10 place Gambetta, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "5",
   ratings_count: rand(1..20)
 )
 )
+yokai_hermit.categories = Category.where(name: "Black & Grey")
 
-User.create!(
+creepy_girl = User.create!(
   email: 'firegirl@gmail.fr',
   password: 'fire33',
   pseudo: 'CreepyGirl',
@@ -183,6 +239,7 @@ User.create!(
   ratings_count: rand(1..20)
 )
 )
+creepy_girl.categories = Category.where(name: "Sketch / Trash Polka")
 
 
 
