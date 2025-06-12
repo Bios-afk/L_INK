@@ -2,6 +2,10 @@ class QuoteRequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quote_request, only: [:accept, :reject]
 
+  def validated?
+    validated
+  end
+
   def new
     @artist = Artist.find(params[:artist_id])
     @quote_request = QuoteRequest.new
@@ -85,7 +89,8 @@ class QuoteRequestsController < ApplicationController
       client: @quote_request.client,
       artist: @quote_request.artist,
       quote_request: @quote_request,
-      message_feed: feed
+      message_feed: feed,
+      status: 0
       )
     @booking.save!
 

@@ -16,13 +16,27 @@
       <% end %>
     </div>
   </div>
-  <button class="btn p-0"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight">
-    <%= image_tag 'parametre.svg', class: 'header-icon-message' %>
-  </button>
+  <div class="d-flex align-items-center gap-3">
+    <!-- Lien vers le formulaire de booking -->
+<% if @feed.booking.present? &&
+      current_user.userable_type == "Artist" &&
+      @feed.booking.artist == current_user.userable &&
+      @feed.booking.quote_request.present? &&
+      @feed.booking.quote_request.accepted? %>
+  <%= link_to edit_booking_path(@feed.booking), class: "btn p-0", title: "Proposer un devis" do %>
+    <%= image_tag 'icons8-picnic-64.png', style: 'width: 28px; height: 28px;', class: 'header-icon-message' %>
+  <% end %>
+<% end %>
+
+    <!-- Bouton pour ouvrir le panneau de paramètres -->
+    <button class="btn p-0"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight">
+      <%= image_tag 'parametre.svg', class: 'header-icon-message' %>
+    </button>
+  </div>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

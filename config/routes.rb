@@ -54,4 +54,12 @@ Rails.application.routes.draw do
       get :card_details
     end
   end
+
+  # Route pour les bookings
+  resources :bookings, only: [:edit, :update] do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
 end

@@ -4,6 +4,7 @@ class Artist < ApplicationRecord
 
   has_one :user, as: :userable, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :quote_requests, dependent: :destroy
 
   has_many :message_feeds, dependent: :destroy
   has_many :reviews, through: :bookings, dependent: :destroy

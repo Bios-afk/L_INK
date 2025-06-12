@@ -1,13 +1,13 @@
 require 'faker'
 
 puts '🧹 Suppression des données existantes...'
+QuoteRequest.destroy_all
+Booking.destroy_all
 Message.destroy_all
 MessageFeed.destroy_all
-Booking.destroy_all
 User.destroy_all
 Artist.destroy_all
 Client.destroy_all
-Category.destroy_all
 
 puts '📦 Insertion des styles de tatouage...'
 

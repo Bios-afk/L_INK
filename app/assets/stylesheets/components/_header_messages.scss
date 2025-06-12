@@ -2,3 +2,9 @@
   width: 20px;
   height: 20px;
 }
+
+.icon-white-large {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1); /* rend une image noire en blanc */
+}

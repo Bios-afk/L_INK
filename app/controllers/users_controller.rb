@@ -34,13 +34,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def update_avatar
-    @user = current_user
-    if params[:user] && params[:user][:avatar]
-      @user.avatar.attach(params[:user][:avatar])
-      redirect_to user_path(@user), notice: "Avatar mis à jour avec succès."
+  def show
+    @user = User.find(params[:id])
+
+    if @user.userable_type == "Client"
+      @upcoming_bookings = @user.userable.bookings
+        .where("booking_date > ?", Date.today)
+        .where(status: [:pending_client_approval, :approved])
+        .order(:booking_date)
     else
-      redirect_to user_path(@user), alert: "Aucun avatar sélectionné."
+      @upcoming_bookings = []
     end
   end
 

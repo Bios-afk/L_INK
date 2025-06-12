@@ -28,6 +28,8 @@ class MessageFeedsController < ApplicationController
 
     @messages = @feed.messages.order(created_at: :asc)
     @message = Message.new
+
+    @booking = @feed.booking
   end
 
   def destroy

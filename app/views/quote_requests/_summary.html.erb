@@ -2,10 +2,10 @@
   <p class="titre-message-rapport">✏️ <strong>Nouvelle demande de devis</strong></p>
   <ul style="padding-left: 18px; margin: 0;"
       class="list-unstyled mb-0 d-flex flex-column gap-1 align-items-start p-0">
-    <li><strong>Style</strong> : <%= quote.style.join(', ') %></li>
+    <li><strong>Style</strong> : <%= quote.style.is_a?(Array) ? quote.style.join(', ') : quote.style %></li>
     <li><strong>Taille</strong> : <%= quote.size %></li>
-    <li><strong>Couleur</strong> : <%= quote.color.join(', ') %></li>
-    <li><strong>Zone</strong> : <%= quote.body_zone.join(', ') %></li>
+    <li><strong>Couleur</strong> : <%= quote.color.is_a?(Array) ? quote.color.join(', ') : quote.color %></li>
+    <li><strong>Zone</strong> : <%= quote.body_zone.is_a?(Array) ? quote.body_zone.join(', ') : quote.body_zone %></li>
     <li><strong>Commentaire</strong> : <%= quote.comments.presence || "Aucun" %></li>
   </ul>
 
