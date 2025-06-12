@@ -1,2 +1,12 @@
-<h1>Follows#destroy</h1>
-<p>Find me in app/views/follows/destroy.html.erb</p>
+<%= turbo_stream.replace "follow_btn_#{@artist.id}" do %>
+  <%= form_with url: follows_path,
+                method: :post,
+                format: :turbo_stream,
+                id: "follow_btn_#{@artist.id}",
+                class: "d-inline" do %>
+    <%= hidden_field_tag :artist_id, @artist.id %>
+    <button type="submit" class="btn btn-primary text-light" title="Suivre">
+      <i class="fa-regular fa-heart"></i>
+    </button>
+  <% end %>
+<% end %>
