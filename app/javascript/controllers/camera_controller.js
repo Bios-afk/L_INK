@@ -19,18 +19,34 @@ export default class extends Controller {
   capture() {
     const video = this.videoTarget
 
-    const width = video.clientWidth
-    const height = video.clientHeight
+    // Taille réelle du flux vidéo
+    const videoWidth = video.videoWidth
+    const videoHeight = video.videoHeight
 
+    // Calcul du crop pour obtenir du 9:16
+    const targetRatio = 9 / 16
+    let cropWidth = videoWidth
+    let cropHeight = videoWidth / targetRatio
+
+    if (cropHeight > videoHeight) {
+      cropHeight = videoHeight
+      cropWidth = videoHeight * targetRatio
+    }
+
+    const cropX = (videoWidth - cropWidth) / 2
+    const cropY = (videoHeight - cropHeight) / 2
+
+    // Canvas au format 9:16
     const canvas = document.createElement("canvas")
-    canvas.width = width
-    canvas.height = height
+    canvas.width = cropWidth
+    canvas.height = cropHeight
     const ctx = canvas.getContext("2d")
 
-    // Symétrie axe Y (effet miroir)
-    ctx.translate(width, 0)
-    ctx.scale(-1, 1)
-    ctx.drawImage(video, 0, 0, width, height)
+    ctx.drawImage(
+      video,
+      cropX, cropY, cropWidth, cropHeight, // source crop
+      0, 0, cropWidth, cropHeight          // destination
+    )
 
     const dataUrl = canvas.toDataURL("image/png")
     this.inputTarget.value = dataUrl

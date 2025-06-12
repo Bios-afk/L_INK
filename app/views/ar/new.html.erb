@@ -1,21 +1,23 @@
 <div data-controller="camera" class="d-flex flex-column align-items-center w-100">
 
-  <%# bouton retour %>
-  <%= link_to image_tag('back_to_message.svg'), message_feed_messages_path(@message_feed.id), class: "button-retour-circle btn btn-primary rounded-pill" %>
-
   <%# petit affichage au dessus de la webcam %>
   <div class="text-top-webcam rounded-pill">
     <p>Prends en photo la partie que tu veux tatouer</p>
   </div>
 
-  <%# webcam %>
-  <video data-camera-target="video" autoplay playsinline
-  class="webcam-container w-100"></video>
+  <div class="webcam-wrapper position-relative">
+    <video data-camera-target="video" autoplay playsinline class="webcam-container"></video>
 
-  <%# button pour prendre la photo %>
-  <button data-action="click->camera#capture" class="round-photo-btn">
-    <i class="fa-solid fa-camera" style="color: #232323;"></i>
-  </button>
+    <div class="button-camera-container">
+      <%# bouton retour %>
+      <%= link_to image_tag('back_to_message.svg'), message_feed_messages_path(@message_feed.id), class: "button-retour-circle btn btn-primary rounded-pill" %>
+
+      <%# button pour prendre la photo %>
+      <button data-action="click->camera#capture" class="round-photo-btn">
+        <i class="fa-solid fa-camera" style="color: #232323;"></i>
+      </button>
+    </div>
+  </div>
 
   <form id="photo-form" action="<%= create_ar_path %>" method="post" enctype="multipart/form-data" style="display:none;">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
