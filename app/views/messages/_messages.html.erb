@@ -1,4 +1,6 @@
 <%= turbo_stream_from "message_feed_#{@feed.id}" %>
+<%= turbo_stream_from "message_feed_#{@feed.id}_#{current_user.userable_type}" %>
+
 <div id="messages" class="messages-container" data-controller="scroll">
   <% messages.each do |message| %>
     <%= render partial: 'messages/message', locals: { message: message, now_user: current_user} %>

@@ -18,16 +18,20 @@
   </div>
   <div class="d-flex align-items-center gap-3">
     <!-- Lien vers le formulaire de booking -->
+<div id="cadie">
 <% if @feed.booking.present? &&
       current_user.userable_type == "Artist" &&
       @feed.booking.artist == current_user.userable &&
       @feed.booking.quote_request.present? &&
-      @feed.booking.quote_request.accepted? %>
-  <%= link_to edit_booking_path(@feed.booking), class: "btn p-0", title: "Proposer un devis" do %>
-    <%= image_tag 'icons8-picnic-64.png', style: 'width: 28px; height: 28px;', class: 'header-icon-message' %>
-  <% end %>
-<% end %>
-
+      @feed.booking.quote_request.accepted? &&
+      !@feed.booking.approved? &&
+      !@feed.booking.completed? &&
+      !@feed.booking.rejected_by_client? &&
+      !@feed.booking.cancelled_by_artist? &&
+      !@feed.booking.archived? %>
+        <%= render partial: 'messages/bouton', locals: { feed: @feed } %>
+        <% end %>
+        </div>
     <!-- Bouton pour ouvrir le panneau de paramètres -->
     <button class="btn p-0"
             type="button"

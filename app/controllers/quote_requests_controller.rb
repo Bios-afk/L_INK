@@ -34,7 +34,15 @@ class QuoteRequestsController < ApplicationController
     if @quote_request.update(status: :accepted)
       feed = MessageFeed.find_or_create_by!(artist: @quote_request.artist, client: @quote_request.client)
       message = feed.messages.first
-      message.update(body: quote_summary(@quote_request), user: current_user)
+      message.update(body: quote_summary(@quote_request))
+
+      Turbo::StreamsChannel.broadcast_append_to(
+        "message_feed_#{@quote_request.message_feed.id}_Artist",
+        partial: "messages/bouton",
+        target: "cadie",
+        locals: { feed: feed }
+      )
+
       respond_to do |format|
         format.turbo_stream do
           html = <<~HTML
@@ -75,7 +83,7 @@ class QuoteRequestsController < ApplicationController
       :size,
       :comments,
       :artist_id,
-      style: [],
+      :style ,
       color: [],
       body_zone: []
     )
