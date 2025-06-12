@@ -67,8 +67,9 @@
       <%# </div> %>
     </div>
 
-    <%= recaptcha_v3 action: 'signup' %>
+
     <div class="form-actions mt-3">
+      <%= recaptcha_v3(action: 'signup') %>
       <%= f.button :submit, "S'inscrire", class: "btn btn-success btn-sm" %>
     </div>
   <% end %>
