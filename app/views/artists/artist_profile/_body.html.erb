@@ -7,11 +7,11 @@
       <% follow = current_user.follows.find_by(artist_id: artist.id) %>
       <% followed = follow.present? %>
 
-      <%= form_with url: (followed ? follow_path(follow) : follows_path),
-                    method: (followed ? :delete : :post),
-                    id: "follow_btn_#{artist.id}",
-                    data: { turbo_stream: true },
-                    class: "d-inline" do %>
+        <%= form_with url: (followed ? follow_path(follow) : follows_path),
+              method: (followed ? :delete : :post),
+              format: :turbo_stream,
+              id: "follow_btn_#{artist.id}",
+              class: "d-inline" do %>
 
         <%# -- Champ caché seulement quand on crée le follow -- %>
         <% unless followed %>
