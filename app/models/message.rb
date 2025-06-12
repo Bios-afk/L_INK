@@ -43,4 +43,5 @@ class Message < ApplicationRecord
                         target: "pastille-notif"
 
   end
+
 end

@@ -3,7 +3,7 @@
 
   <ul style="padding-left: 18px; margin: 0;"
       class="list-unstyled mb-0 d-flex flex-column gap-1 align-items-start p-0">
-    <li><strong>Date proposée</strong> : <%= l(booking.booking_date, format: :long) %></li>
+    <li><strong>Date proposée</strong> : <%= booking.booking_date.strftime("%d/%m/%Y") %></li>
     <li><strong>Prix</strong> : <%= number_to_currency(booking.price, unit: "€") %></li>
     <% quote = booking.quote_request %>
 
