@@ -13,51 +13,41 @@
             <div class="rating-circle">
               <div class="rating">
                 <i class="fa-solid fa-star"></i>
-                <%# <%= user.rating %>
                 <p><%= artist.rating %></p>
               </div>
             </div>
           </div>
           <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
-            <h3 class="artist-name"><%= artist.user.pseudo %></h3>
-
-            <p class="artist-bio">
-              <% if artist.user.categories.present? %>
-                <% categories = artist.user.categories.is_a?(Array) ? artist.user.categories.first(3) : artist.user.categories.limit(3) %>
-                <% full_text = categories.map { |category| "##{category.name}" }.join(" ") %>
-
-                <% display_text = if full_text.length <= 35
-                                    full_text
-                                  else
-                                    full_text[0...32] + "..."
-                                  end %>
-
-                <%= display_text %>
-              <% else %>
-                #
+            <div class="d-flex align-items-center gap-2">
+              <h3 class="artist-name mb-0"><%= artist.user.pseudo %></h3>
+              <% if current_user %>
+                <p class="artist-distance text-muted m-0 d-flex align-items-center">
+                  <%= image_tag 'loc_icon.svg', class: 'icon-location me-1' %>
+                  <%= artist.distance_to(current_user.latitude, current_user.longitude) %> km
+                </p>
               <% end %>
-            </p>
+            </div>
 
-            <!--affichage de la difference de km -->
-            <% if current_user %>
-              <p class="artist-distance text-muted m-0" style="color: #fbf7f0 !important;">
-                <%= image_tag 'loc_icon.svg', class: 'header-profile-info-icon-loc' %> <%= artist.distance_to(current_user.latitude, current_user.longitude) %> km
-              </p>
+            <% if artist.user.categories.present? %>
+              <div class="d-flex flex-wrap gap-1">
+                <% artist.user.categories.first(3).each do |category| %>
+                  <span class="styles-badge">#<%= category.name %></span>
+                <% end %>
+              </div>
+            <% else %>
+              <p>#</p>
             <% end %>
-
           </div>
         </div>
       <% end %>
+
       <!-- Partie Loc -->
       <div class="top-card-loc text-center">
         <button class="toggle-down-btn btn p-0 border-0 bg-transparent d-flex flex-column align-items-center w-100"
                 data-action="click->artist-card#toggleBack">
-
-          <!-- 👇 Icône contrôlée par Stimulus -->
           <i data-artist-card-target="cardIcon"
             class="fa-solid fa-map-location-dot mb-1 card-icon-transition card-icon-show"
             style="color: #fbf7f0;"></i>
-
           <i class="fa-solid fa-chevron-down fa-sm mt-2" style="color: #fbf7f0;"></i>
         </button>
       </div>
@@ -67,24 +57,20 @@
 
   <!-- Second plan -->
   <div class="artist-card-down p-3 w-100 d-flex justify-content-between align-items-end" data-artist-card-target='down'>
-
-    <!-- Section photos -->
     <div class="artist-card-down-container justify-content-center align-items-end">
       <div class="photos w-100" data-artist-card-target='photos'>
-          <div class="artist-card-down-img d-flex gap-4 align-items-end">
-            <% artist.photos.last(6).each do |photo| %>
-              <%= cl_image_tag photo.key, class: "publication rounded", width: 110, height: 137 %>
-            <% end %>
-          </div>
+        <div class="artist-card-down-img d-flex gap-4 align-items-end">
+          <% artist.photos.last(6).each do |photo| %>
+            <%= cl_image_tag photo.key, class: "publication rounded", width: 110, height: 137 %>
+          <% end %>
+        </div>
       </div>
 
-      <!-- Section map -->
       <div class="map hidden rounded" data-artist-card-target='map'
-      data-controller="map"
-      data-map-lat-value="<%= artist.marker_map[:lat] %>"
-      data-map-lng-value="<%= artist.marker_map[:lng] %>"
-      data-map-api-key-value="<%= ENV['MAP_BOX_API_KEY'] %>">
-        <%#= render partial: 'artists/map', locals: { marker: artist.marker_map} %>
+           data-controller="map"
+           data-map-lat-value="<%= artist.marker_map[:lat] %>"
+           data-map-lng-value="<%= artist.marker_map[:lng] %>"
+           data-map-api-key-value="<%= ENV['MAP_BOX_API_KEY'] %>">
       </div>
     </div>
   </div>

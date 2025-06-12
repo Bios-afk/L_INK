@@ -6,11 +6,15 @@
     <h1 class="m-0 text-center">Votre projet ?</h1>
   </div>
 
-  <%= form_with model: @quote_request, url: artist_quote_requests_path(@artist), local: true, class: "needs-validation" do |f| %>
-    <!-- Style (select simple) -->
+  <%= simple_form_for @quote_request, url: artist_quote_requests_path(@artist), html: { class: "needs-validation" } do |f| %>
+    <!-- Style (select multiple) -->
     <div class="mb-4">
-      <%= f.label :style, "Style", class: "form-label" %>
-      <%= f.select :style, Category.pluck(:name), { prompt: "Choisissez un ou plusieurs styles" }, { class: "form-select", multiple: true, name: "quote_request[style][]" } %>
+      <%= f.input :style,
+        label: "Catégorie",
+        collection: Category.pluck(:name),
+        as: :select,
+        input_html: { class: "form-select", prompt: "Sélectionnez un style"}
+      %>
     </div>
 
     <!-- Couleurs (cases à cocher multiples) -->
@@ -18,7 +22,6 @@
       <%= f.label :color, "Couleurs", class: "form-label d-block" %>
       <div class="d-flex flex-wrap gap-3">
         <% ["Noir", "Couleur"].each do |color_option| %>
-          <% # Id unique pour chaque checkbox %>
           <% checkbox_id = "quote_request_color_#{color_option.parameterize}" %>
           <div class="form-check">
             <%= check_box_tag "quote_request[color][]", color_option, @quote_request.color&.include?(color_option), id: checkbox_id, class: "form-check-input" %>
@@ -44,20 +47,18 @@
 
     <!-- Taille approximative (input texte) -->
     <div class="mb-3">
-      <%= f.label :size, "Taille approximative", class: "form-label" %>
-      <%= f.text_field :size, class: "form-control" %>
+      <%= f.input :size, label: "Taille approximative", input_html: { class: "form-control" } %>
     </div>
 
     <!-- Commentaires -->
     <div class="mb-3">
-      <%= f.label :comments, "Commentaires (allergies, précisions…)", class: "form-label" %>
-      <%= f.text_area :comments, class: "form-control", rows: 4, placeholder: "Mentionnez ici vos allergies, préférences ou demandes spécifiques" %>
+      <%= f.input :comments, as: :text, label: "Commentaires (allergies, précisions…)", input_html: { class: "form-control", rows: 4, placeholder: "Mentionnez ici vos allergies, préférences ou demandes spécifiques" } %>
     </div>
 
     <%= f.hidden_field :artist_id, value: @artist.id %>
 
     <div class="mb-3">
-      <%= f.submit "Envoyer la demande", class: "btn btn-primary w-100" %>
+      <%= f.button :submit, "Envoyer la demande", class: "btn btn-primary w-100" %>
     </div>
   <% end %>
 </div>

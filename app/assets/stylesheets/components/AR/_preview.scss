@@ -1,11 +1,19 @@
 @import "../../template.scss";
 
 
-.canvas-container{
-  margin-top: 15px;
+.canvas-container {
+  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
-  overflow: hidden;
   position: relative;
+  // aspect-ratio: 9 / 16;
+  width: 100%;
+  max-width: 358px;
+  margin: 0 auto;
 }
 
 .inner-shadow,
@@ -70,4 +78,15 @@
     font-size: 0.9rem;
     font-family: $font-family-base;
   }
+}
+
+canvas.canvas-preview {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  display: block;
+  border-radius: 1rem;
+  object-fit: cover;
+  max-width: 358px; // optionnel, pour limiter la taille max comme la caméra
+  margin: 0 auto;
 }
