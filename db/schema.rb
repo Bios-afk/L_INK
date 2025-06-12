@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_10_143533) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_12_121253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,7 +111,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_143533) do
   create_table "quote_requests", force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "artist_id", null: false
-    t.jsonb "style", default: [], null: false
+    t.string "style", null: false
     t.jsonb "color", default: [], null: false
     t.string "size"
     t.jsonb "body_zone", default: [], null: false
