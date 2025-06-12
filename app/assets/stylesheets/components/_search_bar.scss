@@ -68,6 +68,7 @@
     align-items: center;
     position: relative;
     padding: 1rem;
+
   }
 
   .offcanvas-title {
@@ -84,8 +85,8 @@
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
-    filter: invert(35%) sepia(78%) saturate(408%) hue-rotate(330deg) brightness(85%) contrast(90%);
-    transition: filter 0.3s ease;
+    // background-color: white;
+    filter: invert(1) sepia(0) saturate(0) hue-rotate(0deg) brightness(1) contrast(1);    transition: filter 0.3s ease;
 
     &:hover {
       filter: invert(60%) sepia(90%) saturate(600%) hue-rotate(330deg) brightness(110%) contrast(100%);
@@ -142,4 +143,11 @@
 .star-rating .star {
   cursor: pointer;
   transition: color 0.2s;
+}
+
+#filtersOffcanvas{
+  background: rgba(255, 255, 255, 0.21);
+  backdrop-filter: blur(11.7px);
+  -webkit-backdrop-filter: blur(11.7px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
