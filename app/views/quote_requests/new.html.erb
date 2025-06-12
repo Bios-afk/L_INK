@@ -13,8 +13,7 @@
         label: "Catégorie",
         collection: Category.pluck(:name),
         as: :select,
-        input_html: { class: "form-select" },
-        prompt: "Choisissez une catégorie"
+        input_html: { class: "form-select", prompt: "Sélectionnez un style"}
       %>
     </div>
 
