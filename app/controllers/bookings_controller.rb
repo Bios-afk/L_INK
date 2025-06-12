@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
 
   def edit
     # @booking déjà chargé via set_booking
+    @booking.quote_request ||= QuoteRequest.find(@booking.quote_request_id)
   end
 
   def update
@@ -19,9 +20,27 @@ class BookingsController < ApplicationController
           body: booking_summary(@booking)
         )
 
-        redirect_to message_feed_messages_path(@booking.message_feed), notice: 'Proposition envoyée au client.'
+      redirect_to message_feed_messages_path(@booking.message_feed.id), notice: "Proposition envoyée avec succès."
+
+      unless @booking.errors.empty?
+        Rails.logger.debug "Booking update errors: #{@booking.errors.full_messages}"
+        Rails.logger.debug "QuoteRequest errors: #{@booking.quote_request.errors.full_messages}"
+      end
+
       else
-        render :edit, status: :unprocessable_entity
+        respond_to do |format|
+          format.html do
+            flash.now[:alert] = 'Erreur dans le formulaire.'
+            render :edit, status: :unprocessable_entity
+          end
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(
+              "booking_form_#{@booking.id}",
+              partial: "bookings/form",
+              locals: { booking: @booking }
+            ), status: :unprocessable_entity
+          end
+        end
       end
     else
       # redirect_to  message_feed_messages_path(@booking.message_feed.id), alert: 'Ce projet ne peut plus être modifié.'
@@ -35,15 +54,13 @@ class BookingsController < ApplicationController
 
       summary_html = render_to_string(partial: 'bookings/summary', locals: { booking: @booking, current_user: current_user })
 
-      message = @booking.message_feed.messages.create!(
-        user: current_user,
-        body: summary_html
-      )
+      message = @booking.message_feed.messages.last
+      message.update(body: summary_html)
 
       respond_to do |format|
         format.html { redirect_to message_feed_path(@booking.message_feed), notice: 'Booking validé avec succès !' }
         format.turbo_stream do
-          render turbo_stream: turbo_stream.append("messages", partial: "messages/message", locals: { message: message })
+          render turbo_stream: turbo_stream.replace("message-#{message.id}", partial: "messages/message", locals: { message: message, now_user: current_user })
         end
       end
     else
@@ -54,9 +71,20 @@ class BookingsController < ApplicationController
   def reject
     if @booking.pending_client_approval?
       @booking.rejected_by_client!
-      redirect_to message_feed_path(@booking.message_feed), notice: 'Proposition de booking refusée.'
+
+      summary_html = render_to_string(partial: 'bookings/summary', locals: { booking: @booking, current_user: current_user })
+
+      message = @booking.message_feed.messages.last
+      message.update(body: summary_html)
+
+      respond_to do |format|
+        format.html { redirect_to message_feed_path(@booking.message_feed), notice: "Proposition de booking refusée." }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("message-#{message.id}", partial: "messages/message", locals: { message: message, now_user: current_user })
+        end
+      end
     else
-      redirect_to message_feed_path(@booking.message_feed), alert: 'Booking ne peut pas être refusé à ce stade.'
+      redirect_to message_feed_path(@booking.message_feed), alert: "Booking ne peut pas être refusé à ce stade."
     end
   end
 
@@ -72,9 +100,20 @@ class BookingsController < ApplicationController
     redirect_to root_path, alert: 'Booking non trouvé.'
   end
 
-  def booking_params
-    params.require(:booking).permit(:booking_date, :price, :photo, :status)
-  end
+    def booking_params
+      params.require(:booking).permit(
+        :status,
+        :quote_request_id,
+        :booking_date,
+        :price,
+        quote_request_attributes: [
+          :id,
+          :size,
+          :color,
+          :body_zone
+        ]
+      )
+    end
 
   def authorize_artist_for_update
     redirect_to root_path, alert: 'Action non autorisée.' unless current_user.userable_type == "Artist"

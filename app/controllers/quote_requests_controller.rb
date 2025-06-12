@@ -2,6 +2,10 @@ class QuoteRequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quote_request, only: [:accept, :reject]
 
+  def validated?
+    validated
+  end
+
   def new
     @artist = Artist.find(params[:artist_id])
     @quote_request = QuoteRequest.new

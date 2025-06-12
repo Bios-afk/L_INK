@@ -3,7 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :artist
   belongs_to :quote_request, dependent: :destroy
   belongs_to :message_feed, optional: true  # temporairement optionnel
-
+  accepts_nested_attributes_for :quote_request
   has_one_attached :photo
   has_many :reviews, dependent: :destroy
 

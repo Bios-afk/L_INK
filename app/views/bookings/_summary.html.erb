@@ -1,10 +1,25 @@
 <div class="summary-container d-flex flex-column align-items-start justify-content-between">
-  <p class="titre-message-rapport">📅 <strong>Proposition de rendez-vous</strong></p>
+  <p class="titre-message-rapport">📅 <strong>Validation du projet</strong></p>
 
   <ul style="padding-left: 18px; margin: 0;"
       class="list-unstyled mb-0 d-flex flex-column gap-1 align-items-start p-0">
     <li><strong>Date proposée</strong> : <%= l(booking.booking_date, format: :long) %></li>
     <li><strong>Prix</strong> : <%= number_to_currency(booking.price, unit: "€") %></li>
+    <% quote = booking.quote_request %>
+
+<li><strong>Taille</strong> : <%= quote.size.presence || "Non précisé" %></li>
+
+<li><strong>Couleur(s)</strong> :
+  <%= quote.color.is_a?(Array) ? quote.color.join(', ') : quote.color.presence || "Non précisé" %>
+</li>
+
+<li><strong>Zone(s) du corps</strong> :
+  <%= quote.body_zone.is_a?(Array) ? quote.body_zone.join(', ') : quote.body_zone.presence || "Non précisé" %>
+</li>
+
+<% if quote.comments.present? %>
+  <li><strong>Commentaires</strong> : <%= quote.comments %></li>
+<% end %>
 
     <% if booking.photo.attached? %>
       <li><strong>Référence visuelle</strong> :<br>
@@ -12,12 +27,6 @@
       </li>
     <% end %>
   </ul>
-
-  <p>Utilisateur connecté : <%= current_user.userable_type %></p>
-  <p>Booking status : <%= booking.status %></p>
-  <p>pending_client_approval? : <%= booking.pending_client_approval? %></p>
-
-
   <div id="booking_buttons_<%= booking.id %>" class="d-flex gap-2 mt-2 w-100 justify-content-start flex-wrap">
     <%# debugger %>
     <% if booking.approved? %>

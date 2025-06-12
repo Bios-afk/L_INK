@@ -1,9 +1,9 @@
 <div class="quote-form">
   <div class="titre-container d-flex align-items-center justify-content-center position-relative mb-4">
     <% if @booking.message_feed.present? %>
-      <%= link_to message_feed_path(@booking.message_feed), class: "position-absolute start-0" do %>
-        <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
-      <% end %>
+          <%= link_to message_feed_messages_path(@booking.message_feed), class: "position-absolute start-0" do %>
+      <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
+    <% end %>
     <% else %>
       <%= link_to bookings_path, class: "position-absolute start-0" do %>
         <%= image_tag 'Left_arrow.svg', class: 'header-arrow' %>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="mb-4">
-      <%= f.label :price, "Prix proposé (€)", class: "form-label" %>
+      <%= f.label :price, "Prix (€)", class: "form-label" %>
       <%= f.number_field :price, class: "form-control", step: 1 %>
     </div>
 
@@ -27,6 +27,23 @@
       <%= f.label :photo, "Référence visuelle (optionnelle)", class: "form-label" %>
       <%= f.file_field :photo, class: "form-control" %>
     </div>
+
+    <%= f.fields_for :quote_request do |qf| %>
+  <div class="mb-4">
+    <%= qf.label :size, "Taille", class: "form-label" %>
+    <%= qf.number_field :size, class: "form-control" %>
+  </div>
+
+  <div class="mb-4">
+    <%= qf.label :color, "Couleur", class: "form-label" %>
+    <%= qf.text_field :color, class: "form-control" %>
+  </div>
+
+  <div class="mb-4">
+    <%= qf.label :body_zone, "Zone du corps", class: "form-label" %>
+    <%= qf.text_field :body_zone, class: "form-control" %>
+  </div>
+  <% end %>
 
     <div class="mb-3">
       <%= f.submit "Envoyer au client", class: "btn btn-primary w-100" %>

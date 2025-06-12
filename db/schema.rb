@@ -108,21 +108,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_143533) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "project_proposals", force: :cascade do |t|
-    t.bigint "artist_id", null: false
-    t.bigint "client_id", null: false
-    t.bigint "quote_request_id", null: false
-    t.string "status", default: "pending"
-    t.integer "proposed_price"
-    t.text "description"
-    t.datetime "proposed_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_id"], name: "index_project_proposals_on_artist_id"
-    t.index ["client_id"], name: "index_project_proposals_on_client_id"
-    t.index ["quote_request_id"], name: "index_project_proposals_on_quote_request_id"
-  end
-
   create_table "quote_requests", force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "artist_id", null: false
@@ -199,9 +184,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_143533) do
   add_foreign_key "message_feeds", "clients"
   add_foreign_key "messages", "message_feeds"
   add_foreign_key "messages", "users"
-  add_foreign_key "project_proposals", "artists"
-  add_foreign_key "project_proposals", "clients"
-  add_foreign_key "project_proposals", "quote_requests"
   add_foreign_key "quote_requests", "artists"
   add_foreign_key "quote_requests", "clients"
   add_foreign_key "reviews", "bookings"
