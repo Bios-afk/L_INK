@@ -2,7 +2,7 @@
 <div data-controller="tattoo-fabric"
      data-tattoo-fabric-photo-url-value="<%= url_for(@user.ar_photo) if @user.ar_photo.attached? %>"
      data-tattoo-fabric-tattoo-url-value="<%= cl_image_path(@tattoo_url.key) %>"
-     class="canvas-container d-flex flex-column align-items-end">
+     class="canvas-container">
 
   <%# message pour placer le tattoo %>
   <div class="text-top-preview rounded-pill">
@@ -13,20 +13,21 @@
   <canvas data-tattoo-fabric-target="canvas"
   class="canvas-preview inner-shadow"></canvas>
 
-  <%# contenaire de boutons %>
-  <div class="w-100 d-flex justify-content-between align-items-center mt-3">
+</div>
 
-    <%# bouton retour %>
-    <div class="retour-preview-container d-flex justify-content-end">
-      <%= link_to image_tag('back_to_message.svg'), request.referer || root_path, class: "button-retour-circle-camera btn btn-primary rounded-pill" %>
-    </div>
+<%# contenaire de boutons %>
+<div class="w-100 d-flex justify-content-between align-items-center mt-3">
 
-    <%# bouton download %>
-    <button
-      type="button"
-      class="button-download-preview rounded-pill"
-      data-action="tattoo-fabric#download">
-      <%= image_tag 'Download.svg', class: 'logo-dowload-ar' %>
-    </button>
+  <%# bouton retour %>
+  <div class="retour-preview-container d-flex justify-content-end">
+    <%= link_to image_tag('back_to_message.svg'), request.referer || root_path, class: "button-retour-circle-camera btn btn-primary rounded-pill" %>
   </div>
+
+  <%# bouton download %>
+  <button
+    type="button"
+    class="button-download-preview rounded-pill"
+    data-action="tattoo-fabric#download">
+    <%= image_tag 'Download.svg', class: 'logo-dowload-ar' %>
+  </button>
 </div>
