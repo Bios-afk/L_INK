@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  # Routes pour le changement d'avatar
+  patch 'avatar', to: 'users#update_avatar', as: :avatar_users
+  
   # Routes pour l'AR
   get 'ar/new/:tattoo_url', to: 'ar#new', as: 'new_ar'
   post 'ar/create', to: 'ar#create', as: 'create_ar'
@@ -41,7 +44,6 @@ Rails.application.routes.draw do
   resources :follows, only: [:create, :destroy]
 
   # Route Post pour la geolocalisation
-
   post "/users/set_location", to: "users#set_location"
 
   # Route pour la page carte

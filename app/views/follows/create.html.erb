@@ -1,2 +1,11 @@
-<h1>Follows#create</h1>
-<p>Find me in app/views/follows/create.html.erb</p>
+<%= turbo_stream.replace "follow_btn_#{@artist.id}" do %>
+  <%= form_with url: follow_path(@follow),
+                method: :delete,
+                format: :turbo_stream,
+                id: "follow_btn_#{@artist.id}",
+                class: "d-inline" do %>
+    <button type="submit" class="btn btn-primary text-light" title="Ne plus suivre">
+      <i class="fa-solid fa-heart"></i>
+    </button>
+  <% end %>
+<% end %>
