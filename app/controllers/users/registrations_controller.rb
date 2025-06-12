@@ -4,7 +4,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts "🎯 CONTROLEUR PERSONNALISÉ UTILISÉ"
 
      # 👉 Vérification reCAPTCHA AVANT toute création
-    unless verify_recaptcha(action: 'signup', minimum_score: Rails.env.development? ? 0 : 0.5)
+    puts "🔍 reCAPTCHA score en cours de vérification..."
+    recaptcha_valid = verify_recaptcha(action: 'signup', minimum_score: Rails.env.development? ? 0.1 : 0.5)
+    puts "📊 reCAPTCHA Score : #{request.env['recaptcha.score']}"
+    puts "🔎 reCAPTCHA ENV : #{request.env.select { |k, _| k.include?('recaptcha') }}"
+
+    puts "🔒 reCAPTCHA valide ? #{recaptcha_valid}"
+    unless recaptcha_valid
+      puts "⚠️ reCAPTCHA invalide. Redirection vers le formulaire."
       # flash[:alert] = "Captcha invalide, veuillez réessayer."
       build_resource(sign_up_params)
       render :new and return
