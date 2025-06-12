@@ -34,6 +34,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+
+    if @user.userable_type == "Client"
+      @upcoming_bookings = @user.userable.bookings
+        .where("booking_date > ?", Date.today)
+        .where(status: [:pending_client_approval, :approved])
+        .order(:booking_date)
+    else
+      @upcoming_bookings = []
+    end
+  end
+
   private
 
   def user_params

@@ -1,1 +1,31 @@
-<h2 class="text-light mt-3"> Mes prochains rendez-vous
+<div class="container full-follow-page mt-4">
+<h2 class="mb-4 text-white">Mes prochains rendez-vous</h2>
+
+
+<% if @upcoming_bookings.any? %>
+  <% @upcoming_bookings.each do |booking| %>
+    <% artist_user = booking.artist.user %>
+
+    <div class="position-relative mb-3">
+      <div class="follow-card w-100 d-flex align-items-center justify-content-between p-3 rounded">
+        <div class="d-flex align-items-center w-100">
+          <%= image_tag(
+                artist_user.avatar.attached? ? url_for(artist_user.avatar) : "default_avatar.png",
+                class: "rounded-circle me-3",
+                size: "50x50",
+                alt: artist_user.pseudo
+              ) %>
+          <div>
+            <h5 class="mb-1"><%= artist_user.pseudo.presence || "#{artist_user.first_name} #{artist_user.last_name}" %></h5>
+            <p class="mb-0">
+              📅  <%= booking.booking_date.strftime("%d/%m/%Y") %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>Vous n’avez aucun rendez-vous à venir.</p>
+<% end %>
+</div>

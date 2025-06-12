@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :categories, through: :tattoo_categories
   has_many :follows, dependent: :destroy
   has_many :followed_artists, through: :follows, source: :artist
+  has_many :bookings, dependent: :destroy
 
   # messages
   has_many :messages, dependent: :destroy
