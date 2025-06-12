@@ -83,7 +83,7 @@ class QuoteRequestsController < ApplicationController
       :size,
       :comments,
       :artist_id,
-      style: [],
+      :style ,
       color: [],
       body_zone: []
     )
