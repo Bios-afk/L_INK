@@ -163,7 +163,7 @@ tribal_jam = User.create!(
   bio: 'Une illusion s éfface, Remind me baby of you',
   userable: Artist.create!(
   address: '24 Rue neuve, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "4",
   ratings_count: rand(1..20)
 )
 )
@@ -195,7 +195,7 @@ jojo_fantaisie = User.create!(
   bio: 'Je me drogue à la vie',
   userable: Artist.create!(
   address: '54 Rue Sainte Catherine, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "4",
   ratings_count: rand(1..20)
 )
 )
@@ -227,7 +227,7 @@ johnny = User.create!(
   bio: 'Il suffira d une étincelle 🔥',
   userable: Artist.create!(
   address: '2 place Paul Doumer, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "3",
   ratings_count: rand(1..20)
 )
 )
@@ -259,7 +259,7 @@ sha = User.create!(
   bio: '... 🫢',
   userable: Artist.create!(
   address: '2 place du palais, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "5",
   ratings_count: rand(1..20)
 )
 )
@@ -290,7 +290,7 @@ yokai_hermit = User.create!(
   last_name: 'Hermit',
   bio: 'Kage Bushin no Justu 🦊',
   userable: Artist.create!(
-  address: '10 place Gambetta, 33000 Bordeaux, France',
+  address: '10 rue de paradis, 75010 Paris, France',
   rating: "5",
   ratings_count: rand(1..20)
 )
@@ -323,7 +323,7 @@ creepy_girl = User.create!(
   bio: 'Ce soir, on vous met le feu ! 🔥',
   userable: Artist.create!(
   address: '15 rue porte Dijeau, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "5",
   ratings_count: rand(1..20)
 )
 )

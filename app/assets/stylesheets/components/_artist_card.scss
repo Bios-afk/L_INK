@@ -1,5 +1,5 @@
 @import "../template.scss";
-$artist-card-down-height: 13.7rem; // 220px
+$artist-card-down-height: 13.7rem;
 
 .artist-card {
   display: flex;
@@ -13,11 +13,11 @@ $artist-card-down-height: 13.7rem; // 220px
   position: relative;
 }
 
-a.mapboxgl-ctrl-logo{
+a.mapboxgl-ctrl-logo {
   display: none !important;
 }
 
-.mapboxgl-ctrl-bottom-right{
+.mapboxgl-ctrl-bottom-right {
   z-index: 1 !important;
 }
 
@@ -32,17 +32,16 @@ a.mapboxgl-ctrl-logo{
   z-index: 2;
 
   &.all-read {
-  background-color: rgba($primary-color, 0.5);
+    background-color: rgba($primary-color, 0.5);
   }
 
-  a{
+  a {
     text-decoration: none;
     color: inherit;
   }
-
 }
 
-.no-image-found{
+.no-image-found {
   width: 54px;
   height: 54px;
 }
@@ -52,7 +51,7 @@ a.mapboxgl-ctrl-logo{
 
   .picture {
     height: 100%;
-    width: fit-content; // 54px
+    width: fit-content;
     position: relative;
   }
 
@@ -67,16 +66,37 @@ a.mapboxgl-ctrl-logo{
   .text-info {
     font-family: $font-family-base;
 
-    h3 {
+    .artist-name {
       color: $text-color;
-      font-size: $font-size-base;
-      margin: 0;
+      font-size: 1.1rem; // augmenté
+      font-weight: bold;
     }
 
-    p {
-      color: $text-color;
-      font-size: 0.65rem; // 10px
-      margin: 0;
+    .artist-distance {
+      font-size: 0.85rem;
+      color: $text-color !important;
+      display: flex;
+      align-items: center;
+
+      .icon-location {
+        width: 14px;
+        height: 14px;
+        object-fit: contain;
+        margin-right: 4px;
+      }
+    }
+
+    .styles-badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: white;
+      background-color: $background-color;
+      border-radius: 1rem;
+      margin-top: 0.5rem;
+      margin-right: 0.25rem;
+      white-space: nowrap;
     }
   }
 }
@@ -85,7 +105,7 @@ a.mapboxgl-ctrl-logo{
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #f8f9fa; // ou autre couleur de fond
+  background-color: #f8f9fa;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,15 +139,15 @@ a.mapboxgl-ctrl-logo{
   position: relative;
 
   i {
-    font-size: 1.2rem; // 18px
+    font-size: 1.2rem;
     margin-bottom: 4px;
     margin-right: 4px;
     top: 0;
   }
 
   .artist-location {
-    font-size: 0.8rem; // 12px
-    line-height: 1; // très important pour éviter le "km" qui descend
+    font-size: 0.8rem;
+    line-height: 1;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -135,7 +155,7 @@ a.mapboxgl-ctrl-logo{
   }
 
   button {
-    all: unset; // supprime tous les styles par défaut du bouton
+    all: unset;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -144,19 +164,14 @@ a.mapboxgl-ctrl-logo{
 
 .artist-card-down {
   width: 100%;
-  height: $artist-card-down-height; // 220px
+  height: $artist-card-down-height;
   position: absolute;
   overflow-x: auto;
   overflow-y: hidden;
   top: 0;
   left: 0;
   border-radius: $border-radius;
-  background: #d8d2c2;
-  background: linear-gradient(
-    90deg,
-    rgba(216, 210, 194, 1) 0%,
-    rgba(130, 127, 117, 1) 100%
-  );
+  background: linear-gradient(90deg, rgba(216, 210, 194, 1) 0%, rgba(130, 127, 117, 1) 100%);
   padding: 12px;
   gap: 6px;
   transition: height 0.5s ease;
@@ -167,7 +182,7 @@ a.mapboxgl-ctrl-logo{
     margin: 0 auto;
   }
 
-  .map{
+  .map {
     overflow: hidden;
     max-width: 330px;
     width: 320px;
@@ -187,15 +202,15 @@ a.mapboxgl-ctrl-logo{
   }
 
   .publication {
-      object-fit: cover;
-      width: 5.5rem; // 88px
-      height: 6.9rem; // 110px
+    object-fit: cover;
+    width: 5.5rem;
+    height: 6.9rem;
   }
 }
 
-.artist-card-down-no-img{
+.artist-card-down-no-img {
   width: 220px;
-  height: 110px; // 220px
+  height: 110px;
 }
 
 .artist-card-down.shrunk {
@@ -203,7 +218,6 @@ a.mapboxgl-ctrl-logo{
   transition: height 0.5s ease;
 }
 
-// --- Animation changement d'icône map/photo ---
 .card-icon-transition {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
@@ -217,4 +231,3 @@ a.mapboxgl-ctrl-logo{
   opacity: 1;
   transform: scale(1);
 }
-// --- FIN Animation changement d'icône map/photo ---
