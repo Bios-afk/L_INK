@@ -7,7 +7,7 @@
     <% artist_user = booking.artist.user %>
 
     <div class="position-relative mb-3">
-      <div class="follow-card w-100 d-flex align-items-center justify-content-between p-3 rounded">
+      <div class="header_profile_info_container rounded w-100 d-flex justify-content-start align-items-center gap-3 px-3 py-2">
         <div class="d-flex align-items-center w-100">
           <%= image_tag(
                 artist_user.avatar.attached? ? url_for(artist_user.avatar) : "default_avatar.png",
