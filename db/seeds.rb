@@ -123,16 +123,62 @@ puts '🚀 Création des clients et artistes...'
 #   user.categories << sample_styles
 # end
 
+
+
+# Clients
+
+thibault = User.create!(
+  email: 'thib@ult.com',
+  password: "thib33",
+  pseudo: 'Thibault',
+  first_name: 'Thib',
+  last_name: 'Ault',
+  bio: 'En recherche de tatoueurs sur Bordeaux',
+  userable: Client.create!(
+
+  )
+)
+# Avatar
+attach_avatar(thibault, "https://res.cloudinary.com/dntveegeg/image/upload/v1749734902/amiral_xt8iuu.jpg")
+
+padbol = User.create!(
+  email: 'padbol@gmail.com',
+  password: "padbol33",
+  pseudo: 'Padbol',
+  first_name: 'Pad',
+  last_name: 'Thai',
+  bio: 'Salut moi c est Padbol, j ai trop pas de chance',
+  userable: Client.create!(
+
+  )
+)
+attach_avatar(padbol, "https://res.cloudinary.com/dntveegeg/image/upload/v1749735006/padbol_avatar_opk6uw.jpg")
+
+client_test = User.create!(
+  email: 'test@gmail.com',
+  password: "test33",
+  pseudo: 'Test',
+  first_name: 'Test',
+  last_name: 'Test',
+  bio: 'Je suis un compte test',
+  userable: Client.create!(
+
+  )
+)
+
+
+# Tatoueurs
+
 felix = User.create!(
   email: 'felix.korbendau@free.fr',
   password: "Felix_33",
-  pseudo: 'bios',
+  pseudo: 'Bios',
   first_name: 'Felix',
   last_name: 'Ix',
   bio: 'Modestemment le meilleur tatoueur de Bordeaux',
   userable: Artist.create!(
   address: '24 Rue Saint-Rémi, 33000 Bordeaux, France',
-  rating: rand(1..5),
+  rating: "5",
   ratings_count: rand(1..20)
 )
 )
