@@ -19,9 +19,9 @@
       <div class="top-card-info w-100 h-100 d-flex align-items-center justify-content-start">
         <div class="picture h-100">
           <% if current_user.userable_type == 'Client' %>
-            <%= image_tag feed.artist.user.avatar_or_default, class: 'rounded-circle', size: "53x53" %>
+            <%= image_tag feed.artist.user.avatar_or_default, class: 'rounded-circle object-fit-cover', size: "53x53" %>
           <% else %>
-            <%= image_tag feed.client.user.avatar_or_default, class: 'rounded-circle', size: "53x53" %>
+            <%= image_tag feed.client.user.avatar_or_default, class: 'rounded-circle object-fit-cover', size: "53x53" %>
           <% end %>
         </div>
         <div class="text-info d-flex flex-column align-items-start justify-content-between h-100">
